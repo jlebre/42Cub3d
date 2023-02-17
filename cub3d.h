@@ -62,5 +62,6 @@ typedef struct s_game
 
 int			key_press(int keycode, t_game *game);
 int			ft_exit(t_game *game);
+void	    init_vars(t_game *game);
 
 #endif

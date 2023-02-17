@@ -15,11 +15,13 @@
 int	key_press2(int keycode, t_game *game)
 {
 	if (keycode == 123 || keycode == 65361)
+	{
 		printf("LEFT key pressed\n");
-		//game->key_left = 1;
+	}
 	else if (keycode == 125 || keycode == 65363)
+	{
 		printf("RIGHT key pressed\n");
-		//game->key_right = 1;
+	}
 	else if (keycode == 53 || keycode == 65307)
 		ft_exit(game);
 	return (0);
@@ -30,22 +32,18 @@ int	key_press(int keycode, t_game *game)
 	if (keycode == 13 || keycode == 119)
 	{
 		printf("W key pressed\n");
-		//game->key_w = 1;
 	}
 	else if (keycode == 0 || keycode == 97)
 	{
 		printf("A key pressed\n");
-		//game->key_a = 1;
 	}
 	else if (keycode == 1 || keycode == 100)
 	{
 		printf("D key pressed\n");
-		//game->key_s = 1;
 	}
 	else if (keycode == 2 || keycode == 115)
 	{
 		printf("S key pressed\n");
-		//game->key_d = 1;
 	}	
 	else 
 		key_press2(keycode, game);
