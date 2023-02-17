@@ -1,0 +1,35 @@
+Available functions:
+
+open
+close
+read
+write
+printf
+malloc
+free
+perror
+strerror
+exit
+math library (-lm man man 3 math)
+{
+    sin(X)
+    cos(X)
+    tan(X)
+    asin(X)
+    acos(X)
+    atan(X)
+    atan2(Y, X)
+    sinh(X)
+    cosh(X)
+    tanh(X)
+    asinh(X)
+    acosh(X)
+    atanh(X)
+    exp(X)
+    log(X)
+    log10(X)
+    pow(X, Y)
+    sqrt(X)
+}
+mlx
+libft
