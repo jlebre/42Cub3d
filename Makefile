@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/19 16:32:14 by jlebre            #+#    #+#              #
-#    Updated: 2023/02/17 19:12:33 by marvin           ###   ########.fr        #
+#    Updated: 2023/02/17 20:03:40 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLXFLAGS_LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 #-fsanitize=address
 RM = @rm -fr
 NAME = cub3d
-SRCS = main.c check.c
+SRCS = main.c ft_exit.c key_press.c
 OBJS = $(SRCS:.c=.o)
 
 HEADER = cub3d.h libft/libft.h
@@ -51,5 +51,8 @@ fclean: clean
 	@echo "\033[0;31mCub3d Removed!\033[0m"
 
 re: fclean all
+
+a: 
+	make && make clean && ./cub3d
 
 .PHONY: all clean fclean re
