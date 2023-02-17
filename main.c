@@ -18,6 +18,13 @@ t_game	*game(void)
 	return (&a);
 }
 
+int	render(t_game *game)
+{
+	(void)game;
+	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, 0, 0);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	(void)argc;
@@ -45,7 +52,7 @@ int main(int argc, char **argv)
 			game()->width * 60, game()->height * 60, "cub3d");
 	//mlx_loop_hook(game()->mlx, render, game());
 	mlx_hook(game()->mlx_win, 2, 1L << 0, &key_press, game());
-	mlx_hook(game()->mlx_win, 17, 1L << 17, &ft_exit, game());
+	//mlx_hook(game()->mlx_win, 17, 1L << 17, &ft_exit, game());
 	mlx_loop(game()->mlx);
 	return (0);
 }
