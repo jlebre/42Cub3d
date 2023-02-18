@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/19 16:32:14 by jlebre            #+#    #+#              #
-#    Updated: 2023/02/17 20:21:12 by marvin           ###   ########.fr        #
+#    Updated: 2023/02/18 02:05:58 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ MLXFLAGS_LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 #-fsanitize=address
 RM = @rm -fr
 NAME = cub3d
-SRCS = main.c ft_exit.c key_press.c init_vars.c
+SRCS = main.c ft_exit.c key_press.c init_vars.c render.c \
+		mini_map.c init_image.c
 OBJS = $(SRCS:.c=.o)
 
 HEADER = cub3d.h libft/libft.h

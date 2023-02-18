@@ -56,6 +56,13 @@ typedef struct s_game
 {
     int     width;
     int     height;
+    int     map_width;
+    int     map_height;
+    float   px;
+    float   py;
+    int     **map;
+    void    *white;
+    void    *blue;
     void	*mlx;
 	void	*mlx_win;
 }            t_game;
@@ -63,5 +70,9 @@ typedef struct s_game
 int			key_press(int keycode, t_game *game);
 int			ft_exit(t_game *game);
 void	    init_vars(t_game *game);
+int	        render(t_game *game);
+void	    mini_map(t_game *game);
+void        print_player(t_game *game);
+void	    init_img(t_game *game);
 
 #endif
