@@ -51,6 +51,21 @@
 # include "libft/libft.h"
 
 # define BUFFER_SIZE 42
+# define PI 3.14159265359
+# define TWO_PI 6.28318530718
+# define HALF_PI 1.57079632679
+# define FOV_ANGLE (60 * (PI / 180))
+# define NUM_RAYS 1200
+# define MINIMAP_SCALE_FACTOR 0.1
+# define TILE_SIZE 64
+# define TILE_SIZE_SCALE (TILE_SIZE * MINIMAP_SCALE_FACTOR)
+# define NUM_TEXTURES 5
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+# define TEXTURE_SCALE_FACTOR 0.5
+# define TEXTURE_WIDTH_SCALE (TEXTURE_WIDTH * TEXTURE_SCALE_FACTOR)
+# define TEXTURE_HEIGHT_SCALE (TEXTURE_HEIGHT * TEXTURE_SCALE_FACTOR)
+
 
 typedef struct s_game
 {
@@ -60,6 +75,9 @@ typedef struct s_game
     int     map_height;
     float   px;
     float   py;
+    float   dir_x;
+    float   dir_y;
+    float   player_angle;
     int     **map;
     void    *white;
     void    *blue;

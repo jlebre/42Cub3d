@@ -53,5 +53,7 @@ void	init_vars(t_game *game)
 	game->map_height = 8;
 	game->px = 50;
 	game->py = 50;
+	game->dir_x = 50;
+	game->dir_y = 50;
 	game->map = dup_map(map);
 }
