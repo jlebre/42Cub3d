@@ -48,6 +48,7 @@
 # include <math.h>
 # include <string.h>
 # include "mlx_linux/mlx.h"
+# include "mlx_linux/mlx_int.h"
 # include "libft/libft.h"
 
 # define BUFFER_SIZE 42
@@ -79,6 +80,7 @@ typedef struct s_game
     float   dir_y;
     float   player_angle;
     int     **map;
+    t_img    *mmp;
     void    *white;
     void    *blue;
     void	*mlx;

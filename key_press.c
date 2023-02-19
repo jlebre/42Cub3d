@@ -39,25 +39,73 @@ int	key_press2(int keycode, t_game *game)
 	return (0);
 }
 
+//W
+//A
+//D
+//S
 int	key_press(int keycode, t_game *game)
 {
 	if (keycode == 13 || keycode == 119)
 	{
-		game->py -= 5;
+		game->px += game->dir_x;
+		game->py += game->dir_y;
 	}
 	else if (keycode == 0 || keycode == 97)
 	{
-		game->px -= 5;
+		if (game->player_angle > (PI / 2) - 1 && game->player_angle < (PI / 2) + 1)
+			game->px += 5;
+		else if (game->player_angle > (PI * 3 / 2) - 1 && game->player_angle > (PI * 3 / 2) + 1)
+			game->px -= 5;
+		else if (game->player_angle > TWO_PI - 1 && game->player_angle < 1)
+			game->py -= 5;
+		else if (game->player_angle > PI - 1 && game->player_angle < PI + 1)
+			game->py += 5;
+		if ((game->player_angle >= 1 && game->player_angle <= PI / 2)
+			|| (game->player_angle >= PI && game->player_angle <= PI * 3 / 2))
+		{
+			game->px -= game->dir_x + (game->player_angle + PI / 2);
+			game->py += game->dir_y + (game->player_angle + PI / 2);
+		}
+		else
+		{
+			game->px += game->dir_x + (game->player_angle + PI / 2);
+			game->py -= game->dir_y + (game->player_angle + PI / 2);
+		}
 	}
 	else if (keycode == 1 || keycode == 100)
 	{
-		game->px += 5;
+		if (game->player_angle > (PI / 2) - 1 && game->player_angle < (PI / 2) + 1)
+			game->px -= 5;
+		else if (game->player_angle > (PI * 3 / 2) - 1 && game->player_angle > (PI * 3 / 2) + 1)
+			game->px += 5;
+		else if (game->player_angle > TWO_PI - 1 && game->player_angle < 1)
+			game->py += 5;
+		else if (game->player_angle > PI - 1 && game->player_angle < PI + 1)
+			game->py -= 5;
+		if ((game->player_angle >= 1 && game->player_angle <= PI / 2)
+			|| (game->player_angle >= PI && game->player_angle <= PI * 3 / 2))
+		{
+			game->px += game->dir_x + (game->player_angle + PI / 2);
+			game->py -= game->dir_y + (game->player_angle + PI / 2);
+		}
+		else
+		{
+			game->px -= game->dir_x + (game->player_angle + PI / 2);
+			game->py += game->dir_y + (game->player_angle + PI / 2);
+		}
 	}
 	else if (keycode == 2 || keycode == 115)
 	{
-		game->py += 5;
+		game->px -= game->dir_x;
+		game->py -= game->dir_y;
 	}	
 	else 
 		key_press2(keycode, game);
 	return (0);
 }
+
+/*
+Normal de um vetor
+
+
+*/

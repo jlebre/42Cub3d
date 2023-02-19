@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:03:52 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/17 19:13:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/18 04:04:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,17 @@ void	check_map(t_game *game)
 		i++;
 	}
 }
+
+/*
+if == 'N'
+	game->player_angle = PI / 2;
+else if == 'S'
+	game->player_angle = 3 * PI / 2;
+else if == 'E'
+	game->player_angle = 0;
+else if == 'W'
+	game->player_angle = PI;
+*/
 
 void	check(t_game *game)
 {

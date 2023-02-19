@@ -41,8 +41,8 @@ void	init_vars(t_game *game)
 		{1,1,1,1,1,1,1,1},
 		{1,0,1,0,0,0,0,1},
 		{1,0,1,0,0,0,0,1},
-		{1,0,1,0,0,0,0,1},
-		{1,0,0,0,0,0,0,1},
+		{1,0,1,0,0,1,1,1},
+		{1,0,0,0,0,1,0,1},
 		{1,0,0,0,0,1,0,1},
 		{1,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1},
@@ -51,9 +51,12 @@ void	init_vars(t_game *game)
 	game->height = 15;
 	game->map_width = 8;
 	game->map_height = 8;
-	game->px = 50;
-	game->py = 50;
-	game->dir_x = 50;
-	game->dir_y = 50;
+	game->px = 150;
+	game->py = 150;
+	/*
+	game->dir_x = game->px + game->player_angle;
+	game->dir_y = game->py + game->player_angle;
+	game->player_angle = PI / 2;
+	*/
 	game->map = dup_map(map);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:24:43 by jlebre            #+#    #+#              #
-#    Updated: 2022/09/01 18:41:27 by jlebre           ###   ########.fr        #
+#    Updated: 2023/02/19 18:04:08 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,13 @@ RM		= @rm -fr
 NAME	= libft.a
 LIB		= .
 
-SRCS	= ft_strlen.c ft_strchr.c ft_strrchr.c \
-			ft_atoi.c ft_strdup.c ft_itoa.c\
-			ft_substr.c ft_strjoin.c ft_split.c\
-			get_next_line.c get_next_line_utils.c\
-			ft_printf.c func_extra.c func_extra1.c\
-			ft_strjoin_without_newline.c ft_strdup_without_newline.c ft_remove_newline.c\
+SRCS	= ft_strlen.c ft_strchr.c ft_strrchr.c ft_memset.c \
+		ft_atoi.c ft_strdup.c ft_itoa.c \
+		ft_substr.c ft_strjoin.c ft_split.c \
+		get_next_line.c get_next_line_utils.c \
+		ft_printf.c func_extra.c func_extra1.c \
+		ft_strjoin_without_newline.c ft_strdup_without_newline.c \
+		ft_remove_newline.c
 
 OBJS	= $(SRCS:.c=.o)
 
