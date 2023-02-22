@@ -53,10 +53,5 @@ void	init_vars(t_game *game)
 	game->map_height = 8;
 	game->px = 150;
 	game->py = 150;
-	/*
-	game->dir_x = game->px + game->player_angle;
-	game->dir_y = game->py + game->player_angle;
-	game->player_angle = PI / 2;
-	*/
 	game->map = dup_map(map);
 }

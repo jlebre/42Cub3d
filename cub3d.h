@@ -67,7 +67,6 @@
 # define TEXTURE_WIDTH_SCALE (TEXTURE_WIDTH * TEXTURE_SCALE_FACTOR)
 # define TEXTURE_HEIGHT_SCALE (TEXTURE_HEIGHT * TEXTURE_SCALE_FACTOR)
 
-
 typedef struct s_game
 {
     int     width;
@@ -87,12 +86,18 @@ typedef struct s_game
 	void	*mlx_win;
 }            t_game;
 
-int			key_press(int keycode, t_game *game);
 int			ft_exit(t_game *game);
 void	    init_vars(t_game *game);
 int	        render(t_game *game);
 void	    mini_map(t_game *game);
 void        print_player(t_game *game);
 void	    init_img(t_game *game);
+
+// KEYPRESS
+int			key_press(int keycode, t_game *game);
+void		press_w(t_game *game);
+void		press_a(t_game *game);
+void		press_d(t_game *game);
+void		press_s(t_game *game);
 
 #endif
