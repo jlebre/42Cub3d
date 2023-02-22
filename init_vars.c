@@ -54,4 +54,6 @@ void	init_vars(t_game *game)
 	game->px = 150;
 	game->py = 150;
 	game->map = dup_map(map);
+	game->player_angle = HALF_PI;
+	game->ray = 0;
 }

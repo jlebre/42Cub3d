@@ -15,5 +15,6 @@
 int	render(t_game *game)
 {
     mini_map(game);
+    raycast(game);
 	return (0);
 }

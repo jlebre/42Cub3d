@@ -53,8 +53,10 @@
 
 # define BUFFER_SIZE 42
 # define PI 3.14159265359
-# define TWO_PI 6.28318530718
+# define PI2 6.28318530718
+# define PI3 4.71238898038
 # define HALF_PI 1.57079632679
+# define RADIAN 0.01745329251
 # define FOV_ANGLE (60 * (PI / 180))
 # define NUM_RAYS 1200
 # define MINIMAP_SCALE_FACTOR 0.1
@@ -78,20 +80,45 @@ typedef struct s_game
     float   dir_x;
     float   dir_y;
     float   player_angle;
+    float   ray_angle;
     int     **map;
-    t_img    *mmp;
     void    *white;
     void    *blue;
     void	*mlx;
 	void	*mlx_win;
+    float   ray_x;
+    float   ray_y;
+    float   x_offset;
+    float   y_offset;
+    float   aTan;
+    float   nTan;
+    float   distance_H;
+    float   distance_V;
+    float   hx;
+    float   hy;
+    float   vx;
+    float   vy;
+    int     ray;
+    int     map_x;
+    int     map_y;
+    int     map_position;
+    int     depht_of_field;
+    t_img   *mmp;
 }            t_game;
 
-int			ft_exit(t_game *game);
+// PARSER
+
+// INIT
 void	    init_vars(t_game *game);
+void	    init_img(t_game *game);
+
+// RENDER
 int	        render(t_game *game);
+
+// MINIMAP
 void	    mini_map(t_game *game);
 void        print_player(t_game *game);
-void	    init_img(t_game *game);
+void	    print_fov(int x0, int y0, t_game *game);
 
 // KEYPRESS
 int			key_press(int keycode, t_game *game);
@@ -99,5 +126,14 @@ void		press_w(t_game *game);
 void		press_a(t_game *game);
 void		press_d(t_game *game);
 void		press_s(t_game *game);
+
+// RAYCAST
+void        raycast(t_game *game);
+
+// MATH FUNCTIONS
+int         ft_abs(int n);
+
+// UTILS
+int			ft_exit(t_game *game);
 
 #endif
