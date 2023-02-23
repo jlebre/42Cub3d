@@ -116,12 +116,13 @@ void check_vertical(t_game *game)
 // Maybe there's a problem with using 64, as the minimap is 32bit
 void raycast(t_game *game)
 {
+	game->ray = 0;
 	game->ray_angle = game->player_angle - (RADIAN * 30);
 	if (game->ray_angle < 0)
 		game->ray_angle += 2 * PI;
 	if (game->ray_angle > 2 * PI)
 		game->ray_angle -= 2 * PI;
-	while(game->ray < 10)
+	while(game->ray < 60)
 	{
 		check_horizontal(game);
 		check_vertical(game);
@@ -129,18 +130,24 @@ void raycast(t_game *game)
 		{
 			game->ray_x = game->hx;
 			game->ray_y = game->hy;
+			game->distance = game->distance_V;
 		}
 		else
 		{
 			game->ray_x = game->vx;
 			game->ray_y = game->vy;
+			game->distance = game->distance_H;
 		}
-		//print_fov(game->ray_x, game->ray_y, game);
-		game->ray++;
+		game->lineH = ((12 * 320) / game->distance);
+		if (game->lineH > 320)
+			game->lineH = 320;
+		game->lineOffset = 160 - (game->lineH / 2);
+		draw_vertical_line(game->ray * 8 + 530, game->lineOffset, game->lineH, game, 0x00FF00);
 		game->ray_angle += RADIAN;	
 		if (game->ray_angle < 0)
 			game->ray_angle += 2 * PI;
 		if (game->ray_angle > 2 * PI)
 			game->ray_angle -= 2 * PI;
+		game->ray++;
 	}
 }

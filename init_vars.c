@@ -47,13 +47,15 @@ void	init_vars(t_game *game)
 		{1,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1},
 	};
-	game->width = 20;
-	game->height = 15;
+	game->width = 1024;
+	game->height = 768;
 	game->map_width = 8;
 	game->map_height = 8;
-	game->px = 150;
-	game->py = 150;
-	game->map = dup_map(map);
+	game->px = 128;
+	game->py = 128;
 	game->player_angle = HALF_PI;
+	game->delta_x = cos(game->player_angle) * 5;
+	game->delta_y = sin(game->player_angle) * 5;
+	game->map = dup_map(map);
 	game->ray = 0;
 }

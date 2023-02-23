@@ -18,6 +18,18 @@ t_game	*game(void)
 	return (&a);
 }
 
+int	mouse_hook(int button, int x, int y, t_game *game)
+{
+	(void)y;
+	(void)button;
+
+	if (x > (game->width / 2))
+		press_d(game);
+	else if (x < (game->width / 2))
+		press_a(game);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	(void)argc;
@@ -40,9 +52,10 @@ int main(int argc, char **argv)
 	init_img(game());
 	init_vars(game());
 	game()->mlx_win = mlx_new_window(game()->mlx,
-			game()->width * 60, game()->height * 60, "cub3d");
+			game()->width, game()->height, "cub3d");
 	sleep(1);
 	mlx_loop_hook(game()->mlx, render, game());
+    mlx_mouse_hook(game()->mlx_win, &mouse_hook, game());
 	mlx_hook(game()->mlx_win, 2, 1L << 0, &key_press, game());
 	mlx_hook(game()->mlx_win, 17, 1L << 17, &ft_exit, game());
 	mlx_loop(game()->mlx);

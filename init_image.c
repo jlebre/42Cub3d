@@ -22,11 +22,7 @@ void	init_img(t_game *game)
     game->blue = mlx_xpm_file_to_image(game->mlx, "image/blue.xpm",
             &img_width, &img_height);
     game->mmp = mlx_new_image(game->mlx, 5, 5);
-    ft_memset(game->mmp->data, 158, game->mmp->width * game->mmp->height * sizeof(int));
+    ft_memset(game->mmp->data, 150, game->mmp->width * game->mmp->height * sizeof(int));
+    game->mmbase = mlx_new_image(game->mlx, 272, 272);
+    ft_memset(game->mmbase->data, 0, game->mmbase->width * game->mmbase->height * sizeof(int));
 }
-
-/*
-    img = mlx_new_image(mlx, 128, 128);
-	memset(img->pixels, 255, img->width * img->height * sizeof(int));
-	mlx_image_to_window(mlx, img, 0, 0);
-*/

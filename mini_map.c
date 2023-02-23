@@ -18,15 +18,15 @@
 	Vetor direção = (x1 - x0, y1 - y0)
 */
 
-void	print_fov(int x0, int y0, t_game *game)
+void	print_fov(int x0, int y0, t_game *game, int color)
 {
 	int fov;
 
 	fov = 0;
 	while (fov < 20)
 	{
-		mlx_pixel_put(game->mlx, game->mlx_win, x0 + (game->dir_x * fov) / 5,
-				y0 + (game->dir_y * fov) / 5, 0x00FF0);
+		mlx_pixel_put(game->mlx, game->mlx_win, x0 + (game->delta_x * fov) / 5,
+				y0 + (game->delta_y * fov) / 5, color);
 		fov++;
 	}
 }
@@ -34,7 +34,7 @@ void	print_fov(int x0, int y0, t_game *game)
 void    print_player(t_game *game)
 {
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mmp, game->px, game->py);
-	print_fov(game->px + 2.5, game->py + 2.5, game);
+	print_fov(game->px + 2.5, game->py + 2.5, game, 0x00FF0);
 }
 
 void	mini_map(t_game *game)
@@ -43,7 +43,7 @@ void	mini_map(t_game *game)
 	int	y;
 
 	y = 0;
-	mlx_clear_window(game->mlx, game->mlx_win);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mmbase, 0, 0);
 	while (y < game->map_height)
 	{
 		x = 0;

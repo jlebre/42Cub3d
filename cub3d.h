@@ -71,39 +71,44 @@
 
 typedef struct s_game
 {
-    int     width;
-    int     height;
-    int     map_width;
-    int     map_height;
-    float   px;
-    float   py;
-    float   dir_x;
-    float   dir_y;
-    float   player_angle;
-    float   ray_angle;
-    int     **map;
-    void    *white;
-    void    *blue;
-    void	*mlx;
+	int     width;
+	int     height;
+	int     map_width;
+	int     map_height;
+	float   px;
+	float   py;
+	float   delta_x;
+	float   delta_y;
+	float   player_angle;
+	float   ray_angle;
+	int     **map;
+	void    *white;
+	void    *blue;
+	void	*mlx;
 	void	*mlx_win;
-    float   ray_x;
-    float   ray_y;
-    float   x_offset;
-    float   y_offset;
-    float   aTan;
-    float   nTan;
-    float   distance_H;
-    float   distance_V;
-    float   hx;
-    float   hy;
-    float   vx;
-    float   vy;
-    int     ray;
-    int     map_x;
-    int     map_y;
-    int     map_position;
-    int     depht_of_field;
-    t_img   *mmp;
+	float   ray_x;
+	float   ray_y;
+	float   x_offset;
+	float   y_offset;
+	float   aTan;
+	float   nTan;
+	float   distance_H;
+	float   distance_V;
+	float   distance;
+	float   hx;
+	float   hy;
+	float   vx;
+	float   vy;
+	float	lineH;
+	float	lineV;
+	float   lineOffset;
+	int     ray;
+	int     map_x;
+	int     map_y;
+	int     map_position;
+	int     depht_of_field;
+	t_img   *mmp;
+	t_img   *mmbase;
 }            t_game;
 
 // PARSER
@@ -118,7 +123,8 @@ int	        render(t_game *game);
 // MINIMAP
 void	    mini_map(t_game *game);
 void        print_player(t_game *game);
-void	    print_fov(int x0, int y0, t_game *game);
+void	    print_fov(int x0, int y0, t_game *game, int color);
+void	draw_ray(int x0, int y0, int x1, int y1, t_game *game);
 
 // KEYPRESS
 int			key_press(int keycode, t_game *game);
@@ -126,9 +132,14 @@ void		press_w(t_game *game);
 void		press_a(t_game *game);
 void		press_d(t_game *game);
 void		press_s(t_game *game);
+int	        mouse_hook(int button, int x, int y, t_game *game);
 
 // RAYCAST
 void        raycast(t_game *game);
+
+// DRAW
+int		draw_vertical_line(int x, int y, int len, t_game *game, int color);
+void	draw_a_line(t_game *game);
 
 // MATH FUNCTIONS
 int         ft_abs(int n);

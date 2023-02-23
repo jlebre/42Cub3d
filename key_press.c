@@ -33,8 +33,8 @@ int	key_press(int keycode, t_game *game)
 
 void	press_w(t_game *game)
 {
-	game->px += game->dir_x;
-	game->py += game->dir_y;
+	game->px += game->delta_x;
+	game->py += game->delta_y;
 }
 
 void	press_a(t_game *game)
@@ -42,8 +42,8 @@ void	press_a(t_game *game)
 	game->player_angle -= 0.1;
 	if (game->player_angle < 0)
 		game->player_angle = PI2;
-	game->dir_x = cos(game->player_angle) * 5;
-	game->dir_y = sin(game->player_angle) * 5;
+	game->delta_x = cos(game->player_angle) * 5;
+	game->delta_y = sin(game->player_angle) * 5;
 }
 
 void	press_d(t_game *game)
@@ -51,13 +51,13 @@ void	press_d(t_game *game)
 	game->player_angle += 0.1;
 	if (game->player_angle > PI2)
 		game->player_angle = 0;
-	game->dir_x = cos(game->player_angle) * 5;
-	game->dir_y = sin(game->player_angle) * 5;
+	game->delta_x = cos(game->player_angle) * 5;
+	game->delta_y = sin(game->player_angle) * 5;
 }
 
 void	press_s(t_game *game)
 {
-	game->px -= game->dir_x;
-	game->py -= game->dir_y;
+	game->px -= game->delta_x;
+	game->py -= game->delta_y;
 }
 
