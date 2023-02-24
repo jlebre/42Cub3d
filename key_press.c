@@ -28,36 +28,42 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == 53 || keycode == 65307)
 		ft_exit(game);
 	*/
+	render(game);
+	return (0);
+}
+
+int	key_released(int keycode, t_game *game)
+{
+	(void)keycode;
+	(void)game;
 	return (0);
 }
 
 void	press_w(t_game *game)
 {
-	game->px += game->delta_x;
-	game->py += game->delta_y;
+	game->px += game->delta_x * 5;
+	game->py += game->delta_y * 5;
 }
 
 void	press_a(t_game *game)
 {
-	game->player_angle -= 0.1;
-	if (game->player_angle < 0)
-		game->player_angle = PI2;
-	game->delta_x = cos(game->player_angle) * 5;
-	game->delta_y = sin(game->player_angle) * 5;
+	game->player_angle += 5;
+	game->player_angle = fix_angle(game->player_angle);
+	game->delta_x = cos(degrees_to_radians(game->player_angle));
+	game->delta_y = -sin(degrees_to_radians(game->player_angle));
 }
 
 void	press_d(t_game *game)
 {
-	game->player_angle += 0.1;
-	if (game->player_angle > PI2)
-		game->player_angle = 0;
-	game->delta_x = cos(game->player_angle) * 5;
-	game->delta_y = sin(game->player_angle) * 5;
+	game->player_angle -= 5;
+	game->player_angle = fix_angle(game->player_angle);
+	game->delta_x = cos(degrees_to_radians(game->player_angle));
+	game->delta_y = -sin(degrees_to_radians(game->player_angle));
 }
 
 void	press_s(t_game *game)
 {
-	game->px -= game->delta_x;
-	game->py -= game->delta_y;
+	game->px -= game->delta_x * 5;
+	game->py -= game->delta_y * 5;
 }
 

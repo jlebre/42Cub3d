@@ -90,8 +90,8 @@ typedef struct s_game
 	float   ray_y;
 	float   x_offset;
 	float   y_offset;
+	float   Tan;
 	float   aTan;
-	float   nTan;
 	float   distance_H;
 	float   distance_V;
 	float   distance;
@@ -99,9 +99,10 @@ typedef struct s_game
 	float   hy;
 	float   vx;
 	float   vy;
-	float	lineH;
 	float	lineV;
 	float   lineOffset;
+	int		lineH;
+	int		ca;
 	int     ray;
 	int     map_x;
 	int     map_y;
@@ -140,11 +141,14 @@ void        raycast(t_game *game);
 // DRAW
 int		draw_vertical_line(int x, int y, int len, t_game *game, int color);
 void	draw_a_line(t_game *game);
+void	draw_wall(int x, int y, int len, int angle, t_game *game);
 
 // MATH FUNCTIONS
 int         ft_abs(int n);
 
 // UTILS
 int			ft_exit(t_game *game);
+float   	degrees_to_radians(float degrees);
+int			fix_angle(int angle);
 
 #endif

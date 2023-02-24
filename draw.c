@@ -32,20 +32,6 @@ void	draw_pixel(int x, int y, t_game *game, int color)
 	//*(int *)(game->mlx_win + (4 * game->width * y) + (4 * x)) = color;
 }
 
-/*
-void	draw_vertical_line(int x0, int y0, t_game *game, int color)
-{
-	int fov;
-
-	fov = 0;
-	while (fov < 20)
-	{
-		mlx_pixel_put(game->mlx, game->mlx_win, x0 + (game->delta_x * fov) / 5,
-				y0 + (game->delta_y * fov) / 5, color);
-		fov++;
-	}
-}
-*/
 void	draw_a_line(t_game *game)
 {
 	int x = 500;
@@ -58,6 +44,45 @@ void	draw_a_line(t_game *game)
 		y++;
 		i++;
 	}
+}
+
+/*
+static void	predict_wall_face(
+	t_ray *ray
+)
+{
+	if (ray->side_dist_x < ray->side_dist_y)
+	{
+		ray->side_dist_x += ray->delta_dist_x;
+		ray->mapx += ray->step_x;
+		if (ray->step_x == 1)
+			ray->side = 0;
+		else if (ray->step_x == -1)
+			ray->side = 1;
+	}
+	else
+	{
+		ray->side_dist_y += ray->delta_dist_y;
+		ray->mapy += ray->step_y;
+		if (ray->step_y == 1)
+			ray->side = 2;
+		else if (ray->step_y == -1)
+			ray->side = 3;
+	}
+}
+*/
+
+void draw_wall(int x, int y, int len, int angle, t_game *game)
+{
+	if ((angle >= 0 && angle <= 45) || (angle > 315 && angle <= 360))
+		draw_vertical_line(x, y, len, game, 0x00FF00);
+	else if (angle > 45 && angle <= 135)
+		draw_vertical_line(x, y, len, game, 0x00FFF0);
+	else if (angle > 135 && angle <= 225)
+		draw_vertical_line(x, y, len, game, 0x00FFFF);
+	else if (angle > 225 && angle <= 315)
+		draw_vertical_line(x, y, len, game, 0x000F00);
+
 }
 
 int		draw_vertical_line(int x, int y, int len, t_game *game, int color)
