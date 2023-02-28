@@ -53,7 +53,7 @@ static void	predict_wall_face(
 {
 	if (ray->side_dist_x < ray->side_dist_y)
 	{
-		ray->side_dist_x += ray->delta_dist_x;
+		ray->side_dist_x += ray->dir_dist_x;
 		ray->mapx += ray->step_x;
 		if (ray->step_x == 1)
 			ray->side = 0;
@@ -62,7 +62,7 @@ static void	predict_wall_face(
 	}
 	else
 	{
-		ray->side_dist_y += ray->delta_dist_y;
+		ray->side_dist_y += ray->dir_dist_y;
 		ray->mapy += ray->step_y;
 		if (ray->step_y == 1)
 			ray->side = 2;

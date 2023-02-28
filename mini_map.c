@@ -25,8 +25,8 @@ void	print_fov(int x0, int y0, t_game *game, int color)
 	fov = 0;
 	while (fov < 20)
 	{
-		mlx_pixel_put(game->mlx, game->mlx_win, x0 + (game->delta_x * fov) / 5,
-				y0 + (game->delta_y * fov) / 5, color);
+		mlx_pixel_put(game->mlx, game->mlx_win, x0 + (game->dir_x * fov) / 5,
+				y0 + (game->dir_y * fov) / 5, color);
 		fov++;
 	}
 }
@@ -43,19 +43,20 @@ void	mini_map(t_game *game)
 	int	y;
 
 	y = 0;
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mmbase, 0, 0);
+	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->mmbase, 0, 0);
 	while (y < game->map_height)
 	{
 		x = 0;
 		while (x < game->map_width)
 		{
 			if (game->map[y][x] == 1)
-				mlx_put_image_to_window(game->mlx, game->mlx_win, game->blue, x * 34, y * 34);
+				mlx_put_image_to_window(game->mlx, game->mlx_win, game->blue, x * 32, y * 32);
 			else if (game->map[y][x] == 0)
-				mlx_put_image_to_window(game->mlx, game->mlx_win, game->white, x * 34, y * 34);
+				mlx_put_image_to_window(game->mlx, game->mlx_win, game->white, x * 32, y * 32);
 			x++;
 		}
 		y++;
 	}
-	print_player(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mmp, game->px, game->py);
+	//print_player(game);
 }

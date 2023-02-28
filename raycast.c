@@ -12,29 +12,33 @@
 
 #include "cub3d.h"
 
-float	distance_between_points(float x1, float y1, float x2, float y2)
+int	get_ray_pos(float p)
 {
-	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
-}
+	int ray_pos;
 
-void check_vertical(t_game *game)
+	ray_pos = ((int)p / 64) * 64;
+	return (ray_pos);
+}
+/* 
+// Check Vertical Hit
+void check_vertical(float ray_angle, t_game *game)
 {
 	int dof;
 	float Tan;
 
 	dof = 0;
 	game->distance_V = 10000;
-	Tan = tan(degrees_to_radians(game->ray_angle));
-	if (cos(degrees_to_radians(game->ray_angle)) > 0.001)
+	Tan = tan(degrees_to_radians(ray_angle));
+	if (cos(degrees_to_radians(ray_angle)) > 0.001)
 	{
-		game->ray_x = (((int)game->px >> 6) << 6 ) + 64;
+		game->ray_x = get_ray_pos(game->px) + 64;
 		game->ray_y = (game->px - game->ray_x) * Tan + game->py;
 		game->x_offset = 64;
 		game->y_offset = -game->x_offset * Tan;
 	}
-	else if (cos(degrees_to_radians(game->ray_angle)) < -0.001)
+	else if (cos(degrees_to_radians(ray_angle)) < -0.001)
 	{
-		game->ray_x = (((int)game->px >> 6) << 6 ) - 0.0001;
+		game->ray_x = get_ray_pos(game->px) - 0.0001;
 		game->ray_y = (game->px - game->ray_x) * Tan + game->py;
 		game->x_offset = -64;
 		game->y_offset = -game->x_offset * Tan;
@@ -47,13 +51,13 @@ void check_vertical(t_game *game)
 	}
 	while (dof < 8)
 	{
-		game->map_x = (int)(game->ray_x) >> 6;
-		game->map_y = (int)(game->ray_y) >> 6;
+		game->map_x = game->ray_x / 64;
+		game->map_y = game->ray_y / 64;
 		game->map_position = game->map_y * game->map_width + game->map_x;
 		if (game->map_position > 0 && game->map_position < game->map_width * game->map_height && game->map[game->map_y][game->map_x] == 1)
 		{
 			dof = 8;
-			game->distance_V = cos(degrees_to_radians(game->ray_angle)) * (game->ray_x - game->px) - sin(degrees_to_radians(game->ray_angle)) * (game->ray_y - game->py);
+			game->distance_V = cos(degrees_to_radians(ray_angle)) * (game->ray_x - game->px) - sin(degrees_to_radians(ray_angle)) * (game->ray_y - game->py);
 		}
 		else
 		{
@@ -66,24 +70,25 @@ void check_vertical(t_game *game)
 	}
 }
 
-void check_horizontal(t_game *game)
+// Check Horizontal Hit
+void check_horizontal(float ray_angle, t_game *game)
 {
 	int dof;
 	float aTan;
 
 	dof = 0;
 	game->distance_H = 10000;
-	aTan = 1 / tan(degrees_to_radians(game->ray_angle));
-	if (sin(degrees_to_radians(game->ray_angle)) > 0.001)
+	aTan = 1 / tan(degrees_to_radians(ray_angle));
+	if (sin(degrees_to_radians(ray_angle)) > 0.001)
 	{
-		game->ray_y = (((int)game->py >> 6) << 6 ) - 0.0001;
+		game->ray_y = get_ray_pos(game->py) - 0.0001;
 		game->ray_x = (game->py - game->ray_y) * aTan + game->px;
 		game->y_offset = -64;
 		game->x_offset = -game->y_offset * aTan;
 	}
-	else if (sin(degrees_to_radians(game->ray_angle)) < -0.001)
+	else if (sin(degrees_to_radians(ray_angle)) < -0.001)
 	{
-		game->ray_y = (((int)game->py >> 6) << 6 ) + 64;
+		game->ray_y = get_ray_pos(game->py) + 64;
 		game->ray_x = (game->py - game->ray_y) * aTan + game->px;
 		game->y_offset = 64;
 		game->x_offset = -game->y_offset * aTan;
@@ -96,13 +101,13 @@ void check_horizontal(t_game *game)
 	}
 	while (dof < 8)
 	{
-		game->map_x = (int)(game->ray_x) >> 6;
-		game->map_y = (int)(game->ray_y) >> 6;
+		game->map_x = game->ray_x / 64;
+		game->map_y = game->ray_y / 64;
 		game->map_position = game->map_y * game->map_width + game->map_x;
 		if (game->map_position > 0 && game->map_position < game->map_width * game->map_height && game->map[game->map_y][game->map_x] == 1)
 		{
 			dof = 8;
-			game->distance_H = cos(degrees_to_radians(game->ray_angle)) * (game->ray_x - game->px) - sin(degrees_to_radians(game->ray_angle)) * (game->ray_y - game->py);
+			game->distance_H = cos(degrees_to_radians(ray_angle)) * (game->ray_x - game->px) - sin(degrees_to_radians(ray_angle)) * (game->ray_y - game->py);
 		}
 		else
 		{
@@ -117,34 +122,71 @@ void raycast(t_game *game)
 {
 	int ray;
 	int	ca;
+	float ray_angle;
 	
 	ray = 0;
-	printf("ray_angle %f\n", game->ray_angle);
-	printf("player_angle %f\n", game->player_angle);
-	game->ray_angle = fix_angle(game->player_angle + 30);
+	ray_angle = fix_angle(game->player_angle + 30);
 	while(ray < 60)
 	{
-		printf("ray_angle %f\n", game->ray_angle);
-		printf("ray %d\n", ray);
-		check_vertical(game);
-		printf("vertical\n");
-		check_horizontal(game);
-		printf("horizontal\n");
+		check_vertical(ray_angle, game);
+		check_horizontal(ray_angle, game);
 		if (game->distance_V < game->distance_H)
 		{
 			game->ray_x = game->vx;
 			game->ray_y = game->vy;
 			game->distance_H = game->distance_V;
 		}
-		ca = fix_angle(game->player_angle - game->ray_angle);
+		ca = fix_angle(game->player_angle - ray_angle);
 		game->distance_H = game->distance_H * cos(degrees_to_radians(ca));
 		game->lineH = ((64 * 320) / game->distance_H);
 		if (game->lineH > 320)
 			game->lineH = 320;
-		game->lineOffset = 160 - (game->lineH >> 1);
-		draw_vertical_line(ray * 8 + 530, game->lineOffset, game->lineH, game, 0x00FFF0);
-		//draw_wall(game->ray * 8 + 530, game->lineOffset, fix_angle(game->ray_angle), game->lineH, game);
-		game->ray_angle = fix_angle(game->ray_angle - 1);
+		game->lineOffset = 160 - (game->lineH / 2);
+		draw_vertical_line(ray * 8 + 200, 0, game->lineOffset, game, 0x00FFFF);
+		draw_vertical_line(ray * 8 + 200, game->lineOffset, game->lineH, game, 0xFF0000);
+		draw_vertical_line(ray * 8 + 200, game->lineOffset + game->lineH, 640 - game->lineOffset - game->lineH, game, 0x00FF00);
+		ray_angle = fix_angle(ray_angle - 1);
+		ray++;
+	}
+}
+ */
+
+void raycast(t_game *game)
+{
+	int		ray;
+	int		wall;
+	float	WallHeight;
+	float	distance;
+	float	ray_x;
+	float	ray_y;
+	float	ray_angle;
+	float	rayCos;
+	float	raySin;
+	float	lineOffset;
+
+	ray = 0;
+	ray_angle = fix_angle(game->player_angle - FOV2);
+	while (ray < game->width)
+	{
+		ray_x = game->px;
+		ray_y = game->py;
+		rayCos = cos(degrees_to_radians(ray_angle));
+		raySin = sin(degrees_to_radians(ray_angle));
+		wall = 0;
+		while (wall == 0)
+		{
+			ray_x += rayCos;
+			ray_y += raySin;
+			wall = game->map[(int)ray_y / 32][(int)ray_x / 32];
+		}
+		distance = distance_between_points(game->px, game->py, ray_x, ray_y);
+		distance *= cos(degrees_to_radians(fix_angle(game->player_angle - ray_angle)));
+		WallHeight = ((game->height * 32) / distance);
+		lineOffset = 160 - (WallHeight / 2);
+		draw_vertical_line(ray, 0, lineOffset, game, 0x00FFFF);
+		draw_vertical_line(ray, lineOffset, WallHeight, game, 0xFF0000);
+		draw_vertical_line(ray, lineOffset + WallHeight, game->height - lineOffset - WallHeight, game, 0x00FF00);
+		ray_angle = fix_angle(ray_angle + (FOV / game->width));
 		ray++;
 	}
 }

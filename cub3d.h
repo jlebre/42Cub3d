@@ -58,6 +58,8 @@
 # define HALF_PI 1.57079632679
 # define RADIAN 0.01745329251
 # define FOV_ANGLE (60 * (PI / 180))
+# define FOV 60
+# define FOV2 30
 # define NUM_RAYS 1200
 # define MINIMAP_SCALE_FACTOR 0.1
 # define TILE_SIZE 64
@@ -77,11 +79,11 @@ typedef struct s_game
 	int     map_height;
 	float   px;
 	float   py;
-	float   delta_x;
-	float   delta_y;
+	float   dir_x;
+	float   dir_y;
 	float   player_angle;
 	float   ray_angle;
-	int     **map;
+	char	**map;
 	void    *white;
 	void    *blue;
 	void	*mlx;
@@ -108,6 +110,7 @@ typedef struct s_game
 	int     map_y;
 	int     map_position;
 	int     depht_of_field;
+	int	 	player_speed;
 	t_img   *mmp;
 	t_img   *mmbase;
 }            t_game;
@@ -125,10 +128,11 @@ int	        render(t_game *game);
 void	    mini_map(t_game *game);
 void        print_player(t_game *game);
 void	    print_fov(int x0, int y0, t_game *game, int color);
-void	draw_ray(int x0, int y0, int x1, int y1, t_game *game);
+void		draw_ray(int x0, int y0, int x1, int y1, t_game *game);
 
 // KEYPRESS
 int			key_press(int keycode, t_game *game);
+int			key_release(int keycode, t_game *game);
 void		press_w(t_game *game);
 void		press_a(t_game *game);
 void		press_d(t_game *game);
@@ -139,9 +143,9 @@ int	        mouse_hook(int button, int x, int y, t_game *game);
 void        raycast(t_game *game);
 
 // DRAW
-int		draw_vertical_line(int x, int y, int len, t_game *game, int color);
-void	draw_a_line(t_game *game);
-void	draw_wall(int x, int y, int len, int angle, t_game *game);
+int			draw_vertical_line(int x, int y, int len, t_game *game, int color);
+void		draw_a_line(t_game *game);
+void		draw_wall(int x, int y, int len, int angle, t_game *game);
 
 // MATH FUNCTIONS
 int         ft_abs(int n);
@@ -150,5 +154,6 @@ int         ft_abs(int n);
 int			ft_exit(t_game *game);
 float   	degrees_to_radians(float degrees);
 int			fix_angle(int angle);
+float		distance_between_points(float x1, float y1, float x2, float y2);
 
 #endif

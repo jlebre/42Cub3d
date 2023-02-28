@@ -14,11 +14,8 @@
 
 int	render(t_game *game)
 {
-	mlx_clear_window(game->mlx, game->mlx_win);
-    printf("render\n");
+	//mlx_clear_window(game->mlx, game->mlx_win);
     raycast(game);
-    printf("render2\n");
-    mini_map(game);
-    printf("render3\n");
+	mini_map(game);
 	return (0);
 }
