@@ -1,0 +1,28 @@
+NO ./textures/stone.xpm
+
+
+
+SO ./textures/brick.xpm
+
+
+
+WE ./textures/brick_with_flag.xpm
+
+
+
+EA ./textures/wood.xpm
+
+
+
+C 225,30,0
+
+F 220,100,0
+
+
+
+1111  1111111111
+1001111000110001
+1011000001110001
+100100N000000001
+1000011011000001
+1111111111111111

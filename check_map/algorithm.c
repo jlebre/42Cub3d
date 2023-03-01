@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:10:20 by mtavares          #+#    #+#             */
-/*   Updated: 2023/01/01 01:25:13 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:07:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
-#include <algorithm.h>
+#include "cub3d.h"
 
 int	can_move(t_cp *cp, int x, int y)
 {
@@ -30,7 +29,7 @@ static t_cp	cp_init(t_cub *data)
 	i = -1;
 	while (++i < cp.height)
 	{
-		cp.map[i] = string().strdup(data->map.map[i]);
+		cp.map[i] = ft_strdup(data->map.map[i]);
 		if (!cp.map)
 			return (cp);
 	}

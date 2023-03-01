@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:44:25 by mtavares          #+#    #+#             */
-/*   Updated: 2023/01/02 16:08:20 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:11:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parse.h>
+#include "cub3d.h"
 
 void	free_parse(t_parse *parse)
 {
@@ -34,7 +34,7 @@ static void	free_imgs(t_cub *data)
 	{
 		i = -1;
 		while (data->img.img[++i])
-			mlx_destroy_image(data->win, data->img.img[i]);
+			mlx_destroy_image(data->mlx_win, data->img.img[i]);
 		alloc().free_array((void *)data->img.img);
 	}
 }
@@ -42,9 +42,9 @@ static void	free_imgs(t_cub *data)
 static void	free_mlx(t_cub	*data)
 {
 	free_imgs(data);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->win)
+	if (data->mlx_win)
+		mlx_destroy_window(data->mlx, data->mlx_win);
+	if (data->mlx_win)
 	{
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:20:12 by mtavares          #+#    #+#             */
-/*   Updated: 2022/12/31 17:20:16 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:16:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <str_utils.h>
+#include "cub3d.h"
 
 /*
 	Allocates (with malloc(3)) and returns a substring

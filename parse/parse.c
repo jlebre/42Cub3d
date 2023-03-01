@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:16:51 by mtavares          #+#    #+#             */
-/*   Updated: 2022/12/31 18:02:45 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:28:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parse.h>
+#include "../cub3d.h"
 
 static char	**read_file(char **map, int fd, int counter)
 {
@@ -56,7 +56,7 @@ char	**parse(t_cub *data, char *name)
 	i = -1;
 	while (++i < 4)
 		data->img.order[i] = 0;
-	if (string().strncmp(string().strrchr(name, '.'), ".cub", 5))
+	if (ft_strncmp(ft_strrchr(name, '.'), ".cub", 5))
 		exit_free(data, 1, "The argument must end with .cub");
 	fd = open_file(data, name);
 	parse.file = read_file(NULL, fd, 0);

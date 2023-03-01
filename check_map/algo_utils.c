@@ -3,30 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   algo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 21:46:44 by mtavares          #+#    #+#             */
-/*   Updated: 2023/01/01 01:25:34 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:08:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <algorithm.h>
-#include <cub3d.h>
+#include "cub3d.h"
 
 static int	map_open(t_cp *cp, int x, int y)
 {
-	if (x - 1 == -1 || x + 1 == string().len(cp->map[y], -1) - 1)
+	if (x - 1 == -1 || x + 1 == ft_strlen2(cp->map[y], -1) - 1)
 		return (1);
 	else if (y - 1 == -1 || y + 1 == cp->height)
 		return (1);
-	else if (string().ft_isspace(cp->map[y][x - 1]) || \
-	string().ft_isspace(cp->map[y][x + 1]))
+	else if (ft_isspace(cp->map[y][x - 1]) || \
+	ft_isspace(cp->map[y][x + 1]))
 		return (1);
-	else if (x >= string().len(cp->map[y - 1], -1) - 1 || \
-	string().ft_isspace(cp->map[y - 1][x]))
+	else if (x >= ft_strlen2(cp->map[y - 1], -1) - 1 || \
+	ft_isspace(cp->map[y - 1][x]))
 		return (1);
-	else if (x >= string().len(cp->map[y + 1], -1) - 1 || \
-	string().ft_isspace(cp->map[y + 1][x]))
+	else if (x >= ft_strlen2(cp->map[y + 1], -1) - 1 || \
+	ft_isspace(cp->map[y + 1][x]))
 		return (1);
 	return (0);
 }
@@ -43,7 +42,7 @@ static void	algorithm(t_cp *cp, int x, int y, int *is_open)
 	cp->map[y][x] = 'P';
 	if (x - 1 > -1 && !*is_open && can_move(cp, x - 1, y))
 		algorithm(cp, x - 1, y, is_open);
-	if (x + 1 < string().len(cp->map[y], -1) - 1 && !*is_open && \
+	if (x + 1 < ft_strlen2(cp->map[y], -1) - 1 && !*is_open && \
 	can_move(cp, x + 1, y))
 		algorithm(cp, x + 1, y, is_open);
 	if (!*is_open && can_move(cp, x, y - 1))

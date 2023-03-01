@@ -6,12 +6,12 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:24:43 by jlebre            #+#    #+#              #
-#    Updated: 2023/02/28 23:55:16 by marvin           ###   ########.fr        #
+#    Updated: 2023/03/01 14:33:31 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	= -I. -Wall -Wextra -Werror -g -fsanitize=address
 LIB1	= ar -rcs
 LIB2	= ranlib
 RM		= @rm -fr
@@ -25,7 +25,7 @@ SRCS	= ft_strlen.c ft_strchr.c ft_strrchr.c \
 		get_next_line.c get_next_line_utils.c \
 		ft_printf.c func_extra.c func_extra1.c \
 		ft_strjoin_without_newline.c ft_strdup_without_newline.c \
-		ft_remove_newline.c
+		ft_remove_newline.c ft_strncmp.c ft_isdigit.c ft_isspace.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -37,7 +37,7 @@ $(NAME):	$(OBJS)
 			@echo "\033[0;32mLibft Compiled!\033[0m"
 
 .c.o:
-			@$(CC) $(CFLAGS) -I$(LIB) -c $< -o $(<:.c=.o)
+			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 clean:
 			$(RM) $(OBJS)

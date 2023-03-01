@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 23:09:59 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/22 23:09:59 by marvin           ###   ########.fr       */
+/*   Created: 2023/03/01 02:37:27 by marvin            #+#    #+#             */
+/*   Updated: 2023/03/01 02:37:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int		draw_vertical_line(int x, int y, int len, t_cub *cub, int color)
+int	ft_isspace(char c)
 {
-	int i;
-	int limit;
-
-	i = 0;
-	if (x < 0 || x >= cub->width)
-		return (1);
-	limit = cub->height;
-	while (i < len && (y + i) < limit)
-	{
-		mlx_pixel_put(cub->mlx, cub->mlx_win, x, y + i, color);
-		i++;
-	}
-	return (1);
+	return ((c > 8 && c < 14) || c == 32);
 }

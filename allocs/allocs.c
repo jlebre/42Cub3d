@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   allocs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:27:00 by mtavares          #+#    #+#             */
-/*   Updated: 2022/12/30 19:58:50 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 02:40:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <allocs.h>
+#include "cub3d.h"
 
 /*
 	It will free a matrix

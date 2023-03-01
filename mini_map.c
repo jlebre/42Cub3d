@@ -12,25 +12,29 @@
 
 #include "cub3d.h"
 
-void	mini_map(t_game *game)
+void	mini_map(t_cub *cub)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mmbase, 0, 0);
-	while (y < game->map_height)
+	while (cub->map.map[y])
 	{
 		x = 0;
-		while (x < game->map_width)
+		while (cub->map.map[y][x])
 		{
-			if (game->map[y][x] == 1)
-				mlx_put_image_to_window(game->mlx, game->mlx_win, game->blue, x * 16, y * 16);
-			else if (game->map[y][x] == 0)
-				mlx_put_image_to_window(game->mlx, game->mlx_win, game->white, x * 16, y * 16);
+			if (cub->map.map[y][x] == '1')
+				mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.blue, x * 16, y * 16);
+			else if (cub->map.map[y][x] == '0' || cub->map.map[y][x] == 'N'
+				|| cub->map.map[y][x] == 'S' || cub->map.map[y][x] == 'E'
+				|| cub->map.map[y][x] == 'W')
+				mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.white, x * 16, y * 16);
+			else if (cub->map.map[y][x + 1])
+				mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.black, x * 16, y * 16);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mmp, game->py, game->px);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmp, cub->px, cub->py);
+	mlx_pixel_put(cub->mlx, cub->mlx_win, cub->px + cos(degrees_to_radians(cub->game.player_angle)), cub->py + sin(degrees_to_radians(cub->game.player_angle)), 0x000000);
 }

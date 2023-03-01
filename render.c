@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-int	render(t_game *game)
+int	render(t_cub *cub)
 {
 	//mlx_clear_window(game->mlx, game->mlx_win);
-    raycast(game);
-	//mini_map(game);
-	usleep(game->delay);
+    raycast(cub);
+	mini_map(cub);
+	//usleep(cub->game.delay);
 	return (0);
 }

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 20:41:36 by mtavares          #+#    #+#             */
-/*   Updated: 2023/01/02 16:20:52 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:16:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parse.h>
+#include "cub3d.h"
 
 static int	valid_line(char *s)
 {
 	int	i;
 
-	if (string().len(s, -1) < 2)
+	if (ft_strlen2(s, -1) < 2)
 		return (1);
 	i = -1;
 	while (s[++i] != '\n')
@@ -47,7 +47,7 @@ void	get_map(t_cub *data, t_parse *parse, int y)
 
 	while (parse->file[y])
 	{
-		if (string().len(parse->file[y], -1) > 1)
+		if (ft_strlen2(parse->file[y], -1) > 1)
 			break ;
 		y++;
 	}
@@ -60,7 +60,7 @@ void	get_map(t_cub *data, t_parse *parse, int y)
 	i = -1;
 	while (parse->file[y])
 	{
-		data->map.map[++i] = string().strdup(parse->file[y]);
+		data->map.map[++i] = ft_strdup(parse->file[y]);
 		if (!data->map.map[i])
 			exit_parse(data, 1, "Error malloc with map", parse);
 		y++;

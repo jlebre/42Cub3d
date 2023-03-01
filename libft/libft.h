@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 13:33:21 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/28 23:55:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 14:24:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,11 @@ int		ft_unsigned(unsigned int nb, int fd);
 char	*ft_strjoin_without_newline(char *s1, char *s2);
 char	*ft_strdup_without_newline(const char *str);
 void	ft_remove_newline(char *str);
+
+//
+int		ft_strlen2(char *str, char c);
+int		ft_isdigit(char c);
+int		ft_isspace(char c);
+int		ft_strncmp(char *s1, char *s2, size_t n);
 
 #endif

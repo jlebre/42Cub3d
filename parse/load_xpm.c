@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   load_xpm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 14:22:59 by mtavares          #+#    #+#             */
-/*   Updated: 2022/12/31 19:09:41 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:11:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parse.h>
+#include "cub3d.h"
 
-void	load_imgs(t_cub *data, char **path)
+void	load_imgs(t_cub *data, t_parse *parse, char **path)
 {
 	int	i;
 	int	width;
@@ -29,7 +29,7 @@ void	load_imgs(t_cub *data, char **path)
 	i = -1;
 	while (++i < 4)
 	{
-		data->img.img[i] = mlx_xpm_file_to_image(data->win, \
+		data->img.img[i] = mlx_xpm_file_to_image(data->mlx_win, \
 		path[i], &width, &height);
 		if (!data->img.img[i])
 		{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   str.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:19:15 by mtavares          #+#    #+#             */
-/*   Updated: 2022/12/31 17:20:27 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 02:37:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <str_utils.h>
+#include "cub3b.h"
 
-int	ft_strlen(char *str, char c)
+int	ft_strlen2(char *str, char c)
 {
 	int	len;
 
@@ -62,7 +62,7 @@ char	*ft_strchr(char *str, char c)
 		if it isn't returns false
 */
 
-int	isdig(char c)
+int	ft_isdigit(char c)
 {
 	return (c >= '0' && c <= '9');
 }

@@ -49,8 +49,18 @@ int start_angle(char c)
 	return (0);
 }
 
-void	init_vars(t_game *game)
+void	init_vars(t_cub *cub)
 {
+	cub->width = 640;
+	cub->height = 480;
+	//game->map_width = 8;
+	//game->map_height = 8;
+	cub->game.player_angle = start_angle(cub->direction);
+	cub->game.player_speed = 1;
+	cub->game.delay = 30;
+}
+
+/*
 	char	map[8][8] =
 	{
 		{1,1,1,1,1,1,1,1},
@@ -62,15 +72,5 @@ void	init_vars(t_game *game)
 		{1,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1},
 	};
-	game->width = 640;
-	game->height = 480;
-	game->map_width = 8;
-	game->map_height = 8;
-	game->px = 64;
-	game->py = 32;
-	game->direction = 'N';
-	game->player_angle = start_angle(game->direction);
 	game->map = dup_map(map);
-	game->player_speed = 1;
-	game->delay = 30;
-}
+*/

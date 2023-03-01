@@ -50,95 +50,178 @@
 # include <dirent.h>
 # include "mlx_linux/mlx.h"
 # include "mlx_linux/mlx_int.h"
-# include "libft.h"
+# include "libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define PI 3.14159265359
 # define PI2 6.28318530718
-# define PI3 4.71238898038
-# define HALF_PI 1.57079632679
-# define RADIAN 0.01745329251
-# define FOV_ANGLE (60 * (PI / 180))
 # define FOV 60
 # define FOV2 30
-# define NUM_RAYS 1200
-# define MINIMAP_SCALE_FACTOR 0.1
-# define TILE_SIZE 64
-# define TILE_SIZE_SCALE (TILE_SIZE * MINIMAP_SCALE_FACTOR)
-# define NUM_TEXTURES 5
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
-# define TEXTURE_SCALE_FACTOR 0.5
-# define TEXTURE_WIDTH_SCALE (TEXTURE_WIDTH * TEXTURE_SCALE_FACTOR)
-# define TEXTURE_HEIGHT_SCALE (TEXTURE_HEIGHT * TEXTURE_SCALE_FACTOR)
+# define SIZE_X 64
+# define SIZE_Y 64
 
-typedef struct s_game
+typedef struct s_cub		t_cub;
+typedef struct s_img		t_img;
+typedef struct s_map		t_map;
+typedef struct s_game		t_game;
+typedef struct s_cp			t_cp;
+typedef struct s_parse		t_parse;
+
+struct s_cp
 {
-	int     width;
-	int     height;
-	int     map_width;
-	int     map_height;
-	float   px;
-	float   py;
+	char	**map;
+	int		height;
+};
+
+struct	s_map
+{
+	char	**map;
+	int		num_player;
+};
+
+struct	s_img
+{
+	void	**img;
+	int		colors[2];
+	char	order[5];
+};
+
+struct s_parse
+{
+	char	**file;
+	char	**path_to_img;
+	int		num_vars;
+};
+
+struct s_game
+{
 	float   player_angle;
 	float   ray_angle;
-	char	**map;
 	void    *white;
 	void    *blue;
-	void	*mlx;
-	void	*mlx_win;
-	float   x_offset;
-	float   y_offset;
+	void    *black;
+	int     map_width;
+	int     map_height;
 	int     map_position;
 	int     depht_of_field;
 	int	 	player_speed;
-	char	direction;
 	int		delay;
-	t_img   *mmp;
-	t_img   *mmbase;
-}            t_game;
+	t_img_mlx   *mmp;
+	t_img_mlx   *mmbase;
+};
 
-// PARSER
+struct s_cub
+{
+	void	*mlx;
+	void	*mlx_win;
+	char	**file;
+	int		width;
+	int		height;
+	char	direction;
+	float   px;
+	float   py;
+	int		num_player;
+	t_img	img;
+	t_map	map;
+	t_game	game;
+};
+
+t_cub		*cub(void);
 
 // INIT
-void	    init_vars(t_game *game);
-void	    init_img(t_game *game);
+void	    init_vars(t_cub *cub);
+void	    init_img(t_cub *cub);
 
 // RENDER
-int	        render(t_game *game);
+int	        render(t_cub *cub);
 
 // MINIMAP
-void	    mini_map(t_game *game);
-void        print_player(t_game *game);
-void	    print_fov(int x0, int y0, t_game *game, int color);
-void		draw_ray(int x0, int y0, int x1, int y1, t_game *game);
+void	    mini_map(t_cub *cub);
 
 // KEYPRESS
-int			key_press(int keycode, t_game *game);
-int			key_release(int keycode, t_game *game);
-void		press_w(float pCos, float pSin, t_game *game);
-void		press_a(t_game *game);
-void		press_d(t_game *game);
-void		press_s(float pCos, float pSin, t_game *game);
-int	        mouse_hook(int button, int x, int y, t_game *game);
+int			key_press(int keycode, t_cub *game);
+int			key_release(int keycode, t_cub *game);
+void		press_w(float pCos, float pSin, t_cub *cub);
+void		press_a(t_cub *cub);
+void		press_d(t_cub *cub);
+void		press_s(float pCos, float pSin, t_cub *cub);
+int	        mouse_hook(int button, int x, int y, t_cub *cub);
 
 // RAYCAST
-void        raycast(t_game *game);
+void        raycast(t_cub *cub);
 
 // DRAW
-int			draw_vertical_line(int x, int y, int len, t_game *game, int color);
-void		draw_a_line(t_game *game);
-void		draw_wall(int x, int y, int len, int angle, t_game *game);
+int			draw_vertical_line(int x, int y, int len, t_cub *cub, int color);
 
 // MATH FUNCTIONS
 int         ft_abs(int n);
 
 // UTILS
-int			ft_exit(t_game *game);
+int			ft_exit(t_cub *game);
 float   	degrees_to_radians(float degrees);
 int			fix_angle(int angle);
 float		distance_between_points(float x1, float y1, float x2, float y2);
-void		free_matrix(char **matrix);
 void		*ft_memset(void *str, int c, size_t n);
+
+// PARSER
+void		print_parse(t_cub *data, t_parse *parse);
+void		free_parse(t_parse *parse);
+void		exit_parse(t_cub *data, int status, char *str, t_parse *parse);
+void		load_imgs(t_cub *data, t_parse *parse, char **path);
+int			get_vars(t_cub *data, t_parse *parse);
+void		parse_file(t_cub *data, t_parse *parse);
+//
+void		exit_free(t_cub *data, int status, char *str);
+char		**parse(t_cub *data, char *name);
+int			format_map(t_cub *data);
+int			prep_alg(t_cub *data);
+int			valid_chars(char c);
+int			orientation_player(char c);
+int			check_map(t_cub *data, char **path);
+
+// CHECK MAP
+int			check_map(t_cub *data, char **path);
+int			orientation_player(char c);
+int			valid_chars(char c);
+int			check_invalid_char(t_cub *data);
+
+// ALGORITHM
+int			can_move(t_cp *cp, int x, int y);
+int			prep_alg(t_cub *data);
+int			do_algorithm(t_cp *cp, int x, int y);
+
+// ALLOCS AND FREES
+void		free_matrix(void **matrix);
+void		free_array(void *array);
+void		*ft_calloc(size_t size);
+typedef struct s_allocs		t_allocs;
+struct s_allocs
+{
+	void	*(*calloc)(size_t size);
+	void	(*free_matrix)(void **matrix);
+	void	(*free_array)(void *array);
+};
+
+t_allocs	alloc(void);
+
+// PRINTF_FD
+typedef unsigned long		t_lu;
+typedef unsigned int		t_ui;
+typedef struct s_info		t_info;
+# define HEXUP 				"0123456789ABCDEF"
+# define HEXLO 				"0123456789abcdef"
+# define DEC				"0123456789"
+# define STR				0
+# define CHAR				1
+
+struct s_info
+{
+	int			fd;
+	int			base;
+	size_t		i;
+	size_t		counter;
+};
+
+int		printf_fd(int fd, const char *str, ...);
 
 #endif

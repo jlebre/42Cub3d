@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 23:09:59 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/22 23:09:59 by marvin           ###   ########.fr       */
+/*   Created: 2023/03/01 02:29:40 by marvin            #+#    #+#             */
+/*   Updated: 2023/03/01 02:29:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int		draw_vertical_line(int x, int y, int len, t_cub *cub, int color)
+int	ft_strncmp(char *s1, char *s2, size_t n)
 {
-	int i;
-	int limit;
+	size_t	i;
 
-	i = 0;
-	if (x < 0 || x >= cub->width)
-		return (1);
-	limit = cub->height;
-	while (i < len && (y + i) < limit)
-	{
-		mlx_pixel_put(cub->mlx, cub->mlx_win, x, y + i, color);
-		i++;
-	}
-	return (1);
+	if (!s1 || !s2)
+		return (-1);
+	if (n == 0)
+		return (n);
+	i = -1;
+	while (s1[++i] && s2[i] && s1[i] == s2[i] && i < n)
+		;
+	return ((unsigned char)*(s1 + i - (n == i)) - \
+	(unsigned char)*(s2 + i - (n == i)));
 }

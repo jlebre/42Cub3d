@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:19:41 by mtavares          #+#    #+#             */
-/*   Updated: 2022/12/31 16:45:57 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:16:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <str_utils.h>
+#include "cub3d.h"
 
 /*
 	This function evaluates if a char is space
