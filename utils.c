@@ -12,6 +12,19 @@
 
 #include "cub3d.h"
 
+void	free_matrix(char **matrix)
+{
+	int i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}
+
 float	degrees_to_radians(float degrees)
 {
 	return (degrees * (PI / 180));
@@ -29,4 +42,17 @@ int fix_angle(int angle)
 float	distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
+}
+
+void	*ft_memset(void *str, int c, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		*(unsigned char *)(str + i) = (unsigned char)c;
+		i++;
+	}
+	return (str);
 }

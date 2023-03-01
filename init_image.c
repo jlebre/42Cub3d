@@ -23,6 +23,6 @@ void	init_img(t_game *game)
             &img_width, &img_height);
     game->mmp = mlx_new_image(game->mlx, 5, 5);
     ft_memset(game->mmp->data, 150, game->mmp->width * game->mmp->height * sizeof(int));
-    game->mmbase = mlx_new_image(game->mlx, 272, 272);
+    game->mmbase = mlx_new_image(game->mlx, 128, 128);
     ft_memset(game->mmbase->data, 0, game->mmbase->width * game->mmbase->height * sizeof(int));
 }

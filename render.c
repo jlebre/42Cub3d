@@ -16,6 +16,7 @@ int	render(t_game *game)
 {
 	//mlx_clear_window(game->mlx, game->mlx_win);
     raycast(game);
-	mini_map(game);
+	//mini_map(game);
+	usleep(game->delay);
 	return (0);
 }

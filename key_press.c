@@ -14,8 +14,13 @@
 
 int	key_press(int keycode, t_game *game)
 {
+	float	playerCos;
+	float	playerSin;
+
+	playerCos = cos(degrees_to_radians(game->player_angle));
+	playerSin = sin(degrees_to_radians(game->player_angle));
 	if (keycode == 13 || keycode == 119)
-		press_w(game);
+		press_w(playerCos, playerSin, game);
 	else if (keycode == 0 || keycode == 97
 		|| keycode == 123 || keycode == 65361)
 		press_a(game);
@@ -23,7 +28,7 @@ int	key_press(int keycode, t_game *game)
 		|| keycode == 125 || keycode == 65363)
 		press_d(game);
 	else if (keycode == 2 || keycode == 115)
-		press_s(game);
+		press_s(playerCos, playerSin, game);
 	else if (keycode == 53 || keycode == 65307)
 		ft_exit(game);
 	render(game);
@@ -37,43 +42,41 @@ int	key_release(int keycode, t_game *game)
 	return (0);
 }
 
-void	press_w(t_game *game)
+void	press_w(float pCos, float pSin, t_game *game)
 {
-	printf("map = %d\n", game->map[(int)game->py / 32][(int)game->px / 32]);
-	printf("px = %f, py = %f\n", game->px, game->py);
-	printf("dir_x = %f, dir_y = %f\n", game->dir_x, game->dir_y);
-	if (game->map[(int)game->py / 32][(int)game->px / 32] == 0)
+	float new_x;
+	float new_y;
+
+	new_x = game->px + pCos * game->player_speed;
+	new_y = game->py + pSin * game->player_speed;
+	if (game->map[(int)new_y / 16][(int)new_x / 16] == 0)
 	{
-		game->px += game->dir_x * game->player_speed;
-		game->py += game->dir_y * game->player_speed;
+		game->px = new_x;
+		game->py = new_y;
 	}
 }
 
 void	press_a(t_game *game)
 {
-	printf("angle = %f\n", game->player_angle);
-	game->player_angle = fix_angle(game->player_angle + 5);
-	game->dir_x = cos(degrees_to_radians(game->player_angle));
-	game->dir_y = -sin(degrees_to_radians(game->player_angle));
+	game->player_angle = fix_angle(game->player_angle - 5);
 }
 
 void	press_d(t_game *game)
 {
-	printf("angle = %f\n", game->player_angle);
-	game->player_angle = fix_angle(game->player_angle - 5);
-	game->dir_x = cos(degrees_to_radians(game->player_angle));
-	game->dir_y = -sin(degrees_to_radians(game->player_angle));
+	game->player_angle = fix_angle(game->player_angle + 5);
 }
 
-void	press_s(t_game *game)
+void	press_s(float pCos, float pSin, t_game *game)
 {
-	printf("map = %d\n", game->map[(int)game->py / 32][(int)game->px / 32]);
-	printf("px = %f, py = %f\n", game->px, game->py);
-	printf("dir_x = %f, dir_y = %f\n", game->dir_x, game->dir_y);
-	if (game->map[(int)game->py / 32][(int)game->px / 32] == 0)
+	float new_x;
+	float new_y;
+
+	new_x = game->px - pCos * game->player_speed;
+	new_y = game->py - pSin * game->player_speed;
+	if (game->map[(int)new_y / 16][(int)new_x / 16] == 0)
 	{
-		game->px -= game->dir_x * game->player_speed;
-		game->py -= game->dir_y * game->player_speed;
+		game->px = new_x;
+		game->py = new_y;
 	}
 }
 

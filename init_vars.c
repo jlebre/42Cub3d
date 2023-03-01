@@ -36,6 +36,19 @@ char	**dup_map(char map[8][8])
 	return (new_map);
 }
 
+int start_angle(char c)
+{
+	if (c == 'N')
+		return (90);
+	if (c == 'S')
+		return (270);
+	if (c == 'E')
+		return (0);
+	if (c == 'W')
+		return (180);
+	return (0);
+}
+
 void	init_vars(t_game *game)
 {
 	char	map[8][8] =
@@ -44,20 +57,20 @@ void	init_vars(t_game *game)
 		{1,0,1,0,0,0,0,1},
 		{1,0,1,0,0,0,0,1},
 		{1,0,1,0,0,0,0,1},
-		{1,0,0,0,0,0,0,1},
+		{1,0,0,0,1,0,0,1},
 		{1,0,0,0,0,0,0,1},
 		{1,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1},
 	};
-	game->width = 768;
-	game->height = 512;
+	game->width = 640;
+	game->height = 480;
 	game->map_width = 8;
 	game->map_height = 8;
-	game->px = 128;
-	game->py = 128;
-	game->dir_x = -1;
-	game->dir_y = 0;
-	game->player_angle = 90;
+	game->px = 64;
+	game->py = 32;
+	game->direction = 'N';
+	game->player_angle = start_angle(game->direction);
 	game->map = dup_map(map);
-	game->player_speed = 5;
+	game->player_speed = 1;
+	game->delay = 30;
 }

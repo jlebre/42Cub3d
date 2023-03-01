@@ -47,9 +47,10 @@
 # include <fcntl.h>
 # include <math.h>
 # include <string.h>
+# include <dirent.h>
 # include "mlx_linux/mlx.h"
 # include "mlx_linux/mlx_int.h"
-# include "libft/libft.h"
+# include "libft.h"
 
 # define BUFFER_SIZE 42
 # define PI 3.14159265359
@@ -79,8 +80,6 @@ typedef struct s_game
 	int     map_height;
 	float   px;
 	float   py;
-	float   dir_x;
-	float   dir_y;
 	float   player_angle;
 	float   ray_angle;
 	char	**map;
@@ -88,29 +87,13 @@ typedef struct s_game
 	void    *blue;
 	void	*mlx;
 	void	*mlx_win;
-	float   ray_x;
-	float   ray_y;
 	float   x_offset;
 	float   y_offset;
-	float   Tan;
-	float   aTan;
-	float   distance_H;
-	float   distance_V;
-	float   distance;
-	float   hx;
-	float   hy;
-	float   vx;
-	float   vy;
-	float	lineV;
-	float   lineOffset;
-	int		lineH;
-	int		ca;
-	int     ray;
-	int     map_x;
-	int     map_y;
 	int     map_position;
 	int     depht_of_field;
 	int	 	player_speed;
+	char	direction;
+	int		delay;
 	t_img   *mmp;
 	t_img   *mmbase;
 }            t_game;
@@ -133,10 +116,10 @@ void		draw_ray(int x0, int y0, int x1, int y1, t_game *game);
 // KEYPRESS
 int			key_press(int keycode, t_game *game);
 int			key_release(int keycode, t_game *game);
-void		press_w(t_game *game);
+void		press_w(float pCos, float pSin, t_game *game);
 void		press_a(t_game *game);
 void		press_d(t_game *game);
-void		press_s(t_game *game);
+void		press_s(float pCos, float pSin, t_game *game);
 int	        mouse_hook(int button, int x, int y, t_game *game);
 
 // RAYCAST
@@ -155,5 +138,7 @@ int			ft_exit(t_game *game);
 float   	degrees_to_radians(float degrees);
 int			fix_angle(int angle);
 float		distance_between_points(float x1, float y1, float x2, float y2);
+void		free_matrix(char **matrix);
+void		*ft_memset(void *str, int c, size_t n);
 
 #endif

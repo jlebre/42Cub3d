@@ -6,12 +6,12 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:24:43 by jlebre            #+#    #+#              #
-#    Updated: 2023/02/19 18:04:08 by marvin           ###   ########.fr        #
+#    Updated: 2023/02/28 23:55:16 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
 LIB1	= ar -rcs
 LIB2	= ranlib
 RM		= @rm -fr
@@ -19,7 +19,7 @@ RM		= @rm -fr
 NAME	= libft.a
 LIB		= .
 
-SRCS	= ft_strlen.c ft_strchr.c ft_strrchr.c ft_memset.c \
+SRCS	= ft_strlen.c ft_strchr.c ft_strrchr.c \
 		ft_atoi.c ft_strdup.c ft_itoa.c \
 		ft_substr.c ft_strjoin.c ft_split.c \
 		get_next_line.c get_next_line_utils.c \

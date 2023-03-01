@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 13:33:21 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/19 18:04:21 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 23:55:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include <dirent.h>
 
 //LIBFT
 
@@ -34,7 +35,6 @@ int		ft_atoi(const char *str);
 char	*ft_strdup(const char *str);
 char	*ft_substr(char const *s, int start, int len);
 char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_memset(void *str, int c, size_t n);
 
 //GET_NEXT_LINE
 
