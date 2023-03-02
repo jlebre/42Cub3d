@@ -52,8 +52,10 @@ int main(int argc, char **argv)
 	cub()->mlx = mlx_init();
 	if (!cub()->mlx)
 		printf("MLX init error!");
-	init_img(cub());
 	init_vars(cub());
+	init_img(cub());
+	init_mini_map(cub());
+	init_fov(cub());
 	cub()->mlx_win = mlx_new_window(cub()->mlx,
 			cub()->width, cub()->height, "cub3d");
 	//mlx_loop_hook(cub()->mlx, render, cub());

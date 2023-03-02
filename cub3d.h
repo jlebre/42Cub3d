@@ -69,61 +69,65 @@ typedef struct s_parse		t_parse;
 
 struct s_cp
 {
-	char	**map;
-	int		height;
+	char		**map;
+	int			height;
 };
 
 struct	s_map
 {
-	char	**map;
-	int		num_player;
+	char		**map;
+	int			num_player;
+	int     	width;
+	int     	height;
 };
 
 struct	s_img
 {
-	void	**img;
-	int		colors[2];
-	char	order[5];
+	void		**img;
+	int			colors[2];
+	char		order[5];
 };
 
 struct s_parse
 {
-	char	**file;
-	char	**path_to_img;
-	int		num_vars;
+	char		**file;
+	char		**path_to_img;
+	int			num_vars;
 };
 
 struct s_game
 {
-	float   player_angle;
-	float   ray_angle;
-	void    *white;
-	void    *blue;
-	void    *black;
-	int     map_width;
-	int     map_height;
-	int     map_position;
-	int     depht_of_field;
-	int	 	player_speed;
-	int		delay;
+	float   	player_angle;
+	float   	ray_angle;
+	void    	*white;
+	void    	*blue;
+	void    	*black;
+	int     	map_position;
+	int     	depht_of_field;
+	int	 		player_speed;
+	int			delay;
+	int			fov_on;
+	int			map_on;
+	t_img_mlx	*fov;
 	t_img_mlx   *mmp;
 	t_img_mlx   *mmbase;
 };
 
 struct s_cub
 {
-	void	*mlx;
-	void	*mlx_win;
-	char	**file;
-	int		width;
-	int		height;
-	char	direction;
-	float   px;
-	float   py;
-	int		num_player;
-	t_img	img;
-	t_map	map;
-	t_game	game;
+	void		*mlx;
+	void		*mlx_win;
+	char		**file;
+	int			width;
+	int			height;
+	char		direction;
+	float   	px;
+	float   	py;
+	int			num_player;
+	t_img_mlx	*screen;
+	t_img		img;
+	t_map		map;
+	t_game		game;
 };
 
 t_cub		*cub(void);
@@ -136,7 +140,14 @@ void	    init_img(t_cub *cub);
 int	        render(t_cub *cub);
 
 // MINIMAP
+void		init_mini_map(t_cub *cub);
 void	    mini_map(t_cub *cub);
+
+// FOV
+void		init_fov(t_cub *cub);
+void		draw_fov(t_cub *cub, int x, int y, int color);
+void		clear_fov(t_cub *cub);
+void		T_fov(t_cub *cub);
 
 // KEYPRESS
 int			key_press(int keycode, t_cub *game);
@@ -149,8 +160,11 @@ int	        mouse_hook(int button, int x, int y, t_cub *cub);
 
 // RAYCAST
 void        raycast(t_cub *cub);
+void 		draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y);
 
 // DRAW
+void		my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
+void		draw_square(t_cub *cub, int x, int y, int color);
 int			draw_vertical_line(int x, int y, int len, t_cub *cub, int color);
 
 // MATH FUNCTIONS

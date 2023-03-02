@@ -53,24 +53,9 @@ void	init_vars(t_cub *cub)
 {
 	cub->width = 640;
 	cub->height = 480;
-	//game->map_width = 8;
-	//game->map_height = 8;
 	cub->game.player_angle = start_angle(cub->direction);
 	cub->game.player_speed = 1;
 	cub->game.delay = 30;
+	cub->game.fov_on = 0;
+	cub->game.map_on = 1;
 }
-
-/*
-	char	map[8][8] =
-	{
-		{1,1,1,1,1,1,1,1},
-		{1,0,1,0,0,0,0,1},
-		{1,0,1,0,0,0,0,1},
-		{1,0,1,0,0,0,0,1},
-		{1,0,0,0,1,0,0,1},
-		{1,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1},
-	};
-	game->map = dup_map(map);
-*/

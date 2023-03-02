@@ -14,9 +14,8 @@
 
 int	render(t_cub *cub)
 {
-	//mlx_clear_window(game->mlx, game->mlx_win);
     raycast(cub);
 	mini_map(cub);
-	//usleep(cub->game.delay);
+	usleep(cub->game.delay);
 	return (0);
 }

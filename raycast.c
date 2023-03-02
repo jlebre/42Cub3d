@@ -16,8 +16,6 @@ void raycast(t_cub *cub)
 {
 	int		ray;
 	char	wall;
-	float	WallHeight;
-	float	distance;
 	float	ray_x;
 	float	ray_y;
 	float	ray_angle;
@@ -25,6 +23,7 @@ void raycast(t_cub *cub)
 	float	raySin;
 
 	ray = 0;
+	clear_fov(cub);
 	ray_angle = fix_angle(cub->game.player_angle - FOV2);
 	while (ray < (cub->width))
 	{
@@ -37,16 +36,31 @@ void raycast(t_cub *cub)
 		{
 			ray_x += rayCos;
 			ray_y += raySin;
+			draw_fov(cub, ray_x + 2, ray_y + 2, 0x0000FF00);
 			wall = cub->map.map[(int)ray_y / 16][(int)ray_x / 16];
-			//printf("map[%d][%d] = %c\n", (int)ray_y / 16, (int)ray_x / 16, wall);
 		}
-		distance = distance_between_points(cub->px, cub->py, ray_x, ray_y);
-		distance *= cos(degrees_to_radians(cub->game.player_angle - ray_angle));
-		WallHeight = (((cub->height * 2)) / distance);
+		draw_walls(cub, ray, ray_angle, ray_x, ray_y);
+		ray_angle = (float)(ray_angle + ((float)FOV / (float)(cub->width)));
+		ray++;
+	}
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->screen, 0, 0);
+}
+
+void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
+{
+	float	WallHeight;
+	float	distance;
+	(void)(ray_angle);
+	
+	distance = distance_between_points(cub->px, cub->py, ray_x, ray_y);
+	//distance *= cos(degrees_to_radians(cub->game.player_angle - ray_angle));
+	WallHeight = (((cub->height * 2)) / distance);
+	if (WallHeight >= cub->height)
+		draw_vertical_line(ray, 0, cub->height, cub, 0xFF0000);
+	else
+	{
 		draw_vertical_line(ray, 0, (cub->height / 2) - WallHeight, cub, 0x00FFFF);
 		draw_vertical_line(ray, (cub->height / 2) - WallHeight, (cub->height / 2) + WallHeight, cub, 0xFF0000);
 		draw_vertical_line(ray, (cub->height / 2) + WallHeight, cub->height, cub, 0x00FF00);
-		ray_angle = ray_angle + ((float)FOV / (float)(cub->width));
-		ray++;
 	}
 }

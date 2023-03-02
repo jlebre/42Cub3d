@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 19:12:57 by mtavares          #+#    #+#             */
-/*   Updated: 2023/03/01 18:54:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 15:51:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	check_invalid_char(t_cub *data)
 	int	x;
 	data->num_player = 0;
 
+	x = 0;
 	y = -1;
 	while (data->map.map[++y])
 	{
@@ -47,6 +48,8 @@ int	check_invalid_char(t_cub *data)
 			}
 		}
 	}
+	data->map.width = x * 16;
+	data->map.height = y * 16;
 	return (data->num_player != 1);
 }
 

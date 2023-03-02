@@ -15,10 +15,12 @@
 void   destroy_img(t_cub *game)
 {
 	mlx_destroy_image(game->mlx, game->game.mmp);
-	mlx_destroy_image(game->mlx, game->game.mmbase);
 	mlx_destroy_image(game->mlx, game->game.black);
 	mlx_destroy_image(game->mlx, game->game.blue);
 	mlx_destroy_image(game->mlx, game->game.white);
+	mlx_destroy_image(game->mlx, game->screen);
+	mlx_destroy_image(game->mlx, game->game.fov);
+	mlx_destroy_image(game->mlx, game->game.mmbase);
 }
 
 int	ft_exit(t_cub *game)

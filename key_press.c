@@ -12,6 +12,22 @@
 
 #include "cub3d.h"
 
+void switch_fov(t_cub *cub)
+{
+	if (cub->game.fov_on == 0)
+		cub->game.fov_on = 1;
+	else if (cub->game.fov_on == 1)
+		cub->game.fov_on = 0;
+}
+
+void switch_map(t_cub *cub)
+{
+	if (cub->game.map_on == 0)
+		cub->game.map_on = 1;
+	else if (cub->game.map_on == 1)
+		cub->game.map_on = 0;
+}
+
 int	key_press(int keycode, t_cub *cub)
 {
 	float	playerCos;
@@ -31,6 +47,10 @@ int	key_press(int keycode, t_cub *cub)
 		press_s(playerCos, playerSin, cub);
 	else if (keycode == 53 || keycode == 65307)
 		ft_exit(cub);
+	else if (keycode == 102)
+		switch_fov(cub);
+	else if (keycode == 109)
+		switch_map(cub);
 	render(cub);
 	return (0);
 }
