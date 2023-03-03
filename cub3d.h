@@ -66,6 +66,7 @@ typedef struct s_map		t_map;
 typedef struct s_game		t_game;
 typedef struct s_cp			t_cp;
 typedef struct s_parse		t_parse;
+typedef struct s_proj		t_proj;
 
 struct s_cp
 {
@@ -84,6 +85,10 @@ struct	s_map
 struct	s_img
 {
 	void		**img;
+	t_img_mlx	*NO_tex;
+	t_img_mlx	*SO_tex;
+	t_img_mlx	*WE_tex;
+	t_img_mlx	*EA_tex;
 	int			colors[2];
 	char		order[5];
 };
@@ -94,6 +99,17 @@ struct s_parse
 	char		**path_to_img;
 	int			num_vars;
 };
+
+struct s_proj
+{
+	int 		scale;
+	int			widht;
+	int			height;
+	int 		half_width;
+	int 		half_height;
+	float 		increment;
+};
+
 
 struct s_game
 {
@@ -108,9 +124,13 @@ struct s_game
 	int			delay;
 	int			fov_on;
 	int			map_on;
+	int			pause;
+	int			lights;
+	int			textures_on;
 	t_img_mlx	*fov;
 	t_img_mlx   *mmp;
 	t_img_mlx   *mmbase;
+	t_img_mlx   *mpause;
 };
 
 struct s_cub
@@ -128,6 +148,7 @@ struct s_cub
 	t_img		img;
 	t_map		map;
 	t_game		game;
+	t_proj		projection;
 };
 
 t_cub		*cub(void);
@@ -135,6 +156,7 @@ t_cub		*cub(void);
 // INIT
 void	    init_vars(t_cub *cub);
 void	    init_img(t_cub *cub);
+void		init_textutes(t_cub *cub, char **path);
 
 // RENDER
 int	        render(t_cub *cub);
@@ -165,7 +187,10 @@ void 		draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y
 // DRAW
 void		my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void		draw_square(t_cub *cub, int x, int y, int color);
-int			draw_vertical_line(int x, int y, int len, t_cub *cub, int color);
+void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color);
+void		draw_texture(float x, float y, float len, t_cub *cub);
+void		get_pixel(t_cub *cub, int x, int y);
+void		clear_screen(t_cub *cub);
 
 // MATH FUNCTIONS
 int         ft_abs(int n);
@@ -181,7 +206,7 @@ void		*ft_memset(void *str, int c, size_t n);
 void		print_parse(t_cub *data, t_parse *parse);
 void		free_parse(t_parse *parse);
 void		exit_parse(t_cub *data, int status, char *str, t_parse *parse);
-void		load_imgs(t_cub *data, t_parse *parse, char **path);
+void		load_imgs(t_cub *data, char **path);
 int			get_vars(t_cub *data, t_parse *parse);
 void		parse_file(t_cub *data, t_parse *parse);
 //

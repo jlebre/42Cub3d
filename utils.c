@@ -28,7 +28,7 @@ int fix_angle(int angle)
 
 float	distance_between_points(float x1, float y1, float x2, float y2)
 {
-	return (sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
+	return ((float)sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }
 
 void	*ft_memset(void *str, int c, size_t n)

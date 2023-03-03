@@ -33,3 +33,60 @@ math library (-lm man man 3 math)
 }
 mlx
 libft
+
+void cast_rays(t_mlx *m)
+{
+	int i;
+	i = -1;
+	float r_angle = m->p->ang - (FOV / 2);
+	while(++i < WIDTH)
+	{
+		int tex_x;
+		t_point close = calc_rays(m, r_angle);
+		float pjc = cos(normalize_ang(r_angle - m->p->ang)) * close.dist2pl * 2;
+		int lineheigth = (HEIGHT / pjc) * 60; 
+    	int drawStart = -lineheigth / 2 + HEIGHT / 2;
+      	if(drawStart < 0)
+			drawStart = 0;
+    	int drawEnd = lineheigth / 2 + HEIGHT / 2;
+      	if(drawEnd >= HEIGHT)
+			drawEnd = HEIGHT - 1;
+		if (close.hit)
+            tex_x = (int)close.x * m->texture.w / TILES % m->texture.w;
+        else
+            tex_x = (int)close.y * m->texture.h / TILES % m->texture.h;
+		int y = drawStart;
+        while (y < drawEnd)
+        {
+            // Calculate texture coordinate for current pixel (W_H - vars->p_vec->line_height) / 2;
+			int tex_y = ((y - HEIGHT / 2 + lineheigth / 2) * m->texture.h) / lineheigth;            
+			// Retrieve pixel value from texture image data
+            char *tex_ptr = m->texture.addr + (tex_y * m->texture.line_len + tex_x * (m->texture.bpp / 8));
+            int color = *(int *)tex_ptr;
+		    put_pixel_img(m, i, y, color);
+            y++;
+        }
+		render_floor(m, i,drawEnd, drawStart);
+		r_angle += (FOV / WIDTH);
+	}
+}
+
+mlx->texture.img_ptr = mlx_xpm_file_to_image(mlx->ptr,"./assets/siding6.xpm", &mlx->texture.w, &mlx->texture.h);
+mlx->texture.addr = mlx_get_data_addr(mlx->texture.img_ptr, &mlx->texture.bpp, &mlx->texture.line_len, &mlx->texture.endian);
+
+typedef struct	s_mlx {
+	void	*ptr;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx_win;
+	int 	squarex;
+	int 	squarey;
+	int		win_x;
+	int		win_y;
+	int 	**map;
+	t_image		texture;
+	t_player	*p;
+}				t_mlx;

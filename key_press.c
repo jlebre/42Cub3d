@@ -20,12 +20,51 @@ void switch_fov(t_cub *cub)
 		cub->game.fov_on = 0;
 }
 
+void light_switch(t_cub *cub)
+{
+	if (cub->game.lights == 0)
+		cub->game.lights = 1;
+	else if (cub->game.lights == 1)
+		cub->game.lights = 0;
+}
+
+void textures_switch(t_cub *cub)
+{
+	if (cub->game.textures_on == 0)
+		cub->game.textures_on = 1;
+	else if (cub->game.textures_on == 1)
+		cub->game.textures_on = 0;
+}
+
 void switch_map(t_cub *cub)
 {
 	if (cub->game.map_on == 0)
 		cub->game.map_on = 1;
 	else if (cub->game.map_on == 1)
 		cub->game.map_on = 0;
+}
+
+int	button(int button, int x, int y, t_cub *cub)
+{
+	(void)x;
+	(void)y;
+	(void)button;
+	(void)cub;
+	if (button == 1 && cub->game.pause == 1 && x >= 275 && x <= 365 && y >= 260 && y <= 290)
+		ft_exit(cub);
+	return (0);
+}
+
+void pause_menu(t_cub *cub)
+{
+	if (cub->game.pause == 0)
+	{
+		cub->game.pause = 1;
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mpause, 170, 140);
+    	mlx_mouse_hook(cub->mlx_win, &button, cub);
+	}
+	else if (cub->game.pause == 1)
+		cub->game.pause = 0;
 }
 
 int	key_press(int keycode, t_cub *cub)
@@ -35,23 +74,32 @@ int	key_press(int keycode, t_cub *cub)
 
 	playerCos = cos(degrees_to_radians(cub->game.player_angle));
 	playerSin = sin(degrees_to_radians(cub->game.player_angle));
-	if (keycode == 13 || keycode == 119)
+	if ((keycode == 13 || keycode == 119) && cub->game.pause == 0)
 		press_w(playerCos, playerSin, cub);
-	else if (keycode == 0 || keycode == 97
+	else if ((keycode == 0 || keycode == 97
 		|| keycode == 123 || keycode == 65361)
+		&& cub->game.pause == 0)
 		press_a(cub);
-	else if (keycode == 1 || keycode == 100
+	else if ((keycode == 1 || keycode == 100
 		|| keycode == 125 || keycode == 65363)
+		&& cub->game.pause == 0)
 		press_d(cub);
-	else if (keycode == 2 || keycode == 115)
+	else if ((keycode == 2 || keycode == 115) && cub->game.pause == 0)
 		press_s(playerCos, playerSin, cub);
-	else if (keycode == 53 || keycode == 65307)
+	else if ((keycode == 53 || keycode == 65307) && cub->game.pause == 0)
 		ft_exit(cub);
-	else if (keycode == 102)
+	else if (keycode == 102 && cub->game.pause == 0)
 		switch_fov(cub);
-	else if (keycode == 109)
+	else if (keycode == 109 && cub->game.pause == 0)
 		switch_map(cub);
-	render(cub);
+	else if (keycode == 112)
+		pause_menu(cub);
+	else if (keycode == 108)
+		light_switch(cub);
+	else if (keycode == 116)
+		textures_switch(cub);
+	if (cub->game.pause == 0)
+		render(cub);
 	return (0);
 }
 

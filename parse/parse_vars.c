@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 00:19:33 by mtavares          #+#    #+#             */
-/*   Updated: 2023/03/01 15:29:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/03 02:56:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	fill_args(t_parse *parse, char *s, int path_i, int color_i)
 		s += 2;
 		while (ft_isspace(*s))
 			s++;
-		parse->path_to_img[path_i] = ft_strdup(s);
+		parse->path_to_img[path_i] = ft_strdup_without_newline(s);
 		if (!parse->path_to_img[path_i])
 			return (1);
 	}

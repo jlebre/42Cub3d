@@ -78,26 +78,6 @@ void	draw_pixel(t_cub *cub, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	init_fov(t_cub *cub)
-{
-	char	*dst;
-	int 	x;
-	int 	y;
-
-	y = 0;
-	while (y < cub->map.height)
-	{
-		x = 0;
-		while (x < cub->map.width)
-		{
-			dst = cub->game.fov->data + (y * cub->game.fov->size_line + x * (cub->game.fov->bpp / 8));
-			*(unsigned int*)dst = 0xFF000000;
-			x++;
-		}
-		y++;
-	}
-}
-
 void	draw_square(t_cub *cub, int x, int y, int color)
 {
 	int		temp;
@@ -119,14 +99,32 @@ void	draw_square(t_cub *cub, int x, int y, int color)
 	}
 }
 
-int		draw_vertical_line(int x, int y, int len, t_cub *cub, int color)
+void	clear_screen(t_cub *cub)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < cub->height)
+	{
+		x = 0;
+		while (x < cub->width)
+		{
+			my_mlx_pixel_put(cub, x, y, 0x00000000);
+			x++;
+		}
+		y++;
+	}
+}
+
+void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color)
 {
 	int i;
 	int limit;
 
 	i = 0;
-	if (x < 0 || x >= cub->width)
-		return (1);
+	if (x < 0 || x > cub->width)
+		return ;
 	limit = cub->height;
 	while (i < len && (y + i) < limit)
 	{
@@ -134,5 +132,4 @@ int		draw_vertical_line(int x, int y, int len, t_cub *cub, int color)
 			my_mlx_pixel_put(cub, x, y + i, color);
 		i++;
 	}
-	return (1);
 }

@@ -21,12 +21,19 @@ t_cub	*cub(void)
 int	mouse_hook(int button, int x, int y, t_cub *cub)
 {
 	(void)y;
-	(void)button;
+	int half;
 
-	if (x > (cub->width / 2))
-		press_d(cub);
-	else
-		press_a(cub);
+	half = (cub->width / 2);
+	if (button == 1 && x >= half && cub->game.pause == 0)
+	{
+		cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
+		render(cub);
+	}
+	else if (button == 1 && x < half && cub->game.pause == 0)
+	{
+		cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
+		render(cub);
+	}
 	return (0);
 }
 
@@ -54,14 +61,13 @@ int main(int argc, char **argv)
 		printf("MLX init error!");
 	init_vars(cub());
 	init_img(cub());
+	init_textutes(cub(), path);
 	init_mini_map(cub());
-	init_fov(cub());
-	cub()->mlx_win = mlx_new_window(cub()->mlx,
-			cub()->width, cub()->height, "cub3d");
-	//mlx_loop_hook(cub()->mlx, render, cub());
-    mlx_mouse_hook(cub()->mlx_win, &mouse_hook, cub());
+	cub()->mlx_win = mlx_new_window(cub()->mlx, cub()->width, cub()->height, "cub3d");
+	render(cub());
 	mlx_hook(cub()->mlx_win, 2, 1L << 0, &key_press, cub());
 	mlx_hook(cub()->mlx_win, 3, 1L << 1, &key_release, cub());
+    mlx_mouse_hook(cub()->mlx_win, &mouse_hook, cub());
 	mlx_hook(cub()->mlx_win, 17, 1L << 17, &ft_exit, cub());
 	mlx_loop(cub()->mlx);
 	alloc().free_matrix((void **)path);
