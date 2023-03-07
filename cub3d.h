@@ -89,6 +89,7 @@ struct	s_img
 	t_img_mlx	*SO_tex;
 	t_img_mlx	*WE_tex;
 	t_img_mlx	*EA_tex;
+	t_img_mlx	*chess;
 	int			colors[2];
 	char		order[5];
 };
@@ -188,7 +189,7 @@ void 		draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y
 void		my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void		draw_square(t_cub *cub, int x, int y, int color);
 void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color);
-void		draw_texture(float x, float y, float len, t_cub *cub);
+void		draw_texture(int x, int y, float len, t_cub *cub, float ray_x, float ray_y);
 void		get_pixel(t_cub *cub, int x, int y);
 void		clear_screen(t_cub *cub);
 

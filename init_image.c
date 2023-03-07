@@ -25,6 +25,8 @@ void	init_textutes(t_cub *cub, char **path)
 		&img_width, &img_height);
 	cub->img.EA_tex = mlx_xpm_file_to_image(cub->mlx, path[3],
 		&img_width, &img_height);
+	cub->img.chess = mlx_xpm_file_to_image(cub->mlx, "textures/chess.xpm",
+		&img_width, &img_height);
 }
 
 void	init_img(t_cub *cub)
