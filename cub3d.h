@@ -145,6 +145,7 @@ struct s_cub
 	float   	px;
 	float   	py;
 	int			num_player;
+	int			side;
 	t_img_mlx	*screen;
 	t_img		img;
 	t_map		map;
@@ -187,9 +188,11 @@ void 		draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y
 
 // DRAW
 void		my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
+int			my_mlx_pixel_get(t_img_mlx *texture, int x, int y);
 void		draw_square(t_cub *cub, int x, int y, int color);
 void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color);
-void		draw_texture(int x, int y, float len, t_cub *cub, float ray_x, float ray_y);
+void		draw_texture(int x, int y, float len, t_cub *cub, float WallX, float ray_x);
+void		draw_texture2(int x, int y, float len, t_cub *cub, float WallX, t_img_mlx *texture, float ray_x);
 void		get_pixel(t_cub *cub, int x, int y);
 void		clear_screen(t_cub *cub);
 

@@ -21,26 +21,28 @@ void raycast(t_cub *cub)
 	float	ray_angle;
 	float	rayCos;
 	float	raySin;
+	float	increment;
 
 	ray = 0;
 	clear_fov(cub);
 	ray_angle = fix_angle(cub->game.player_angle - FOV2);
+	increment = (float)FOV / (float)cub->width;
 	while (ray < (cub->width))
 	{
 		ray_x = cub->px;
 		ray_y = cub->py;
-		rayCos = cos(degrees_to_radians(ray_angle));
-		raySin = sin(degrees_to_radians(ray_angle));
+		rayCos = cos(degrees_to_radians(ray_angle)) / 20;
+		raySin = sin(degrees_to_radians(ray_angle)) / 20;
 		wall = '0';
 		while (wall == '0')
 		{
 			ray_x += rayCos;
 			ray_y += raySin;
 			draw_fov(cub, ray_x + 2, ray_y + 2, 0x0000FF00);
-			wall = cub->map.map[(int)ray_y / 16][(int)ray_x / 16];
+			wall = cub->map.map[(int)(ray_y / 16)][(int)(ray_x / 16)];
 		}
-		draw_walls(cub, ray, ray_angle, floor(ray_x), floor(ray_y));
-		ray_angle += ((float)FOV / (float)(cub->width));
+		draw_walls(cub, ray, ray_angle, ray_x, ray_y);
+		ray_angle += increment;
 		ray++;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->screen, 0, 0);
@@ -51,17 +53,19 @@ void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
 	float	WallHeight;
 	float	distance;
 	float	new_distance;
-	float	new_angle;
-	(void)(ray_angle);
-	
+	int 	PerpWallDist;
+	float	WallX;
+
 	distance = distance_between_points(cub->px, cub->py, ray_x, ray_y);
-	new_angle = fix_angle(ray_angle - cub->game.player_angle);
-	new_distance = distance * cos(degrees_to_radians(new_angle));
+	new_distance = distance * cos(degrees_to_radians(ray_angle - cub->game.player_angle));
+	PerpWallDist = sqrt(pow(new_distance, 2) - pow(cub->py - ray_y, 2));
 	WallHeight = floor((cub->height * 2) / new_distance);
+	WallX = cub->px + PerpWallDist * cos(degrees_to_radians(ray_angle));
+	WallX -= floor(WallX);
 	if (WallHeight >= cub->height)
 	{
 		if (cub->game.textures_on == 1)
-			draw_texture(ray, 0, cub->height, cub, ray_x, ray_y);
+			draw_texture(ray, 0, cub->height, cub, WallX, ray_x);
 		else
 			draw_vertical_line(ray, 0, cub->height, cub, 0xFF0000);
 	}
@@ -71,18 +75,18 @@ void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
 		{
 			draw_vertical_line(ray, 0, floor((cub->height / 2) - WallHeight), cub, cub->img.colors[1]);
 			if (cub->game.textures_on == 1)
-				draw_texture(ray, floor((cub->height / 2) - WallHeight), floor(cub->height / 2) + WallHeight, cub, ray_x, ray_y);
+				draw_texture(ray, floor((cub->height / 2) - WallHeight), 2 * WallHeight, cub, WallX, ray_x);
 			else
-				draw_vertical_line(ray, floor((cub->height / 2) - WallHeight), floor(cub->height / 2) + WallHeight, cub, 0xFF0000);
+				draw_vertical_line(ray, floor((cub->height / 2) - WallHeight), 2 * WallHeight, cub, 0xFF0000);
 			draw_vertical_line(ray, floor((cub->height / 2) + WallHeight), cub->height, cub, cub->img.colors[0]);
 		}
 		else if (cub->game.lights == 0)
 		{
 			draw_vertical_line(ray, 0, floor((cub->height / 2) - WallHeight), cub, 0x00000000);
 			if (cub->game.textures_on == 1)
-				draw_texture(ray, floor((cub->height / 2) - WallHeight), floor(cub->height / 2) + WallHeight, cub, ray_x, ray_y);
+				draw_texture(ray, floor((cub->height / 2) - WallHeight), 2 * WallHeight, cub, WallX, ray_x);
 			else
-				draw_vertical_line(ray, floor((cub->height / 2) - WallHeight), floor(cub->height / 2) + WallHeight, cub, 0xFF0000);
+				draw_vertical_line(ray, floor((cub->height / 2) - WallHeight), 2 * WallHeight, cub, 0xFF0000);
 			draw_vertical_line(ray, floor((cub->height / 2) + WallHeight), cub->height, cub, 0x00000000);
 		}
 	}
@@ -98,26 +102,52 @@ int	round_down(float num)
 	return (integer);
 }
 
-void	draw_texture(int x, int y, float len, t_cub *cub, float ray_x, float ray_y)
+void	draw_texture(int x, int y, float len, t_cub *cub, float WallX, float ray_x)
 {
+	draw_texture2(x, y, len, cub, WallX, cub->img.NO_tex, ray_x);
+	/*
+	if ((int)ray_y % 16 == 0)
+	{
+		if (ray_y < 0)
+			draw_texture2(x, y, len, cub, WallX, cub->img.NO_tex);
+		else
+			draw_texture2(x, y, len, cub, WallX, cub->img.SO_tex);
+	}
+	else
+	{
+		if (ray_x < 0)
+			draw_texture2(x, y, len, cub, WallX, cub->img.WE_tex);
+		else
+			draw_texture2(x, y, len, cub, WallX, cub->img.EA_tex);
+	}
+	*/
+}
+
+void	draw_texture2(int x, int y, float len, t_cub *cub, float WallX, t_img_mlx *texture, float ray_x)
+{
+	int 	i;
 	float	tex_x;
+	int		texX;
 	float	tex_y;
-	char	*tex;
 	float	increment;
 
-	(void)(ray_y);
 	(void)(ray_x);
-	tex_x = (cub->img.chess->width / (cub->width / (float)x));
-	increment = cub->img.chess->height / len;
-	len += y;
+	texX = (int)(WallX * (float)texture->width);
+	if (ray_x < 0)
+		tex_x = texture->width - texX;
+	else
+		tex_x = texX;
+	//tex_x = texture->width - tex_x - 1;
+	increment = texture->height / len;
+	i = 0;
 	tex_y = 0;
-	while (y < len && y < cub->height)
+	while (i < len && i < cub->height)
 	{
-		//dst = cub->screen->data + (y * cub->screen->size_line + x * (cub->screen->bpp / 8));
-		tex = cub->img.chess->data + ((round_down)(tex_y) * cub->img.chess->size_line) + ((round_down)(tex_x) * (cub->img.chess->bpp / 8));
-		if (y < cub->height && x < cub->width && (y >= 0 && x >= 0 && tex_y <= cub->img.chess->height && tex_x <= cub->img.chess->width))
-			my_mlx_pixel_put(cub, x, y, *(unsigned int *)tex);
+		if (y < cub->height && x < cub->width && (y >= 0 && x >= 0 && tex_y <= texture->height && tex_x <= texture->width))
+			my_mlx_pixel_put(cub, x, y, 
+			my_mlx_pixel_get(texture, tex_x, tex_y));
 		tex_y += increment;
 		y++;
+		i++;
 	}
 }

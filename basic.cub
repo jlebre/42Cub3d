@@ -2,11 +2,11 @@ NO ./textures/stone.xpm
 
 
 
-SO ./textures/brick.xpm
+SO ./textures/brick_with_flag.xpm
 
 
 
-WE ./textures/brick_with_flag.xpm
+WE ./textures/stone_musgo.xpm
 
 
 

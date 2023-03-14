@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+int	my_mlx_pixel_get(t_img_mlx *texture, int x, int y)
+{
+	char	*dst;
+
+	dst = texture->data + (y * texture->size_line + x * (texture->bpp / 8));
+	return (*(unsigned int*)dst);
+}
+
 void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
 {
 	char	*dst;
