@@ -163,19 +163,10 @@ void	draw_texture2(int x, int y, float len, t_cub *cub, float WallX, t_img_mlx *
 {
 	int 	i;
 	float	tex_x;
-	int		texX;
 	float	tex_y;
 	float	increment;
 
 	(void)(ray_x);
-	(void)(texX);
-	//tex_x = get_wall_x(WallX, texture->width);
-	//tex_x = WallX * (float)texture->width;
-	//texX = (int)(WallX * (float)texture->width);
-	//if (ray_x < 0)
-	//	tex_x = texture->width - texX;
-	//else
-	//	tex_x = texture->width - tex_x - 1;
 	tex_x = WallX;
 	increment = texture->height / len;
 	i = 0;

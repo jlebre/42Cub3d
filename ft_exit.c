@@ -26,6 +26,7 @@ void   destroy_img(t_cub *game)
 	mlx_destroy_image(game->mlx, game->img.SO_tex);
 	mlx_destroy_image(game->mlx, game->img.WE_tex);
 	mlx_destroy_image(game->mlx, game->img.EA_tex);
+	mlx_destroy_image(game->mlx, game->img.chess);
 }
 
 int	ft_exit(t_cub *game)

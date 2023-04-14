@@ -67,6 +67,16 @@ void pause_menu(t_cub *cub)
 		cub->game.pause = 0;
 }
 
+void	left(t_cub *cub)
+{
+	cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
+}
+
+void	right(t_cub *cub)
+{
+	cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
+}
+
 int	key_press(int keycode, t_cub *cub)
 {
 	float	playerCos;
@@ -74,23 +84,25 @@ int	key_press(int keycode, t_cub *cub)
 
 	playerCos = cos(degrees_to_radians(cub->game.player_angle));
 	playerSin = sin(degrees_to_radians(cub->game.player_angle));
-	if ((keycode == 13 || keycode == 119) && cub->game.pause == 0)
+	if ((keycode == 13 || keycode == 119) && !cub->game.pause)
 		press_w(playerCos, playerSin, cub);
 	else if ((keycode == 0 || keycode == 97
-		|| keycode == 123 || keycode == 65361)
-		&& cub->game.pause == 0)
-		press_a(cub);
-	else if ((keycode == 1 || keycode == 100
-		|| keycode == 125 || keycode == 65363)
-		&& cub->game.pause == 0)
+		|| keycode == 123) && !cub->game.pause)
 		press_d(cub);
-	else if ((keycode == 2 || keycode == 115) && cub->game.pause == 0)
+	else if ((keycode == 1 || keycode == 100
+		|| keycode == 125) && !cub->game.pause)
+		press_a(cub);
+	else if ((keycode == 2 || keycode == 115) && !cub->game.pause)
 		press_s(playerCos, playerSin, cub);
-	else if ((keycode == 53 || keycode == 65307) && cub->game.pause == 0)
+	else if (keycode == 65361 && !cub->game.pause)
+		left(cub);
+	else if (keycode == 65363 && !cub->game.pause)
+		right(cub);
+	else if ((keycode == 53 || keycode == 65307) && !cub->game.pause)
 		ft_exit(cub);
-	else if (keycode == 102 && cub->game.pause == 0)
+	else if (keycode == 102 && !cub->game.pause)
 		switch_fov(cub);
-	else if (keycode == 109 && cub->game.pause == 0)
+	else if (keycode == 109 && !cub->game.pause)
 		switch_map(cub);
 	else if (keycode == 112)
 		pause_menu(cub);
@@ -98,7 +110,7 @@ int	key_press(int keycode, t_cub *cub)
 		light_switch(cub);
 	else if (keycode == 116)
 		textures_switch(cub);
-	if (cub->game.pause == 0)
+	if (!cub->game.pause)
 		render(cub);
 	return (0);
 }
@@ -126,12 +138,42 @@ void	press_w(float pCos, float pSin, t_cub *cub)
 
 void	press_a(t_cub *cub)
 {
-	cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
+	float new_dir;
+	float new_x;
+	float new_y;
+	float pCos;
+	float pSin;
+
+	new_dir = cub->game.player_angle + 90;
+	pCos = cos(degrees_to_radians(new_dir));
+	pSin = sin(degrees_to_radians(new_dir));
+	new_x = cub->px + pCos * cub->game.player_speed;
+	new_y = cub->py + pSin * cub->game.player_speed;
+	if (cub->map.map[(int)new_y / 16][(int)new_x / 16] != '1')
+	{
+		cub->px = new_x;
+		cub->py = new_y;
+	}
 }
 
 void	press_d(t_cub *cub)
 {
-	cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
+float new_dir;
+	float new_x;
+	float new_y;
+	float pCos;
+	float pSin;
+
+	new_dir = cub->game.player_angle - 90;
+	pCos = cos(degrees_to_radians(new_dir));
+	pSin = sin(degrees_to_radians(new_dir));
+	new_x = cub->px + pCos * cub->game.player_speed;
+	new_y = cub->py + pSin * cub->game.player_speed;
+	if (cub->map.map[(int)new_y / 16][(int)new_x / 16] != '1')
+	{
+		cub->px = new_x;
+		cub->py = new_y;
+	}
 }
 
 void	press_s(float pCos, float pSin, t_cub *cub)
@@ -147,4 +189,3 @@ void	press_s(float pCos, float pSin, t_cub *cub)
 		cub->py = new_y;
 	}
 }
-

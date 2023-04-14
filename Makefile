@@ -6,13 +6,14 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/19 16:32:14 by jlebre            #+#    #+#              #
-#    Updated: 2023/03/01 18:10:48 by marvin           ###   ########.fr        #
+#    Updated: 2023/04/14 20:23:59 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -I. -O3 -Wall -Wextra -Werror -g -fsanitize=address
 MLXFLAGS_LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+#OPTI = -ffast-math -ffinite-math-only -flto
 RM = @rm -fr
 NAME = cub3d
 SRCS = main.c ft_exit.c key_press.c init_vars.c render.c printf_fd.c \

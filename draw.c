@@ -141,3 +141,6 @@ void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color)
 		i++;
 	}
 }
+
+//Cores Psicadélicas e reflexo
+//color++;
