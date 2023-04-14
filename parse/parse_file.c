@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 20:41:36 by mtavares          #+#    #+#             */
-/*   Updated: 2023/03/01 14:16:16 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/14 14:13:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	get_map(t_cub *data, t_parse *parse, int y)
 	if (!data->map.map)
 		exit_parse(data, 1, "Error malloc with map", parse);
 	i = -1;
-	while (parse->file[y])
+	while (parse->file[y] && valid_line(parse->file[y]))
 	{
 		data->map.map[++i] = ft_strdup(parse->file[y]);
 		if (!data->map.map[i])

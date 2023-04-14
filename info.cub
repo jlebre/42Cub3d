@@ -1,22 +1,22 @@
-NO ./textures/stone.xpm
+NO ./path_to_the_north_texture
 
 
 
-SO ./textures/brick.xpm
+SO ./path_to_the_south_texture
 
 
 
-WE ./textures/brick_with_flag.xpm
+
+WE ./path_to_the_west_texture
 
 
 
-EA ./textures/wood.xpm
+EA ./path_to_the_east_texture
 
+F 220,100,0
 
+C 225,30,0
 
-C 0,0,255
-
-F 0,255,0
 
 
 

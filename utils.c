@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-float	dtr(float degrees)
+float	degrees_to_radians(float degrees)
 {
 	return (degrees * (PI / 180));
 }
@@ -26,7 +26,7 @@ int fix_angle(int angle)
 	return (angle);
 }
 
-float	dist(float x1, float y1, float x2, float y2)
+float	distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return ((float)sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))));
 }

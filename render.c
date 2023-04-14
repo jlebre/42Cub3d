@@ -39,6 +39,5 @@ int	render(t_cub *cub)
 	mini_map(cub);
 	write_options(cub);
 	usleep(cub->game.delay);
-	mlx_do_sync(cub->mlx);
 	return (0);
 }

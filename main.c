@@ -26,12 +26,12 @@ int	mouse_hook(int button, int x, int y, t_cub *cub)
 	half = (cub->width / 2);
 	if (button == 1 && x >= half && cub->game.pause == 0)
 	{
-		cub->game.pa = fix_angle(cub->game.pa + 5);
+		cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
 		render(cub);
 	}
 	else if (button == 1 && x < half && cub->game.pause == 0)
 	{
-		cub->game.pa = fix_angle(cub->game.pa - 5);
+		cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
 		render(cub);
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:03:52 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/15 13:44:29 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/02/18 04:04:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	check_map(t_game *game)
 
 /*
 if == 'N'
-	game->pa = PI / 2;
+	game->player_angle = PI / 2;
 else if == 'S'
-	game->pa = 3 * PI / 2;
+	game->player_angle = 3 * PI / 2;
 else if == 'E'
-	game->pa = 0;
+	game->player_angle = 0;
 else if == 'W'
-	game->pa = PI;
+	game->player_angle = PI;
 */
 
 void	check(t_game *game)
