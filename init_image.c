@@ -50,4 +50,6 @@ void	init_img(t_cub *cub)
 	ft_memset(cub->game.fov->data, 0, cub->game.fov->width * cub->game.fov->height * sizeof(int));
 	cub->game.mmbase = mlx_new_image(cub->mlx, cub->map.width - 16, cub->map.height);
 	ft_memset(cub->game.mmbase->data, 0, (cub->game.mmbase->width - 16) * (cub->game.mmbase->height) * sizeof(int));
+	cub->game.mini = mlx_new_image(cub->mlx, 128, 128);
+	ft_memset(cub->game.mini->data, 0, cub->game.mini->width * cub->game.mini->height * sizeof(int));
 }

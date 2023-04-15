@@ -55,7 +55,7 @@ void	init_vars(t_cub *cub)
 	cub->height = 480;
 	cub->game.player_angle = start_angle(cub->direction);
 	cub->game.player_speed = 2;
-	cub->game.delay = 30;
+	cub->game.delay = 300;
 	cub->game.fov_on = 0;
 	cub->game.map_on = 1;
 	cub->game.pause = 0;

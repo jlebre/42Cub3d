@@ -131,6 +131,7 @@ struct s_game
 	t_img_mlx	*fov;
 	t_img_mlx   *mmp;
 	t_img_mlx   *mmbase;
+	t_img_mlx   *mini;
 	t_img_mlx   *mpause;
 };
 

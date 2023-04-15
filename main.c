@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 	cub()->mlx_win = mlx_new_window(cub()->mlx, cub()->width, cub()->height, "cub3d");
 	render(cub());
 	mlx_hook(cub()->mlx_win, 2, 1L << 0, &key_press, cub());
-	mlx_hook(cub()->mlx_win, 3, 1L << 1, &key_release, cub());
+	//mlx_hook(cub()->mlx_win, 3, 1L << 1, &key_release, cub());
     mlx_mouse_hook(cub()->mlx_win, &mouse_hook, cub());
 	mlx_hook(cub()->mlx_win, 17, 1L << 17, &ft_exit, cub());
 	mlx_loop(cub()->mlx);

@@ -21,6 +21,7 @@ void   destroy_img(t_cub *game)
 	mlx_destroy_image(game->mlx, game->screen);
 	mlx_destroy_image(game->mlx, game->game.fov);
 	mlx_destroy_image(game->mlx, game->game.mmbase);
+	mlx_destroy_image(game->mlx, game->game.mini);
 	mlx_destroy_image(game->mlx, game->game.mpause);
 	mlx_destroy_image(game->mlx, game->img.NO_tex);
 	mlx_destroy_image(game->mlx, game->img.SO_tex);

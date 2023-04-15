@@ -12,14 +12,58 @@
 
 #include "cub3d.h"
 
+void	draw_mini(t_cub *cub, int x, int y, int color)
+{
+	char	*dst;
+
+	if (y < 128 && x < 128 && (y >= 0 && x >= 0))
+	{
+		dst = cub->game.mini->data + (y * cub->game.mini->size_line + x * (cub->game.mini->bpp / 8));
+		*(unsigned int*)dst = color;
+	}
+}
+
+
+void	print_map(t_cub *cub)
+{
+	int x;
+	int y;
+	int i;
+	int j;
+
+	x = cub->px - 32;
+	y = cub->py - 32;
+
+	if (x < 0)
+		x = 0;
+	if (y < 0)
+		y = 0;
+	if (x > cub->map.width - 64)
+		x = cub->map.width - 64;
+	if (y > cub->map.height - 64)
+		y = cub->map.height - 64;
+	i = 0;
+	while (i < 128)
+	{
+		j = 0;
+		while (j < 128)
+		{
+			draw_mini(cub, j, i, my_mlx_pixel_get(cub->game.mmbase, x + j, y + i));
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mini, 10, 10);	
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmp, cub->px, cub->py);
+}
+
 void	mini_map(t_cub *cub)
 {
 	if (cub->game.map_on == 1)
 	{
 		if (cub->game.fov_on == 0)
 			clear_fov(cub);
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmbase, 0, 0);
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmp, cub->px, cub->py);
+		print_map(cub);
 	}
 }
 
