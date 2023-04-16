@@ -31,17 +31,17 @@ void	print_map(t_cub *cub)
 	int i;
 	int j;
 
-	x = cub->px - 32;
-	y = cub->py - 32;
+	x = cub->px - 64;
+	y = cub->py - 64;
 
-	if (x < 0)
+	if (x < 0 || cub->map.width - x < 64)
 		x = 0;
-	if (y < 0)
+	if (y < 0 || cub->map.height - y < 64)
 		y = 0;
-	if (x > cub->map.width - 64)
-		x = cub->map.width - 64;
-	if (y > cub->map.height - 64)
-		y = cub->map.height - 64;
+	if (cub->map.width - x < 144)
+		x = cub->map.width - 144;
+	if (cub->map.height - y < 128)
+		y = cub->map.height - 128;
 	i = 0;
 	while (i < 128)
 	{
@@ -54,7 +54,7 @@ void	print_map(t_cub *cub)
 		i++;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mini, 10, 10);	
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmp, cub->px, cub->py);
+	//mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmp, cub->px, cub->py);
 }
 
 void	mini_map(t_cub *cub)
@@ -84,6 +84,8 @@ void	init_mini_map(t_cub *cub)
 				|| cub->map.map[y][x] == 'S' || cub->map.map[y][x] == 'E'
 				|| cub->map.map[y][x] == 'W')
 				draw_square(cub, x * 16, y * 16, 0x00FFFFFF);
+			else if (cub->map.map[y][x] == ' ')
+				draw_square(cub, x * 16, y * 16, 0x00000000);
 			else if (cub->map.map[y][x + 1] != '\0')
 				draw_square(cub, x * 16, y * 16, 0x00000000);
 			x++;
