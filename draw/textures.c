@@ -43,7 +43,7 @@ void	draw_texture(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *
 	{
 		if (y < cub->height && x < cub->width && (y >= 0 && x >= 0 && tex_y <= texture->height && wall_x <= texture->width))
 			my_mlx_pixel_put(cub, x, y,
-			my_mlx_pixel_get(texture, (int)wall_x, (int)tex_y));
+			my_mlx_pixel_get(texture, floor(wall_x), floor(tex_y)));
 		tex_y += increment;
 		y++;
 		i++;
