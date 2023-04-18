@@ -2,4 +2,14 @@ mini_map.c
 raycast.c
 render.c
 draw.c
-images - add compass
+init_vars.c
+init_images.c
+
+folder "images" - add compass, hearts and settings
+
+folder "key"
+- key press
+- movements
+- switches
+
+cube3d.h
