@@ -14,20 +14,10 @@
 
 void	write_options(t_cub *cub)
 {
-	if (cub->game.lights == 1)
-	{
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 20, 0x00000000, "P - Pause");
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 32, 0x00000000, "M - Mini Map");
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 44, 0x00000000, "F - FOV");
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 56, 0x00000000, "ESC - Quit");
-	}
-	else
-	{
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 20, 0xFFFFFFFF, "P - Pause");
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 32, 0xFFFFFFFF, "M - Mini Map");
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 44, 0xFFFFFFFF, "F - FOV");
-		mlx_string_put(cub->mlx, cub->mlx_win, 550, 56, 0xFFFFFFFF, "ESC - Quit");
-	}
+	mlx_string_put(cub->mlx, cub->mlx_win, 550, 20, 0x00000000, "P - Pause");
+	mlx_string_put(cub->mlx, cub->mlx_win, 550, 32, 0x00000000, "M - Mini Map");
+	mlx_string_put(cub->mlx, cub->mlx_win, 550, 44, 0x00000000, "F - FOV");
+	mlx_string_put(cub->mlx, cub->mlx_win, 550, 56, 0x00000000, "ESC - Quit");
 }
 
 int	render(t_cub *cub)

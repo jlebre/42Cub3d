@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/19 16:32:14 by jlebre            #+#    #+#              #
-#    Updated: 2023/04/14 20:23:59 by marvin           ###   ########.fr        #
+#    Updated: 2023/04/18 16:34:58 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ MLXFLAGS_LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 #OPTI = -ffast-math -ffinite-math-only -flto
 RM = @rm -fr
 NAME = cub3d
-SRCS = main.c ft_exit.c key_press.c init_vars.c render.c printf_fd.c \
+SRCS = main.c ft_exit.c init_vars.c render.c printf_fd.c \
 		init_image.c ft_abs.c raycast.c draw.c utils.c mini_map.c\
+		\
+		key/key_press.c key/movement.c key/switches.c\
 		\
 		parse/parse.c parse/parse_vars.c parse/parse_file.c parse/load_xpm.c \
 		\

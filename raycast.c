@@ -73,76 +73,77 @@ int	get_Pos( float ray)
 	float	largura;
 	float	x_increment;
 	float	dir;
-	float	WallX;
+	float	wall_x;
 
 	dir = (float)((int)ray % 16);
-	WallX = (float)(ray - dir);
-	unit_dist = (float)(WallX / dir);
+	wall_x = (float)(ray - dir);
+	unit_dist = (float)(wall_x / dir);
 	largura = (float)(unit_dist * 16);
 	x_increment = (float)(64 / largura);
-	WallX = WallX * x_increment;
-	return (WallX);
+	wall_x = wall_x * x_increment;
+	return (wall_x);
 }
 
 int	get_WalX(t_cub *cub, float ray_x, float ray_y)
 {
-	float	WallX;
+	float	wall_x;
 
 	if (check_hit(cub, ray_x, ray_y))
 	{
-		WallX = get_Pos(ray_y);
+		wall_x = get_Pos(ray_y);
 		if (ray_x < cub->px)
-			WallX = 64 - WallX;	
+			wall_x = 64 - wall_x;	
 	}
 	else
 	{
-		WallX = get_Pos(ray_x);
+		wall_x = get_Pos(ray_x);
 		if (ray_y > cub->py)
-			WallX = 64 - WallX;	
+			wall_x = 64 - wall_x;	
 	}
-	return (WallX);
+	return (wall_x);
 }
 
 void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
 {
-	float	WallHeight;
+	float	wall_height;
 	float	distance;
-	float	new_distance;
+	float	fish_eye;
+
 	distance = distance_between_points(cub->px, cub->py, ray_x, ray_y);
-	new_distance = (distance / 16) * cos(degrees_to_radians(ray_angle - cub->game.player_angle));
-	WallHeight = floor((cub->height / 2) / new_distance);
-	float	WallX;
+	fish_eye = (distance / 16) * cos(degrees_to_radians(ray_angle - cub->game.player_angle));
+	wall_height = floor((cub->height / 2) / fish_eye);
+	float	wall_x;
 	
-	WallX = get_WalX(cub, ray_x, ray_y);
-	if (WallHeight >= cub->height)
-		draw_texture(ray, 0, cub->height, cub, WallX, ray_x, ray_y);
+	wall_x = get_WalX(cub, ray_x, ray_y);
+	if (wall_height >= cub->height)
+		draw_texture(ray, 0, cub->height, cub, wall_x, ray_x, ray_y);
 	else
 	{
-		draw_vertical_line(ray, 0, floor((cub->height / 2) - WallHeight), cub, cub->img.colors[1]);
-		draw_texture(ray, floor((cub->height / 2) - WallHeight), 2 * WallHeight, cub, WallX, ray_x, ray_y);
-		draw_vertical_line(ray, floor((cub->height / 2) + WallHeight), cub->height, cub, cub->img.colors[0]);
+		draw_vertical_line(ray, 0, floor((cub->height / 2) - wall_height), cub, cub->img.colors[1]);
+		draw_texture(ray, floor((cub->height / 2) - wall_height), 2 * wall_height, cub, wall_x, ray_x, ray_y);
+		draw_vertical_line(ray, floor((cub->height / 2) + wall_height), cub->height, cub, cub->img.colors[0]);
 	}
 }
 
-void	draw_texture(int x, int y, float len, t_cub *cub, float WallX, float ray_x, float ray_y)
+void	draw_texture(int x, int y, float len, t_cub *cub, float wall_x, float ray_x, float ray_y)
 {
 	if (check_hit(cub, ray_x, ray_y))
 	{
 		if (ray_x < cub->px)
-			draw_texture2(x, y, len, cub, WallX, cub->img.WE_tex, ray_x);
+			draw_texture2(x, y, len, cub, wall_x, cub->img.WE_tex, ray_x);
 		else
-			draw_texture2(x, y, len, cub, WallX, cub->img.EA_tex, ray_x);
+			draw_texture2(x, y, len, cub, wall_x, cub->img.EA_tex, ray_x);
 	}
 	else
 	{
 		if (ray_y < cub->py)
-			draw_texture2(x, y, len, cub, WallX, cub->img.NO_tex, ray_x);
+			draw_texture2(x, y, len, cub, wall_x, cub->img.NO_tex, ray_x);
 		else
-			draw_texture2(x, y, len, cub, WallX, cub->img.SO_tex, ray_x);
+			draw_texture2(x, y, len, cub, wall_x, cub->img.SO_tex, ray_x);
 	}
 }
 
-void	draw_texture2(int x, int y, float len, t_cub *cub, float WallX, t_img_mlx *texture, float ray_x)
+void	draw_texture2(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture, float ray_x)
 {
 	int 	i;
 	float	tex_x;
@@ -150,7 +151,7 @@ void	draw_texture2(int x, int y, float len, t_cub *cub, float WallX, t_img_mlx *
 	float	increment;
 
 	(void)(ray_x);
-	tex_x = WallX;
+	tex_x = wall_x;
 	increment = texture->height / len;
 	i = 0;
 	tex_y = 0;

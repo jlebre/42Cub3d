@@ -13,21 +13,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-/* 
-// MAC KEYS:
-# define X_EVENT_KEY_PRESS		2
-# define X_EVENT_KEY_RELEASE	3
-# define KEY_ESC				53
-# define KEY_W					13
-# define KEY_A					0
-# define KEY_D					1
-# define KEY_S					2
-# define UP 					126
-# define DOWN 					124
-# define LEFT					123
-# define RIGHT 					125
-*/
-
 // LINUX KEYS:
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
@@ -179,11 +164,13 @@ void		T_fov(t_cub *cub);
 // KEYPRESS
 int			key_press(int keycode, t_cub *game);
 int			key_release(int keycode, t_cub *game);
-void		press_w(float pCos, float pSin, t_cub *cub);
-void		press_a(t_cub *cub);
-void		press_d(t_cub *cub);
-void		press_s(float pCos, float pSin, t_cub *cub);
+void		press_ws(float pCos, float pSin, t_cub *cub, int type);
+void		press_ad(t_cub *cub, int type);
+void		rotate(t_cub *cub, int keycode);
 int	        mouse_hook(int button, int x, int y, t_cub *cub);
+void		switch_map(t_cub *cub);
+int			button(int button, int x, int y, t_cub *cub);
+void		pause_menu(t_cub *cub);
 
 // RAYCAST
 void        raycast(t_cub *cub);
@@ -194,9 +181,9 @@ void		my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 int			my_mlx_pixel_get(t_img_mlx *texture, int x, int y);
 void		draw_square(t_cub *cub, int x, int y, int color);
 void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color);
-void		draw_texture(int x, int y, float len, t_cub *cub, float WallX, float ray_x, float ray_y);
-void		draw_texture2(int x, int y, float len, t_cub *cub, float WallX, t_img_mlx *texture, float ray_x);
-void		draw_texture3(int x, int y, float len, t_cub *cub, float WallX, t_img_mlx *texture, float ray_x);
+void		draw_texture(int x, int y, float len, t_cub *cub, float wall_x, float ray_x, float ray_y);
+void		draw_texture2(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture, float ray_x);
+void		draw_texture3(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture, float ray_x);
 void		get_pixel(t_cub *cub, int x, int y);
 void		clear_screen(t_cub *cub);
 
