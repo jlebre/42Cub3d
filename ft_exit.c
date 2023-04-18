@@ -14,6 +14,8 @@
 
 void   destroy_img(t_cub *game)
 {
+	int i = 0;
+
 	mlx_destroy_image(game->mlx, game->game.mmp);
 	mlx_destroy_image(game->mlx, game->game.black);
 	mlx_destroy_image(game->mlx, game->game.blue);
@@ -29,7 +31,7 @@ void   destroy_img(t_cub *game)
 	mlx_destroy_image(game->mlx, game->img.WE_tex);
 	mlx_destroy_image(game->mlx, game->img.EA_tex);
 	mlx_destroy_image(game->mlx, game->img.chess);
-	int i = 0;
+	mlx_destroy_image(game->mlx, game->img.heart);
 	while (i < 8)
 	{
 		mlx_destroy_image(game->mlx, game->img.compass[i]);

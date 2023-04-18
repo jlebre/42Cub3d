@@ -59,6 +59,7 @@ void	init_vars(t_cub *cub)
 	cub->game.fov_on = 1;
 	cub->game.map_on = 1;
 	cub->game.pause = 0;
+	cub->game.lifes = 3;
 	cub->game.lights = 1;
 	cub->game.textures_on = 1;
 	cub->projection.scale = 4;

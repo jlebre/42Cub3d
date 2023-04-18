@@ -42,7 +42,6 @@ void	print_compass(t_cub *cub)
 		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[2], 570, 410);
 	else if (cub->game.player_angle >= 293 && cub->game.player_angle < 337)
 		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[1], 570, 410);
-	printf("angle = %f\n", cub->game.player_angle);
 }
 
 void	print_map(t_cub *cub)
@@ -76,7 +75,6 @@ void	print_map(t_cub *cub)
 	}
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.bordamm, 6, 6);	
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mini, 10, 10);
-	print_compass(cub);
 }
 
 void	mini_map(t_cub *cub)

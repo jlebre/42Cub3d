@@ -75,11 +75,11 @@ int	get_Pos( float ray)
 	float	dir;
 	float	wall_x;
 
-	dir = (float)((int)ray % 16);
-	wall_x = (float)(ray - dir);
-	unit_dist = (float)(wall_x / dir);
-	largura = (float)(unit_dist * 16);
-	x_increment = (float)(64 / largura);
+	dir = ((int)ray % 16);
+	wall_x = (ray - dir);
+	unit_dist = (wall_x / dir);
+	largura = (unit_dist * 16);
+	x_increment = (64 / largura);
 	wall_x = wall_x * x_increment;
 	return (wall_x);
 }

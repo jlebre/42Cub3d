@@ -65,6 +65,8 @@ void	init_img(t_cub *cub)
 		&img_width, &img_height);
 	cub->game.mpause = mlx_xpm_file_to_image(cub->mlx, "image/menu_pause.xpm",
 		&img_width, &img_height);
+	cub->img.heart = mlx_xpm_file_to_image(cub->mlx, "image/heart.xpm",
+		&img_width, &img_height);
 	cub->game.mmp = mlx_new_image(cub->mlx, 5, 5);
 	ft_memset(cub->game.mmp->data, 150, cub->game.mmp->width * cub->game.mmp->height * sizeof(int));
 	cub->screen = mlx_new_image(cub->mlx, cub->width, cub->height);

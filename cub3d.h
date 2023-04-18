@@ -76,6 +76,7 @@ struct	s_img
 	t_img_mlx	*EA_tex;
 	t_img_mlx	*chess;
 	t_img_mlx	*floormm;
+	t_img_mlx	*heart;
 	t_img_mlx	*compass[8];
 	int			colors[2];
 	char		order[5];
@@ -115,6 +116,7 @@ struct s_game
 	int			pause;
 	int			lights;
 	int			textures_on;
+	int			lifes;
 	t_img_mlx	*fov;
 	t_img_mlx   *mmp;
 	t_img_mlx   *mmbase;
@@ -151,6 +153,7 @@ void		init_textutes(t_cub *cub, char **path);
 
 // RENDER
 int	        render(t_cub *cub);
+void		print_compass(t_cub *cub);
 
 // MINIMAP
 void		init_mini_map(t_cub *cub);
@@ -187,6 +190,7 @@ void		draw_texture2(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx
 void		draw_texture3(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture, float ray_x);
 void		get_pixel(t_cub *cub, int x, int y);
 void		clear_screen(t_cub *cub);
+void		draw_pixel(t_cub *cub, int x, int y, int color);
 
 // MATH FUNCTIONS
 int         ft_abs(int n);
