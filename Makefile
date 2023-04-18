@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/19 16:32:14 by jlebre            #+#    #+#              #
-#    Updated: 2023/04/18 16:34:58 by marvin           ###   ########.fr        #
+#    Updated: 2023/04/18 23:34:38 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ MLXFLAGS_LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm
 RM = @rm -fr
 NAME = cub3d
 SRCS = main.c ft_exit.c init_vars.c render.c printf_fd.c \
-		init_image.c ft_abs.c raycast.c draw.c utils.c mini_map.c\
+		init_image.c ft_abs.c raycast.c utils.c mini_map.c\
+		\
+		draw/draw_utils.c draw/draw_walls.c draw/textures.c \
 		\
 		key/key_press.c key/movement.c key/switches.c\
 		\
@@ -36,7 +38,7 @@ all: $(NAME) lib
 
 $(NAME): $(OBJS) lib
 	@$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS_LINUX) $(LIBFT) -o $(NAME)
-	@echo "\033[0;32mCub3d Compiled!\033[0m"
+#@echo "\033[0;32mCub3d Compiled!\033[0m"
 
 lib:
 	@make -C $(LIBFT_PATH)
@@ -47,16 +49,16 @@ lib:
 clean:
 	$(RM) $(OBJS)
 	@make clean -C $(LIBFT_PATH)
-	@echo "\033[0;31m.o Files Removed!\033[0m"
+#@echo "\033[0;31m.o Files Removed!\033[0m"
 	
 fclean: clean
 	$(RM) $(NAME) 
 	@make fclean -C $(LIBFT_PATH)
-	@echo "\033[0;31mCub3d Removed!\033[0m"
+#@echo "\033[0;31mCub3d Removed!\033[0m"
 
 re: fclean all
 
 a: 
-	make re && make clean && ./cub3d basic.cub
+	@make re && make clean && ./cub3d basic.cub
 
 .PHONY: all clean fclean re

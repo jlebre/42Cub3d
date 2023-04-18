@@ -79,6 +79,7 @@ struct	s_img
 	t_img_mlx	*heart;
 	t_img_mlx	*settings;
 	t_img_mlx	*compass[8];
+	t_img_mlx	*fire[4];
 	int			colors[2];
 	char		order[5];
 };
@@ -180,14 +181,16 @@ void		pause_menu(t_cub *cub);
 // RAYCAST
 void        raycast(t_cub *cub);
 void 		draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y);
+int 		check_hit(t_cub *cub, float ray_x, float ray_y);
 
 // DRAW
 void		my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 int			my_mlx_pixel_get(t_img_mlx *texture, int x, int y);
 void		draw_square(t_cub *cub, int x, int y, int color);
 void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color);
-void		draw_texture(int x, int y, float len, t_cub *cub, float wall_x, float ray_x, float ray_y);
-void		draw_texture2(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture);
+void		get_wall_direction(int x, int y, float len, t_cub *cub, float wall_x, float ray_x, float ray_y);
+void		draw_with_tranparency(t_cub *cub, int x, int y, t_img_mlx *texture);
+void		draw_texture(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture);
 void		get_pixel(t_cub *cub, int x, int y);
 void		clear_screen(t_cub *cub);
 void		draw_pixel(t_cub *cub, int x, int y, int color);

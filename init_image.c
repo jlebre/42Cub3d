@@ -12,6 +12,23 @@
 
 #include "cub3d.h"
 
+/*
+void	init_fire(t_cub *cub)
+{	
+	int	img_width;
+	int	img_height;
+
+	cub->img.fire[0] = mlx_xpm_file_to_image(cub->mlx, "image/fire/F1.xpm",
+		&img_width, &img_height);
+	cub->img.fire[1] = mlx_xpm_file_to_image(cub->mlx, "image/fire/F2.xpm",
+		&img_width, &img_height);
+	cub->img.fire[2] = mlx_xpm_file_to_image(cub->mlx, "image/fire/F3.xpm",
+		&img_width, &img_height);
+	cub->img.fire[3] = mlx_xpm_file_to_image(cub->mlx, "image/fire/F4.xpm",
+		&img_width, &img_height);
+}
+*/
+
 void	init_compass(t_cub *cub)
 {
 	int	img_width;

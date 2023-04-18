@@ -28,6 +28,29 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void	draw_with_tranparency(t_cub *cub, int x, int y, t_img_mlx *texture)
+{
+	int		i;
+	int		j;
+	int 	color;
+	int 	pink;
+
+	i = 0;
+	pink = my_mlx_pixel_get(texture, 0, 0);
+	while (i < texture->height)
+	{
+		j = 0;
+		while (j < texture->width)
+		{
+			color = my_mlx_pixel_get(texture, j, i);
+			if (color != pink)
+				my_mlx_pixel_put(cub, x + j, y + i, color);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_fov(t_cub *cub, int x, int y, int color)
 {
 	char	*dst;
@@ -124,23 +147,3 @@ void	clear_screen(t_cub *cub)
 		y++;
 	}
 }
-
-void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color)
-{
-	int i;
-	int limit;
-
-	i = 0;
-	if (x < 0 || x > cub->width)
-		return ;
-	limit = cub->height;
-	while (i < len && (y + i) < limit)
-	{
-		if (y + i < cub->height && x < cub->width && y + i >= 0 && x >= 0)
-			my_mlx_pixel_put(cub, x, y + i, color);
-		i++;
-	}
-}
-
-//Cores Psicadélicas e reflexo
-//color++;

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:24:43 by jlebre            #+#    #+#              #
-#    Updated: 2023/03/01 14:33:31 by marvin           ###   ########.fr        #
+#    Updated: 2023/04/18 23:34:08 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,18 +34,18 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			@$(LIB1) $(NAME) $(OBJS)
 			@$(LIB2) $(NAME)
-			@echo "\033[0;32mLibft Compiled!\033[0m"
+#@echo "\033[0;32mLibft Compiled!\033[0m"
 
 .c.o:
 			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 clean:
 			$(RM) $(OBJS)
-			@echo "\033[0;31m.o Files Removed!\033[0m"
+#@echo "\033[0;31m.o Files Removed!\033[0m"
 
 fclean:		clean
 			$(RM) $(NAME)
-			@echo "\033[0;31mLibft.a Removed!\033[0m"
+#@echo "\033[0;31mLibft.a Removed!\033[0m"
 
 re:			fclean all
 

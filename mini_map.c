@@ -27,21 +27,29 @@ void	print_compass(t_cub *cub)
 {
 	if ((cub->game.player_angle >= 0 && cub->game.player_angle < 23)
 		|| (cub->game.player_angle >= 337 && cub->game.player_angle <= 360))
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[0], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[0], 570, 410);
 	else if (cub->game.player_angle >= 23 && cub->game.player_angle < 68)
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[7], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[7], 570, 410);
 	else if (cub->game.player_angle >= 68 && cub->game.player_angle < 113)
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[5], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[5], 570, 410);
 	else if (cub->game.player_angle >= 113 && cub->game.player_angle < 158)
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[4], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[4], 570, 410);
 	else if (cub->game.player_angle >= 158 && cub->game.player_angle < 203)
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[3], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[3], 570, 410);
 	else if (cub->game.player_angle >= 203 && cub->game.player_angle < 248)
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[6], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[6], 570, 410);
 	else if (cub->game.player_angle >= 248 && cub->game.player_angle < 293)
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[2], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[2], 570, 410);
 	else if (cub->game.player_angle >= 293 && cub->game.player_angle < 337)
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[1], 570, 410);
+		mlx_put_image_to_window(cub->mlx,
+			cub->mlx_win, cub->img.compass[1], 570, 410);
 }
 
 void	print_map(t_cub *cub)
