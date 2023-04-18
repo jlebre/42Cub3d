@@ -53,6 +53,7 @@ void	print_map(t_cub *cub)
 		}
 		i++;
 	}
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.bordamm, 6, 6);	
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mini, 10, 10);	
 	//mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmp, cub->px, cub->py);
 }

@@ -36,6 +36,5 @@ int	render(t_cub *cub)
     raycast(cub);
 	mini_map(cub);
 	write_options(cub);
-	usleep(cub->game.delay);
 	return (0);
 }

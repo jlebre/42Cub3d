@@ -67,36 +67,53 @@ int check_hit(t_cub *cub, float ray_x, float ray_y)
 	return (vertical);
 }
 
+int	get_Pos( float ray)
+{
+	float	unit_dist;
+	float	largura;
+	float	x_increment;
+	float	dir;
+	float	WallX;
+
+	dir = (float)((int)ray % 16);
+	WallX = (float)(ray - dir);
+	unit_dist = (float)(WallX / dir);
+	largura = (float)(unit_dist * 16);
+	x_increment = (float)(64 / largura);
+	WallX = WallX * x_increment;
+	return (WallX);
+}
+
+int	get_WalX(t_cub *cub, float ray_x, float ray_y)
+{
+	float	WallX;
+
+	if (check_hit(cub, ray_x, ray_y))
+	{
+		WallX = get_Pos(ray_y);
+		if (ray_x < cub->px)
+			WallX = 64 - WallX;	
+	}
+	else
+	{
+		WallX = get_Pos(ray_x);
+		if (ray_y > cub->py)
+			WallX = 64 - WallX;	
+	}
+	return (WallX);
+}
+
 void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
 {
 	float	WallHeight;
 	float	distance;
 	float	new_distance;
-	float	WallX;
-	float	unit_dist;
-	float	largura;
-	float	x_increment;
-	float		vertical;
-	float 	horizontal;
-
-	vertical = (float)((int)ray_y % 16);
-	horizontal = (float)((int)ray_x % 16);
 	distance = distance_between_points(cub->px, cub->py, ray_x, ray_y);
 	new_distance = (distance / 16) * cos(degrees_to_radians(ray_angle - cub->game.player_angle));
 	WallHeight = floor((cub->height / 2) / new_distance);
-	if (check_hit(cub, ray_x, ray_y))
-	{
-		WallX = (float)(ray_y - vertical);
-		unit_dist = (float)(WallX / vertical);
-	}
-	else
-	{
-		WallX = (float)(ray_x - horizontal);
-		unit_dist = (float)(WallX / horizontal);
-	}
-	largura = (float)(unit_dist * 16);
-	x_increment = (float)(64 / largura);
-	WallX = WallX * x_increment;
+	float	WallX;
+	
+	WallX = get_WalX(cub, ray_x, ray_y);
 	if (WallHeight >= cub->height)
 		draw_texture(ray, 0, cub->height, cub, WallX, ray_x, ray_y);
 	else
@@ -105,16 +122,6 @@ void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
 		draw_texture(ray, floor((cub->height / 2) - WallHeight), 2 * WallHeight, cub, WallX, ray_x, ray_y);
 		draw_vertical_line(ray, floor((cub->height / 2) + WallHeight), cub->height, cub, cub->img.colors[0]);
 	}
-}
-
-int	round_down(float num)
-{
-	int		integer;
-
-	integer = (int)num;
-	if (num < 0)
-		integer--;
-	return (integer);
 }
 
 void	draw_texture(int x, int y, float len, t_cub *cub, float WallX, float ray_x, float ray_y)
