@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void switch_map(t_cub *cub)
+void	switch_map(t_cub *cub)
 {
 	if (cub->game.map_on == 0)
 		cub->game.map_on = 1;
@@ -32,13 +32,14 @@ int	button(int button, int x, int y, t_cub *cub)
 	return (0);
 }
 
-void pause_menu(t_cub *cub)
+void	pause_menu(t_cub *cub)
 {
 	if (cub->game.pause == 0)
 	{
 		cub->game.pause = 1;
-		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mpause, 170, 140);
-    	mlx_mouse_hook(cub->mlx_win, &button, cub);
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win,
+			cub->game.mpause, 170, 140);
+		mlx_mouse_hook(cub->mlx_win, &button, cub);
 	}
 	else if (cub->game.pause == 1)
 		cub->game.pause = 0;

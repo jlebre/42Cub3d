@@ -164,7 +164,7 @@ void		T_fov(t_cub *cub);
 // KEYPRESS
 int			key_press(int keycode, t_cub *game);
 int			key_release(int keycode, t_cub *game);
-void		press_ws(float pCos, float pSin, t_cub *cub, int type);
+void		press_ws(float p_cos, float p_sin, t_cub *cub, int keycode);
 void		press_ad(t_cub *cub, int type);
 void		rotate(t_cub *cub, int keycode);
 int	        mouse_hook(int button, int x, int y, t_cub *cub);

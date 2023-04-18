@@ -14,27 +14,27 @@
 
 void	rotate(t_cub *cub, int keycode)
 {
-    if (keycode == 65361)
-	    cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
-    else if (keycode == 65363)
-	    cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
+	if (keycode == 65361)
+		cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
+	else if (keycode == 65363)
+		cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
 }
 
-void	press_ws(float pCos, float pSin, t_cub *cub, int type)
+void	press_ws(float p_cos, float p_sin, t_cub *cub, int keycode)
 {
-	float new_x;
-	float new_y;
+	float	new_x;
+	float	new_y;
 
-    if (type == 1)
-    {
-        new_x = cub->px + pCos * cub->game.player_speed;
-        new_y = cub->py + pSin * cub->game.player_speed;
-    }
-    else
-    {
-        new_x = cub->px - pCos * cub->game.player_speed;
-        new_y = cub->py - pSin * cub->game.player_speed;
-    }
+	if (keycode == 13 || keycode == 119)
+	{
+		new_x = cub->px + p_cos * cub->game.player_speed;
+		new_y = cub->py + p_sin * cub->game.player_speed;
+	}
+	else
+	{
+		new_x = cub->px - p_cos * cub->game.player_speed;
+		new_y = cub->py - p_sin * cub->game.player_speed;
+	}
 	if (cub->map.map[(int)new_y / 16][(int)new_x / 16] != '1')
 	{
 		cub->px = new_x;
@@ -44,24 +44,24 @@ void	press_ws(float pCos, float pSin, t_cub *cub, int type)
 
 void	press_ad(t_cub *cub, int type)
 {
-	float new_dir;
-	float new_x;
-	float new_y;
-	float pCos;
-	float pSin;
+	float	new_dir;
+	float	new_x;
+	float	new_y;
+	float	p_cos;
+	float	p_sin;
 
-    if (type == 1)
-    {
-        new_dir = cub->game.player_angle - 90;
-    }
-    else
-    {
-        new_dir = cub->game.player_angle + 90;
-    }
-	pCos = cos(degrees_to_radians(new_dir));
-	pSin = sin(degrees_to_radians(new_dir));
-	new_x = cub->px + pCos * cub->game.player_speed;
-	new_y = cub->py + pSin * cub->game.player_speed;
+	if (type == 1)
+	{
+		new_dir = cub->game.player_angle - 90;
+	}
+	else
+	{
+		new_dir = cub->game.player_angle + 90;
+	}
+	p_cos = cos(degrees_to_radians(new_dir));
+	p_sin = sin(degrees_to_radians(new_dir));
+	new_x = cub->px + p_cos * cub->game.player_speed;
+	new_y = cub->py + p_sin * cub->game.player_speed;
 	if (cub->map.map[(int)new_y / 16][(int)new_x / 16] != '1')
 	{
 		cub->px = new_x;
