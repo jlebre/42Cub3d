@@ -23,6 +23,27 @@ void	draw_mini(t_cub *cub, int x, int y, int color)
 	}
 }
 
+void	print_compass(t_cub *cub)
+{
+	if ((cub->game.player_angle >= 0 && cub->game.player_angle < 23)
+		|| (cub->game.player_angle >= 337 && cub->game.player_angle <= 360))
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[0], 570, 410);
+	else if (cub->game.player_angle >= 23 && cub->game.player_angle < 68)
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[7], 570, 410);
+	else if (cub->game.player_angle >= 68 && cub->game.player_angle < 113)
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[5], 570, 410);
+	else if (cub->game.player_angle >= 113 && cub->game.player_angle < 158)
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[4], 570, 410);
+	else if (cub->game.player_angle >= 158 && cub->game.player_angle < 203)
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[3], 570, 410);
+	else if (cub->game.player_angle >= 203 && cub->game.player_angle < 248)
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[6], 570, 410);
+	else if (cub->game.player_angle >= 248 && cub->game.player_angle < 293)
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[2], 570, 410);
+	else if (cub->game.player_angle >= 293 && cub->game.player_angle < 337)
+		mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.compass[1], 570, 410);
+	printf("angle = %f\n", cub->game.player_angle);
+}
 
 void	print_map(t_cub *cub)
 {
@@ -55,6 +76,7 @@ void	print_map(t_cub *cub)
 	}
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.bordamm, 6, 6);	
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mini, 10, 10);
+	print_compass(cub);
 }
 
 void	mini_map(t_cub *cub)

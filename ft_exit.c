@@ -29,6 +29,12 @@ void   destroy_img(t_cub *game)
 	mlx_destroy_image(game->mlx, game->img.WE_tex);
 	mlx_destroy_image(game->mlx, game->img.EA_tex);
 	mlx_destroy_image(game->mlx, game->img.chess);
+	int i = 0;
+	while (i < 8)
+	{
+		mlx_destroy_image(game->mlx, game->img.compass[i]);
+		i++;
+	}
 }
 
 int	ft_exit(t_cub *game)

@@ -76,6 +76,7 @@ struct	s_img
 	t_img_mlx	*EA_tex;
 	t_img_mlx	*chess;
 	t_img_mlx	*floormm;
+	t_img_mlx	*compass[8];
 	int			colors[2];
 	char		order[5];
 };
