@@ -16,17 +16,17 @@ void raycast(t_cub *cub)
 {
 	int		ray;
 	char	wall;
-	float	ray_x;
-	float	ray_y;
-	float	ray_angle;
-	float	rayCos;
-	float	raySin;
-	float	increment;
+	double	ray_x;
+	double	ray_y;
+	double	ray_angle;
+	double	rayCos;
+	double	raySin;
+	double	increment;
 
 	ray = 0;
 	clear_fov(cub);
 	ray_angle = fix_angle(cub->game.player_angle - FOV2);
-	increment = (float)FOV / (float)cub->width;
+	increment = (double)FOV / (double)cub->width;
 	while (ray < (cub->width))
 	{
 		ray_x = cub->px;
@@ -49,11 +49,11 @@ void raycast(t_cub *cub)
 }
 
 // Checks whether it is a vertical wall or a horizontal wall
-int check_hit(t_cub *cub, float ray_x, float ray_y)
+int check_hit(t_cub *cub, double ray_x, double ray_y)
 {
 	int	vertical;
-	float	a;
-	float	b;
+	double	a;
+	double	b;
 
 	a = ray_x - 0.1;
 	b = ray_x + 0.1;

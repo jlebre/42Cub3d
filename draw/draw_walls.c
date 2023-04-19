@@ -12,26 +12,21 @@
 
 #include "cub3d.h"
 
-int	get_pos( float ray)
+// Get the x position in the wall
+int	get_pos( double ray)
 {
-	float	unit_dist;
-	float	largura;
-	float	x_increment;
-	float	dir;
-	float	wall_x;
+	double	dir;
+	double	wall_x;
 
 	dir = ((int)ray % 16);
-	wall_x = (ray - dir);
-	unit_dist = (wall_x / dir);
-	largura = (unit_dist * 16);
-	x_increment = (64 / largura);
-	wall_x = wall_x * x_increment;
+	wall_x = (ray - dir) * (64 / (((ray - dir) / dir) * 16));
 	return (wall_x);
 }
 
-int	get_wall_x(t_cub *cub, float ray_x, float ray_y)
+// Attribute the wall direction
+int	get_wall_x(t_cub *cub, double ray_x, double ray_y)
 {
-	float	wall_x;
+	double	wall_x;
 
 	if (check_hit(cub, ray_x, ray_y))
 	{
@@ -48,12 +43,12 @@ int	get_wall_x(t_cub *cub, float ray_x, float ray_y)
 	return (wall_x);
 }
 
-void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
+void draw_walls(t_cub *cub, int ray, double ray_angle, double ray_x, double ray_y)
 {
-	float	wall_height;
-	float	distance;
-	float	fish_eye;
-	float	wall_x;
+	double	wall_height;
+	double	distance;
+	double	fish_eye;
+	double	wall_x;
 
 	distance = distance_between_points(cub->px, cub->py, ray_x, ray_y) / 16;
 	fish_eye = distance * cos(degrees_to_radians(ray_angle - cub->game.player_angle));
@@ -69,7 +64,7 @@ void draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y)
 	}
 }
 
-void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color)
+void		draw_vertical_line(double x, double y, double len, t_cub *cub, int color)
 {
 	int i;
 	int limit;

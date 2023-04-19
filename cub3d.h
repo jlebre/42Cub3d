@@ -98,14 +98,14 @@ struct s_proj
 	int			height;
 	int 		half_width;
 	int 		half_height;
-	float 		increment;
+	double 		increment;
 };
 
 
 struct s_game
 {
-	float   	player_angle;
-	float   	ray_angle;
+	double   	player_angle;
+	double   	ray_angle;
 	void    	*white;
 	void    	*blue;
 	void    	*black;
@@ -135,8 +135,8 @@ struct s_cub
 	int			width;
 	int			height;
 	char		direction;
-	float   	px;
-	float   	py;
+	double   	px;
+	double   	py;
 	int			num_player;
 	int			side;
 	t_img_mlx	*screen;
@@ -170,7 +170,7 @@ void		T_fov(t_cub *cub);
 // KEYPRESS
 int			key_press(int keycode, t_cub *game);
 int			key_release(int keycode, t_cub *game);
-void		press_ws(float p_cos, float p_sin, t_cub *cub, int keycode);
+void		press_ws(double p_cos, double p_sin, t_cub *cub, int keycode);
 void		press_ad(t_cub *cub, int type);
 void		rotate(t_cub *cub, int keycode);
 int	        mouse_hook(int button, int x, int y, t_cub *cub);
@@ -180,17 +180,17 @@ void		pause_menu(t_cub *cub);
 
 // RAYCAST
 void        raycast(t_cub *cub);
-void 		draw_walls(t_cub *cub, int ray, float ray_angle, float ray_x, float ray_y);
-int 		check_hit(t_cub *cub, float ray_x, float ray_y);
+void 		draw_walls(t_cub *cub, int ray, double ray_angle, double ray_x, double ray_y);
+int 		check_hit(t_cub *cub, double ray_x, double ray_y);
 
 // DRAW
 void		my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 int			my_mlx_pixel_get(t_img_mlx *texture, int x, int y);
 void		draw_square(t_cub *cub, int x, int y, int color);
-void		draw_vertical_line(float x, float y, float len, t_cub *cub, int color);
-void		get_wall_direction(int x, int y, float len, t_cub *cub, float wall_x, float ray_x, float ray_y);
+void		draw_vertical_line(double x, double y, double len, t_cub *cub, int color);
+void		get_wall_direction(int x, int y, double len, t_cub *cub, double wall_x, double ray_x, double ray_y);
 void		draw_with_tranparency(t_cub *cub, int x, int y, t_img_mlx *texture);
-void		draw_texture(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture);
+void		draw_texture(int x, int y, double len, t_cub *cub, double wall_x, t_img_mlx *texture);
 void		get_pixel(t_cub *cub, int x, int y);
 void		clear_screen(t_cub *cub);
 void		draw_pixel(t_cub *cub, int x, int y, int color);
@@ -200,9 +200,9 @@ int         ft_abs(int n);
 
 // UTILS
 int			ft_exit(t_cub *game);
-float   	degrees_to_radians(float degrees);
+double   	degrees_to_radians(double degrees);
 int			fix_angle(int angle);
-float		distance_between_points(float x1, float y1, float x2, float y2);
+double		distance_between_points(double x1, double y1, double x2, double y2);
 void		*ft_memset(void *str, int c, size_t n);
 
 // PARSER

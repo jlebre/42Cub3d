@@ -38,12 +38,12 @@ void cast_rays(t_mlx *m)
 {
 	int i;
 	i = -1;
-	float r_angle = m->p->ang - (FOV / 2);
+	double r_angle = m->p->ang - (FOV / 2);
 	while(++i < WIDTH)
 	{
 		int tex_x;
 		t_point close = calc_rays(m, r_angle);
-		float pjc = cos(normalize_ang(r_angle - m->p->ang)) * close.dist2pl * 2;
+		double pjc = cos(normalize_ang(r_angle - m->p->ang)) * close.dist2pl * 2;
 		int lineheigth = (HEIGHT / pjc) * 60; 
     	int drawStart = -lineheigth / 2 + HEIGHT / 2;
       	if(drawStart < 0)

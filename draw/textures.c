@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	get_wall_direction(int x, int y, float len, t_cub *cub, float wall_x, float ray_x, float ray_y)
+void	get_wall_direction(int x, int y, double len, t_cub *cub, double wall_x, double ray_x, double ray_y)
 {
 	if (check_hit(cub, ray_x, ray_y))
 	{
@@ -30,11 +30,11 @@ void	get_wall_direction(int x, int y, float len, t_cub *cub, float wall_x, float
 	}
 }
 
-void	draw_texture(int x, int y, float len, t_cub *cub, float wall_x, t_img_mlx *texture)
+void	draw_texture(int x, int y, double len, t_cub *cub, double wall_x, t_img_mlx *texture)
 {
 	int 	i;
-	float	tex_y;
-	float	increment;
+	double	tex_y;
+	double	increment;
 
 	increment = texture->height / len;
 	i = 0;

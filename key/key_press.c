@@ -14,8 +14,8 @@
 
 int	key_press(int keycode, t_cub *cub)
 {
-	float	p_cos;
-	float	p_sin;
+	double	p_cos;
+	double	p_sin;
 
 	p_cos = cos(degrees_to_radians(cub->game.player_angle));
 	p_sin = sin(degrees_to_radians(cub->game.player_angle));

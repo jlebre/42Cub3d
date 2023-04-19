@@ -20,10 +20,10 @@ void	rotate(t_cub *cub, int keycode)
 		cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
 }
 
-void	press_ws(float p_cos, float p_sin, t_cub *cub, int keycode)
+void	press_ws(double p_cos, double p_sin, t_cub *cub, int keycode)
 {
-	float	new_x;
-	float	new_y;
+	double	new_x;
+	double	new_y;
 
 	if (keycode == 13 || keycode == 119)
 	{
@@ -44,11 +44,11 @@ void	press_ws(float p_cos, float p_sin, t_cub *cub, int keycode)
 
 void	press_ad(t_cub *cub, int type)
 {
-	float	new_dir;
-	float	new_x;
-	float	new_y;
-	float	p_cos;
-	float	p_sin;
+	double	new_dir;
+	double	new_x;
+	double	new_y;
+	double	p_cos;
+	double	p_sin;
 
 	if (type == 1)
 	{
