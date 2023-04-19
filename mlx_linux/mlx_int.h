@@ -81,9 +81,8 @@ typedef struct	s_win_list
 	t_event_list		hooks[MLX_MAX_EVENT];
 }				t_win_list;
 
-// data = address of the image
-// XImage *image = void *image
-typedef struct	s_img_mlx
+
+typedef struct	s_img
 {
 	XImage			*image;
 	Pixmap			pix;
@@ -96,7 +95,7 @@ typedef struct	s_img_mlx
 	int				format;
 	char			*data;
 	XShmSegmentInfo	shm;
-}				t_img_mlx;
+}				t_img;
 
 typedef struct	s_xvar
 {

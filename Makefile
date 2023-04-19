@@ -1,64 +1,89 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/19 16:32:14 by jlebre            #+#    #+#              #
-#    Updated: 2023/04/18 23:34:38 by marvin           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRCS		=	$(SRCS_DIR)/allocs/frees.c \
+				$(SRCS_DIR)/allocs/allocs.c \
+				$(SRCS_DIR)/check_map/algorithm.c \
+				$(SRCS_DIR)/check_map/algo_utils.c \
+				$(SRCS_DIR)/check_map/check_map.c \
+				$(SRCS_DIR)/draw/draw_utils.c \
+				$(SRCS_DIR)/draw/draw_walls.c \
+				$(SRCS_DIR)/draw/textures.c \
+				$(SRCS_DIR)/gnl/get_next_line.c \
+				$(SRCS_DIR)/gnl/get_next_line_utils.c \
+				$(SRCS_DIR)/key/key_press.c \
+				$(SRCS_DIR)/key/movement.c \
+				$(SRCS_DIR)/key/switches.c \
+				$(SRCS_DIR)/parse/algorithm.c \
+				$(SRCS_DIR)/parse/parse.c \
+				$(SRCS_DIR)/parse/parse_file.c \
+				$(SRCS_DIR)/parse/parse_vars.c \
+				$(SRCS_DIR)/str/str.c \
+				$(SRCS_DIR)/str/utils1.c \
+				$(SRCS_DIR)/str/utils2.c \
+				$(SRCS_DIR)/raycast/init_image.c \
+				$(SRCS_DIR)/raycast/init_vars.c \
+				$(SRCS_DIR)/raycast/ft_abs.c \
+				$(SRCS_DIR)/raycast/ft_exit.c \
+				$(SRCS_DIR)/raycast/main.c \
+				$(SRCS_DIR)/raycast/mini_map.c \
+				$(SRCS_DIR)/raycast/raycast.c \
+				$(SRCS_DIR)/raycast/render.c \
+				$(SRCS_DIR)/raycast/utils.c \
 
-CC = gcc
-CFLAGS = -I. -O3 -Wall -Wextra -Werror -g -fsanitize=address
-MLXFLAGS_LINUX = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-#OPTI = -ffast-math -ffinite-math-only -flto
-RM = @rm -fr
-NAME = cub3d
-SRCS = main.c ft_exit.c init_vars.c render.c printf_fd.c \
-		init_image.c ft_abs.c raycast.c utils.c mini_map.c\
-		\
-		draw/draw_utils.c draw/draw_walls.c draw/textures.c \
-		\
-		key/key_press.c key/movement.c key/switches.c\
-		\
-		parse/parse.c parse/parse_vars.c parse/parse_file.c parse/load_xpm.c \
-		\
-		allocs/allocs.c allocs/frees.c \
-		\
-		check_map/algo_utils.c check_map/algorithm.c check_map/check_map.c
-OBJS = $(SRCS:.c=.o)
+SRCS_DIR	=	srcs
 
-LIBFT = libft/libft.a
-LIBFT_PATH = libft/
-LIB = .
+OBJS		=	$(subst $(SRCS_DIR), $(OBJS_DIR), $(SRCS:.c=.o))
 
-all: $(NAME) lib
+OBJS_DIR	=	objs
 
-$(NAME): $(OBJS) lib
-	@$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS_LINUX) $(LIBFT) -o $(NAME)
-#@echo "\033[0;32mCub3d Compiled!\033[0m"
 
-lib:
-	@make -C $(LIBFT_PATH)
 
-.c.o:
-	@$(CC) $(CFLAGS) -c $< -o $@
+PRINTF		=	libs/printf_fd/libprintf_fd.a
+
+MLX			=	mlx_linux/libmlx_Linux.a
+
+NAME		=	cub3d
+
+CC			=	cc
+
+INC			=	-Iincludes -Ilibs/printf_fd/include -I/usr/include -Imlx_linux
+
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+
+RM			=	rm -rf
+
+PRINTF_FLAGS	= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+
+MLX_FLAGS		= -Llibs/printf_fd -lprintf_fd
+
+all:		$(NAME)
+
+$(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
+		mkdir -p $(@D)
+		$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
+
+$(NAME):	$(PRINTF) $(MLX) $(OBJS)
+		$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
+
+
+$(PRINTF):
+		make -C libs/printf_fd
+
+$(MLX):
+		make -C mlx_linux
 
 clean:
-	$(RM) $(OBJS)
-	@make clean -C $(LIBFT_PATH)
-#@echo "\033[0;31m.o Files Removed!\033[0m"
-	
-fclean: clean
-	$(RM) $(NAME) 
-	@make fclean -C $(LIBFT_PATH)
-#@echo "\033[0;31mCub3d Removed!\033[0m"
+		$(RM) $(OBJS_DIR)
+		make clean -C libs/printf_fd
+		make clean -C mlx_linux
 
-re: fclean all
+fclean:		clean
+		$(RM) $(NAME)
+		make fclean -C libs/printf_fd
 
-a: 
-	@make re && make clean && ./cub3d basic.cub
+a:
+	make re
+	make clean
+	./cub3d basic.cub
 
-.PHONY: all clean fclean re
+re:			fclean all
+
+.PHONY: all clean fclean re a
