@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
+#    Updated: 2023/04/20 00:30:46 by mtavares         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRCS		=	$(SRCS_DIR)/allocs/frees.c \
 				$(SRCS_DIR)/allocs/allocs.c \
 				$(SRCS_DIR)/check_map/algorithm.c \
@@ -57,32 +69,30 @@ MLX_FLAGS		= -Llibs/printf_fd -lprintf_fd
 all:		$(NAME)
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
-		mkdir -p $(@D)
-		$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
+		@mkdir -p $(@D)
+		@$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
 
 $(NAME):	$(PRINTF) $(MLX) $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
+		@$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
 
 
 $(PRINTF):
-		make -C libs/printf_fd
+		@make -C libs/printf_fd
 
 $(MLX):
-		make -C mlx_linux
+		@make -C mlx_linux
 
 clean:
-		$(RM) $(OBJS_DIR)
-		make clean -C libs/printf_fd
-		make clean -C mlx_linux
+		@$(RM) $(OBJS_DIR)
+		@make clean -C libs/printf_fd
+		@make clean -C mlx_linux
 
 fclean:		clean
-		$(RM) $(NAME)
-		make fclean -C libs/printf_fd
+		@$(RM) $(NAME)
+		@make fclean -C libs/printf_fd
 
 a:
-	make re
-	make clean
-	./cub3d basic.cub
+	@make re && make clean && ./cub3d basic.cub
 
 re:			fclean all
 
