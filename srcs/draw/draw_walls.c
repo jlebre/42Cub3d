@@ -31,7 +31,7 @@ int	get_wall_x(t_cub *cub, double ray_x, double ray_y)
 {
 	double	wall_x;
 
-	if (check_hit(cub, ray_x, ray_y))
+	if (cub->game.vertical)
 	{
 		wall_x = get_pos(ray_y);
 		if (ray_x < cub->px)
@@ -70,6 +70,7 @@ void draw_walls(t_cub *cub, int ray, double ray_angle, double ray_x, double ray_
 	double	fish_eye;
 	double	wall_x;
 
+	cub->game.vertical = check_hit(cub, ray_x, ray_y);
 	distance = distance_between_points(cub->px, cub->py, ray_x, ray_y) / 16;
 	fish_eye = distance * cos(degrees_to_radians(ray_angle - cub->game.player_angle));
 	wall_height = ((cub->height / 2) / fish_eye);

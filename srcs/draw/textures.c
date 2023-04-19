@@ -16,7 +16,7 @@ int		check_hit(t_cub *cub, float ray_x, float ray_y);
 
 void	get_wall_direction(int x, int y, double len, t_cub *cub, double wall_x, double ray_x, double ray_y)
 {
-	if (check_hit(cub, ray_x, ray_y))
+	if (cub->game.vertical)
 	{
 		if (ray_x < cub->px)
 			draw_texture(x, y, len, cub, wall_x, cub->img.we_tex);

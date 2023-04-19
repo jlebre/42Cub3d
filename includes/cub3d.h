@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:40:07 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/19 16:16:45 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:18:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ struct s_game
 	void	*white;
 	void	*blue;
 	void	*black;
+	int		vertical;
 	int		map_position;
 	int		depht_of_field;
 	int		player_speed;
