@@ -18,6 +18,7 @@ void	rotate(t_cub *cub, int keycode);
 void	switch_map(t_cub *cub);
 int		button(int button, int x, int y, t_cub *cub);
 void	pause_menu(t_cub *cub);
+int		key_press2(int keycode, t_cub *cub);
 
 int	key_press(int keycode, t_cub *cub)
 {
@@ -37,14 +38,22 @@ int	key_press(int keycode, t_cub *cub)
 		press_ad(cub, 2);
 	else if ((keycode == 65361 || keycode == 65363) && !cub->game.pause)
 		rotate(cub, keycode);
-	else if ((keycode == 53 || keycode == 65307) && !cub->game.pause)
+	key_press2(keycode, cub);
+	if (!cub->game.pause)
+		render(cub);
+	return (0);
+}
+
+int	key_press2(int keycode, t_cub *cub)
+{
+	if (keycode == 65453 && cub->game.lifes > 0 && !cub->game.pause)
+		cub->game.lifes--;
+	else if ((keycode == 53 || keycode == 65307))
 		ft_exit(cub);
 	else if (keycode == 109 && !cub->game.pause)
 		switch_map(cub);
 	else if (keycode == 112)
 		pause_menu(cub);
-	if (!cub->game.pause)
-		render(cub);
 	return (0);
 }
 

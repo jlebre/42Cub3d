@@ -16,13 +16,13 @@ int		check_hit(t_cub *cub);
 void	get_wall_direction(int y, double len, t_cub *cub);
 
 // Get the x position in the wall
-int	get_pos(double ray)
+double	get_pos(double ray)
 {
 	double	dir;
 	double	wall_x;
 
 	dir = ((int)ray % 16);
-	wall_x = (ray - dir) * (64 / (((ray - dir) / dir) * 16));
+	wall_x = ((int)ray - dir) * (64 / ((((int)ray - dir) / dir) * 16));
 	return (wall_x);
 }
 
@@ -43,7 +43,7 @@ void	get_wall_x(t_cub *cub)
 		if (cub->ray.ray_y > cub->py)
 			wall_x = 64 - wall_x;
 	}
-	cub->ray.wall_x = wall_x;
+	cub->ray.wall_x = (int)wall_x;
 }
 
 void	draw_vertical_line(double y, double len, t_cub *cub, int color)

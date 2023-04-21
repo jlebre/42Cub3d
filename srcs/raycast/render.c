@@ -41,9 +41,9 @@ void	print_hearts(t_cub *cub)
 	else
 	{
 		mlx_string_put(cub->mlx, cub->mlx_win,
-			250, 20, 0x00000000, "GAME OVER");
+			300, 30, 0x00000000, "GAME OVER");
 		mlx_string_put(cub->mlx, cub->mlx_win,
-			250, 32, 0x00000000, "PRESS ESC");
+			300, 42, 0x00000000, "PRESS ESC");
 		cub->game.pause = 1;
 	}
 }

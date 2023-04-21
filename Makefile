@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
-#    Updated: 2023/04/21 15:44:30 by marvin           ###   ########.fr        #
+#    Updated: 2023/04/21 17:17:02 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,27 +71,27 @@ MLX_FLAGS		= -Llibs/printf_fd -lprintf_fd
 all:		$(NAME)
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
-		@mkdir -p $(@D)
-		@$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
 
 $(NAME):	$(PRINTF) $(MLX) $(OBJS)
-		@$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
 
 
 $(PRINTF):
-		@make -C libs/printf_fd
+	@make -C libs/printf_fd
 
 $(MLX):
-		@make -C mlx_linux
+	@make -C mlx_linux
 
 clean:
-		@$(RM) $(OBJS_DIR)
-		@make clean -C libs/printf_fd
-		@make clean -C mlx_linux
+	@$(RM) $(OBJS_DIR)
+	@make clean -C libs/printf_fd
+	@make clean -C mlx_linux
 
 fclean:		clean
-		@$(RM) $(NAME)
-		@make fclean -C libs/printf_fd
+	@$(RM) $(NAME)
+	@make fclean -C libs/printf_fd
 
 a:
 	@make re && make clean && ./cub3d basic.cub
