@@ -17,7 +17,7 @@ float	degrees_to_radians(float degrees)
 	return (degrees * (PI / 180));
 }
 
-int fix_angle(int angle)
+int	fix_angle(int angle)
 {
 	if (angle > 359)
 		angle -= 360;

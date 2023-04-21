@@ -12,27 +12,27 @@
 
 #include "cub3d.h"
 
-int		check_hit(t_cub *cub, float ray_x, float ray_y);
+int		check_hit(t_cub *cub);
 
-void	get_wall_direction(int x, int y, double len, t_cub *cub, double wall_x, double ray_x, double ray_y)
+void	get_wall_direction(int y, double len, t_cub *cub)
 {
-	if (cub->game.vertical)
+	if (cub->ray.vertical)
 	{
-		if (ray_x < cub->px)
-			draw_texture(x, y, len, cub, wall_x, cub->img.we_tex);
+		if (cub->ray.ray_x < cub->px)
+			draw_texture(y, len, cub, cub->img.we_tex);
 		else
-			draw_texture(x, y, len, cub, wall_x, cub->img.ea_tex);
+			draw_texture(y, len, cub, cub->img.ea_tex);
 	}
 	else
 	{
-		if (ray_y < cub->py)
-			draw_texture(x, y, len, cub, wall_x, cub->img.no_tex);
+		if (cub->ray.ray_y < cub->py)
+			draw_texture(y, len, cub, cub->img.no_tex);
 		else
-			draw_texture(x, y, len, cub, wall_x, cub->img.so_tex);
+			draw_texture(y, len, cub, cub->img.so_tex);
 	}
 }
 
-void	draw_texture(int x, int y, double len, t_cub *cub, double wall_x, t_img *texture)
+void	draw_texture(int y, double len, t_cub *cub, t_img *texture)
 {
 	int		i;
 	double	tex_y;
@@ -43,9 +43,11 @@ void	draw_texture(int x, int y, double len, t_cub *cub, double wall_x, t_img *te
 	tex_y = 0;
 	while (i < len && i < cub->height)
 	{
-		if (y < cub->height && x < cub->width && (y >= 0 && x >= 0 && tex_y <= texture->height && wall_x <= texture->width))
-			my_mlx_pixel_put(cub, x, y,
-			my_mlx_pixel_get(texture, floor(wall_x), floor(tex_y)));
+		if (y < cub->height && cub->ray.ray < cub->width
+			&& (y >= 0 && cub->ray.ray >= 0 && tex_y <= texture->height
+				&& cub->ray.wall_x <= texture->width))
+			my_mlx_pixel_put(cub, cub->ray.ray, y, my_mlx_pixel_get(texture,
+					floor(cub->ray.wall_x), floor(tex_y)));
 		tex_y += increment;
 		y++;
 		i++;

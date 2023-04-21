@@ -18,7 +18,8 @@ void	draw_mini(t_cub *cub, int x, int y, int color)
 
 	if (y < 128 && x < 128 && (y >= 0 && x >= 0))
 	{
-		dst = cub->game.mini->data + (y * cub->game.mini->size_line + x * (cub->game.mini->bpp / 8));
+		dst = cub->game.mini->data + (y * cub->game.mini->size_line
+				+ x * (cub->game.mini->bpp / 8));
 		*(unsigned int *)dst = color;
 	}
 }
@@ -54,14 +55,13 @@ void	print_compass(t_cub *cub)
 
 void	print_map(t_cub *cub)
 {
-	int x;
-	int y;
-	int i;
-	int j;
+	int	x;
+	int	y;
+	int	i;
+	int	j;
 
 	x = cub->px - 64;
 	y = cub->py - 64;
-
 	if (x < 0 || cub->map.width - x < 64)
 		x = 0;
 	if (y < 0 || cub->map.height - y < 64)
@@ -70,16 +70,13 @@ void	print_map(t_cub *cub)
 		x = cub->map.width - 144;
 	if (cub->map.height - y < 128)
 		y = cub->map.height - 128;
-	i = 0;
-	while (i < 128)
+	i = -1;
+	while (++i < 128)
 	{
-		j = 0;
-		while (j < 128)
-		{
-			draw_mini(cub, j, i, my_mlx_pixel_get(cub->game.mmbase, x + j, y + i));
-			j++;
-		}
-		i++;
+		j = -1;
+		while (++j < 128)
+			draw_mini(cub, j, i,
+				my_mlx_pixel_get(cub->game.mmbase, x + j, y + i));
 	}
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.bordamm, 6, 6);
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mini, 10, 10);

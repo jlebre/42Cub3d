@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:40:07 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/20 00:18:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/21 16:19:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,24 @@ typedef struct s_image	t_image;
 typedef struct s_map	t_map;
 typedef struct s_game	t_game;
 typedef struct s_proj	t_proj;
+typedef struct s_ray	t_ray;
 
 struct	s_map
 {
 	char	**map;
 	int		width;
 	int		height;
+};
+
+struct	s_ray
+{
+	int		ray;
+	int		vertical;
+	int		wall;
+	double	ray_x;
+	double	ray_y;
+	double	ray_angle;
+	double	wall_x;
 };
 
 struct	s_image
@@ -75,7 +87,6 @@ struct s_game
 	void	*white;
 	void	*blue;
 	void	*black;
-	int		vertical;
 	int		map_position;
 	int		depht_of_field;
 	int		player_speed;
@@ -111,6 +122,7 @@ struct s_cub
 	t_map	map;
 	t_game	game;
 	t_proj	projection;
+	t_ray	ray;
 };
 
 // INIT
@@ -129,7 +141,6 @@ void	mini_map(t_cub *cub);
 void	init_fov(t_cub *cub);
 void	draw_fov(t_cub *cub, int x, int y, int color);
 void	clear_fov(t_cub *cub);
-void	T_fov(t_cub *cub);
 
 // KEYPRESS
 int		key_press(int keycode, t_cub *game);
@@ -138,16 +149,16 @@ int		mouse_hook(int button, int x, int y, t_cub *cub);
 
 // RAYCAST
 void	raycast(t_cub *cub);
-void	draw_walls(t_cub *cub, int ray, double ray_angle, double ray_x, double ray_y);
+void	draw_walls(t_cub *cub);
 
 // DRAW
 void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 int		my_mlx_pixel_get(t_img *texture, int x, int y);
 void	draw_square(t_cub *cub, int x, int y, int color);
-void	draw_texture(int x, int y, double len, t_cub *cub, double wall_x, t_img *texture);
-void	draw_texture2(int x, int y, float len, t_cub *cub, float WallX, t_img *texture, float ray_x);
+void	draw_texture(int y, double len, t_cub *cub, t_img *texture);
 void	get_pixel(t_cub *cub, int x, int y);
 void	clear_screen(t_cub *cub);
+void	draw_pixel(t_cub *cub, int x, int y, int color);
 
 // MATH FUNCTIONS
 int		ft_abs(int n);

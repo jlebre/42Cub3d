@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
-#    Updated: 2023/04/20 00:30:46 by mtavares         ###   ########.fr        #
+#    Updated: 2023/04/21 15:44:30 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS		=	$(SRCS_DIR)/allocs/frees.c \
 				$(SRCS_DIR)/draw/draw_utils.c \
 				$(SRCS_DIR)/draw/draw_walls.c \
 				$(SRCS_DIR)/draw/textures.c \
+				$(SRCS_DIR)/draw/pixel.c \
 				$(SRCS_DIR)/gnl/get_next_line.c \
 				$(SRCS_DIR)/gnl/get_next_line_utils.c \
 				$(SRCS_DIR)/key/key_press.c \
@@ -31,6 +32,7 @@ SRCS		=	$(SRCS_DIR)/allocs/frees.c \
 				$(SRCS_DIR)/str/utils1.c \
 				$(SRCS_DIR)/str/utils2.c \
 				$(SRCS_DIR)/raycast/init_image.c \
+				$(SRCS_DIR)/raycast/init_textures.c \
 				$(SRCS_DIR)/raycast/init_vars.c \
 				$(SRCS_DIR)/raycast/ft_abs.c \
 				$(SRCS_DIR)/raycast/ft_exit.c \

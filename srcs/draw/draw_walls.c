@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-int		check_hit(t_cub *cub, double ray_x, double ray_y);
-void	get_wall_direction(int x, int y, double len, t_cub *cub, double wall_x, double ray_x, double ray_y);
+int		check_hit(t_cub *cub);
+void	get_wall_direction(int y, double len, t_cub *cub);
 
 // Get the x position in the wall
-int	get_pos( double ray)
+int	get_pos(double ray)
 {
 	double	dir;
 	double	wall_x;
@@ -27,60 +27,65 @@ int	get_pos( double ray)
 }
 
 // Attribute the wall direction
-int	get_wall_x(t_cub *cub, double ray_x, double ray_y)
+void	get_wall_x(t_cub *cub)
 {
 	double	wall_x;
 
-	if (cub->game.vertical)
+	if (cub->ray.vertical)
 	{
-		wall_x = get_pos(ray_y);
-		if (ray_x < cub->px)
+		wall_x = get_pos(cub->ray.ray_y);
+		if (cub->ray.ray_x < cub->px)
 			wall_x = 64 - wall_x;
 	}
 	else
 	{
-		wall_x = get_pos(ray_x);
-		if (ray_y > cub->py)
+		wall_x = get_pos(cub->ray.ray_x);
+		if (cub->ray.ray_y > cub->py)
 			wall_x = 64 - wall_x;
 	}
-	return (wall_x);
+	cub->ray.wall_x = wall_x;
 }
 
-void		draw_vertical_line(double x, double y, double len, t_cub *cub, int color)
+void	draw_vertical_line(double y, double len, t_cub *cub, int color)
 {
-	int i;
-	int limit;
+	int	i;
+	int	limit;
 
 	i = 0;
-	if (x < 0 || x > cub->width)
+	if (cub->ray.ray < 0 || cub->ray.ray > cub->width)
 		return ;
 	limit = cub->height;
 	while (i < len && (y + i) < limit)
 	{
-		if (y + i < cub->height && x < cub->width && y + i >= 0 && x >= 0)
-			my_mlx_pixel_put(cub, x, y + i, color);
+		if (y + i < cub->height && cub->ray.ray < cub->width
+			&& y + i >= 0 && cub->ray.ray >= 0)
+			my_mlx_pixel_put(cub, cub->ray.ray, y + i, color);
 		i++;
 	}
 }
 
-void draw_walls(t_cub *cub, int ray, double ray_angle, double ray_x, double ray_y)
+void	draw_walls(t_cub *cub)
 {
 	double	wall_height;
 	double	distance;
 	double	fish_eye;
-	double	wall_x;
 
-	cub->game.vertical = check_hit(cub, ray_x, ray_y);
-	distance = distance_between_points(cub->px, cub->py, ray_x, ray_y) / 16;
-	fish_eye = distance * cos(degrees_to_radians(ray_angle - cub->game.player_angle));
+	distance = distance_between_points(cub->px, cub->py,
+			cub->ray.ray_x, cub->ray.ray_y) / 16;
+	fish_eye = distance
+		* cos(degrees_to_radians(cub->ray.ray_angle - cub->game.player_angle));
 	wall_height = ((cub->height / 2) / fish_eye);
-	wall_x = get_wall_x(cub, ray_x, ray_y);
+	check_hit(cub);
+	get_wall_x(cub);
 	if (wall_height >= cub->height / 2)
-		get_wall_direction(ray, 0, cub->height, cub, wall_x, ray_x, ray_y);
+		get_wall_direction(0, cub->height, cub);
 	else
 	{
-		draw_vertical_line(ray, 0, (int)((cub->height / 2) - wall_height), cub, cub->img.colors[1]);
-		get_wall_direction(ray, (int)((cub->height / 2) - wall_height), 2 * wall_height, cub, wall_x, ray_x, ray_y);
-		draw_vertical_line(ray, (int)((cub->height / 2) + wall_height), cub->height, cub, cub->img.colors[0]);
+		draw_vertical_line(0, (int)((cub->height / 2) - wall_height),
+			cub, cub->img.colors[1]);
+		get_wall_direction((int)((cub->height / 2) - wall_height),
+			2 * wall_height, cub);
+		draw_vertical_line((int)((cub->height / 2) + wall_height),
+			cub->height, cub, cub->img.colors[0]);
 	}
 }

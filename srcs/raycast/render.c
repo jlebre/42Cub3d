@@ -40,15 +40,16 @@ void	print_hearts(t_cub *cub)
 		draw_with_tranparency(cub, 250, 20, cub->img.heart);
 	else
 	{
-		mlx_string_put(cub->mlx, cub->mlx_win, 250, 20, 0x00000000, "GAME OVER");
-		mlx_string_put(cub->mlx, cub->mlx_win, 250, 32, 0x00000000, "PRESS ESC");
+		mlx_string_put(cub->mlx, cub->mlx_win,
+			250, 20, 0x00000000, "GAME OVER");
+		mlx_string_put(cub->mlx, cub->mlx_win,
+			250, 32, 0x00000000, "PRESS ESC");
 		cub->game.pause = 1;
 	}
 }
 
 int	render(t_cub *cub)
 {
-	//clear_screen(cub);
 	raycast(cub);
 	mini_map(cub);
 	print_compass(cub);
@@ -57,3 +58,4 @@ int	render(t_cub *cub)
 	write_options(cub);
 	return (0);
 }
+//clear_screen(cub);

@@ -15,8 +15,8 @@
 char	**dup_map(char map[8][8])
 {
 	char	**new_map;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	new_map = malloc(sizeof(char *) * 9);
@@ -36,7 +36,7 @@ char	**dup_map(char map[8][8])
 	return (new_map);
 }
 
-int start_angle(char c)
+int	start_angle(char c)
 {
 	if (c == 'N')
 		return (90);
