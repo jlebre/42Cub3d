@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
+#    Updated: 2023/04/22 20:31:23 by mtavares         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRCS		=	$(SRCS_DIR)/allocs/frees.c \
 				$(SRCS_DIR)/allocs/allocs.c \
 				$(SRCS_DIR)/check_map/algorithm.c \
@@ -46,7 +58,7 @@ CC			=	cc
 
 INC			=	-Iincludes -Ilibs/printf_fd/include -I/usr/include -Imlx_linux
 
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g# -fsanitize=address
 
 RM			=	rm -rf
 
@@ -86,4 +98,7 @@ a:
 
 re:			fclean all
 
-.PHONY: all clean fclean re a
+valgrind:	re
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes ./cub3d info.cub
+
+.PHONY: all clean fclean re a valgrind

@@ -12,6 +12,37 @@
 
 #include "cub3d.h"
 
+void	destroy_buss(t_cub *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		if (game->img.compass[i])
+			mlx_destroy_image(game->mlx, game->img.compass[i]);
+		i++;
+	}
+}
+
+void	destroy_textures(t_cub *game)
+{
+	if (game->img.no_tex)
+		mlx_destroy_image(game->mlx, game->img.no_tex);
+	if (game->img.so_tex)
+		mlx_destroy_image(game->mlx, game->img.so_tex);
+	if (game->img.we_tex)
+		mlx_destroy_image(game->mlx, game->img.we_tex);
+	if (game->img.ea_tex)
+		mlx_destroy_image(game->mlx, game->img.ea_tex);
+	if (game->img.chess)
+		mlx_destroy_image(game->mlx, game->img.chess);
+	if (game->img.heart)
+		mlx_destroy_image(game->mlx, game->img.heart);
+	if (game->img.settings)
+		mlx_destroy_image(game->mlx, game->img.settings);
+}
+
 void	destroy_img(t_cub *game)
 {
 	if (game->game.mmp)
@@ -32,16 +63,8 @@ void	destroy_img(t_cub *game)
 		mlx_destroy_image(game->mlx, game->game.mini);
 	if (game->game.mpause)
 		mlx_destroy_image(game->mlx, game->game.mpause);
-	if (game->img.no_tex)
-		mlx_destroy_image(game->mlx, game->img.no_tex);
-	if (game->img.so_tex)
-		mlx_destroy_image(game->mlx, game->img.so_tex);
-	if (game->img.we_tex)
-		mlx_destroy_image(game->mlx, game->img.we_tex);
-	if (game->img.ea_tex)
-		mlx_destroy_image(game->mlx, game->img.ea_tex);
-	if (game->img.chess)
-		mlx_destroy_image(game->mlx, game->img.chess);
+	if (game->game.bordamm)
+		mlx_destroy_image(game->mlx, game->game.bordamm);
 }
 
 int	ft_exit(t_cub *game)
