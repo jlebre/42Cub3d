@@ -16,20 +16,23 @@ int		check_hit(t_cub *cub);
 void	get_wall_direction(int y, double len, t_cub *cub);
 
 // Get the x position in the wall
+// Dir vai ser um valor entre 0 e 15,
+	// porque cada parede está dívidida em 64 partes
+// Ray corresponde ao ray_x ou ray__y
 double	get_pos(double ray)
 {
 	int		dir;
-	float	wall_x;
+	double	wall_x;
+	double	largura;
+	double	x_increment;
+	double	unit;
 
-	//printf("ray: %f\n", ray);
-	dir = ((int)ray % 16);
-	//printf("dir: %d\n", dir);
-	wall_x = ((int)ray - dir) * (64 / (((ray - dir) / dir) * 16));
-	//printf("wall_x: %f\n", wall_x);
-	if (wall_x / (int)wall_x == 1)
-		wall_x = 0;
-	else
-		wall_x = (int)wall_x % 64;
+	dir = ((int)ray % 64);
+	wall_x = ((int)ray - dir);
+	unit = (wall_x / dir);
+	largura = (unit * 64);
+	x_increment = (64 / largura);
+	wall_x = wall_x * x_increment;
 	return (wall_x);
 }
 
@@ -78,7 +81,7 @@ void	draw_walls(t_cub *cub)
 	double	fish_eye;
 
 	distance = distance_between_points(cub->px, cub->py,
-			cub->ray.ray_x, cub->ray.ray_y) / 16;
+			cub->ray.ray_x, cub->ray.ray_y) / 64;
 	fish_eye = distance
 		* cos(degrees_to_radians(cub->ray.ray_angle - cub->game.player_angle));
 	wall_height = ((cub->height / 2) / fish_eye);

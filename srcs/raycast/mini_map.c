@@ -60,16 +60,16 @@ void	print_map(t_cub *cub)
 	int	i;
 	int	j;
 
-	x = cub->px - 64;
-	y = cub->py - 64;
-	if (x < 0 || cub->map.width - x < 64)
+	x = (cub->px / 4) - 64;
+	y = (cub->py / 4) - 64;
+	if (x < 0 || cub->map.width16 - x < 64)
 		x = 0;
-	if (y < 0 || cub->map.height - y < 64)
+	if (y < 0 || cub->map.height16 - y < 64)
 		y = 0;
-	if (cub->map.width - x < 144)
-		x = cub->map.width - 144;
-	if (cub->map.height - y < 128)
-		y = cub->map.height - 128;
+	if (cub->map.width16 - x < 144)
+		x = cub->map.width16 - 144;
+	if (cub->map.height16 - y < 128)
+		y = cub->map.height16 - 128;
 	i = -1;
 	while (++i < 128)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 19:12:57 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/18 22:48:03 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/23 19:08:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	set_player(t_cub *data, int x, int y)
 {
 	data->direction = data->map.map[y][x];
 	data->map.map[y][x] = '0';
-	data->px = x * 16 + 5.5;
-	data->py = y * 16 + 5.5;
+	data->px = x * 64 + 5.5;
+	data->py = y * 64 + 5.5;
 	data->num_player++;
 }
 
@@ -49,10 +49,12 @@ static int	check_invalid_char(t_cub *data)
 			if (orientation_player(data->map.map[y][x]))
 				set_player(data, x, y);
 		}
-			data->map.width = (x * 16) * (data->map.width / 16 < x) + \
-			(data->map.width / 16 >= x) * (data->map.width);
+			data->map.width = (x * 64) * (data->map.width / 64 < x) + \
+			(data->map.width / 64 >= x) * (data->map.width);
 	}
-	data->map.height = y * 16;
+	data->map.height = y * 64;
+	data->map.width16 = data->map.width / 4;
+	data->map.height16 = data->map.height / 4;
 	return (data->num_player != 1);
 }
 

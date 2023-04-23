@@ -13,7 +13,7 @@ static char *result[] = {
 "$  c gray15",
 "%  c #272727",
 "&  c #282828",
-"*  c gray16",
+"*  c gray64",
 "=  c #2A2A2A",
 "-  c #2C2C2C",
 ";  c #2D2D2D",

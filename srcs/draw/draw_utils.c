@@ -52,10 +52,10 @@ void	clear_fov(t_cub *cub)
 	int		y;
 
 	y = 0;
-	while (y < cub->map.height)
+	while (y < cub->map.height16)
 	{
 		x = 0;
-		while (x < cub->map.width)
+		while (x < cub->map.width16)
 		{
 			dst = cub->game.mmbase->data + (y * cub->game.mmbase->size_line
 					+ x * (cub->game.mmbase->bpp / 8));

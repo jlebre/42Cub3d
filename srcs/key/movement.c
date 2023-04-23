@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 16:18:26 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/18 16:18:26 by marvin           ###   ########.fr       */
+/*   Created: 2023/04/18 64:18:26 by marvin            #+#    #+#             */
+/*   Updated: 2023/04/18 64:18:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	press_ws(double p_cos, double p_sin, t_cub *cub, int keycode)
 		new_x = cub->px - p_cos * cub->game.player_speed;
 		new_y = cub->py - p_sin * cub->game.player_speed;
 	}
-	if (cub->map.map[(int)new_y / 16][(int)new_x / 16] != '1')
+	if (cub->map.map[(int)new_y / 64][(int)new_x / 64] != '1')
 	{
 		cub->px = new_x;
 		cub->py = new_y;
@@ -62,7 +62,7 @@ void	press_ad(t_cub *cub, int type)
 	p_sin = sin(degrees_to_radians(new_dir));
 	new_x = cub->px + p_cos * cub->game.player_speed;
 	new_y = cub->py + p_sin * cub->game.player_speed;
-	if (cub->map.map[(int)new_y / 16][(int)new_x / 16] != '1')
+	if (cub->map.map[(int)new_y / 64][(int)new_x / 64] != '1')
 	{
 		cub->px = new_x;
 		cub->py = new_y;

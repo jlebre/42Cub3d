@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:40:07 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/22 20:08:22 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/23 19:08:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ struct	s_map
 	char	**map;
 	int		width;
 	int		height;
+	int		width16;
+	int		height16;
 };
 
 struct	s_ray

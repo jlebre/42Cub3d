@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 16:30:54 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/22 16:30:54 by marvin           ###   ########.fr       */
+/*   Created: 2023/02/22 64:30:54 by marvin            #+#    #+#             */
+/*   Updated: 2023/02/22 64:30:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ray_loop(double ray_cos, double ray_sin, t_cub *cub)
 {
 	cub->ray.ray_x += ray_cos;
 	cub->ray.ray_y += ray_sin;
-	draw_fov(cub, cub->ray.ray_x + 2, cub->ray.ray_y + 2, 0x0000FF00);
-	cub->ray.wall = cub->map.map[(int)(cub->ray.ray_y / 16)]
-	[(int)(cub->ray.ray_x / 16)];
+	draw_fov(cub, (cub->ray.ray_x / 4) + 2, (cub->ray.ray_y / 4) + 2, 0x0000FF00);
+	cub->ray.wall = cub->map.map[(int)(cub->ray.ray_y / 64)]
+	[(int)(cub->ray.ray_x / 64)];
 }
 
 void	raycast(t_cub *cub)
@@ -56,11 +56,11 @@ void	check_hit(t_cub *cub)
 	a = cub->ray.ray_x - 0.1;
 	b = cub->ray.ray_x + 0.1;
 	vertical = 0;
-	if (cub->map.map[(int)(cub->ray.ray_y / 16)]
-		[(int)(cub->ray.ray_x / 16)] == '1')
+	if (cub->map.map[(int)(cub->ray.ray_y / 64)]
+		[(int)(cub->ray.ray_x / 64)] == '1')
 	{
-		if (cub->map.map[(int)(cub->ray.ray_y / 16)][(int)(a / 16)] == '0'
-			|| cub->map.map[(int)(cub->ray.ray_y / 16)][(int)(b / 16)] == '0')
+		if (cub->map.map[(int)(cub->ray.ray_y / 64)][(int)(a / 64)] == '0'
+			|| cub->map.map[(int)(cub->ray.ray_y / 64)][(int)(b / 64)] == '0')
 			vertical = 1;
 	}
 	cub->ray.vertical = vertical;

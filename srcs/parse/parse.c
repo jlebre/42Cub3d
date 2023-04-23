@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 17:16:51 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/18 22:53:11 by mtavares         ###   ########.fr       */
+/*   Created: Invalid date        by mtavares          #+#    #+#             */
+/*   Updated: 2023/04/23 18:14:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

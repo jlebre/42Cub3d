@@ -35,9 +35,9 @@ void	init_img2(t_cub *cub)
 	ft_memset(cub->game.fov->data, 0, cub->game.fov->width
 		* cub->game.fov->height * sizeof(int));
 	cub->game.mmbase = mlx_new_image(cub->mlx,
-			cub->map.width - 16, cub->map.height);
+			(cub->map.width16) - 16, cub->map.height16);
 	check_img(cub->game.mmbase);
-	ft_memset(cub->game.mmbase->data, 0, (cub->game.mmbase->width - 16)
+	ft_memset(cub->game.mmbase->data, 0, (cub->game.mmbase->width)
 		* (cub->game.mmbase->height) * sizeof(int));
 	cub->game.mini = mlx_new_image(cub->mlx, 128, 128);
 	check_img(cub->game.mini);
