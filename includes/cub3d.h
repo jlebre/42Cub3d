@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:40:07 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/21 16:19:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/22 20:08:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void	clear_fov(t_cub *cub);
 // KEYPRESS
 int		key_press(int keycode, t_cub *game);
 int		key_release(int keycode, t_cub *game);
-int		mouse_hook(int button, int x, int y, t_cub *cub);
 
 // RAYCAST
 void	raycast(t_cub *cub);

@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-int		check_hit(t_cub *cub);
-
 void	get_wall_direction(int y, double len, t_cub *cub)
 {
 	if (cub->ray.vertical)
@@ -47,7 +45,7 @@ void	draw_texture(int y, double len, t_cub *cub, t_img *texture)
 			&& (y >= 0 && cub->ray.ray >= 0 && tex_y <= texture->height
 				&& cub->ray.wall_x <= texture->width))
 			my_mlx_pixel_put(cub, cub->ray.ray, y, my_mlx_pixel_get(texture,
-					floor(cub->ray.wall_x), floor(tex_y)));
+					cub->ray.wall_x, tex_y));
 		tex_y += increment;
 		y++;
 		i++;

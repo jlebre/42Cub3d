@@ -48,6 +48,25 @@ void	print_hearts(t_cub *cub)
 	}
 }
 
+void print_in_map(t_cub *cub)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < 64)
+	{
+		j = 0;
+		while (j < 64)
+		{
+			my_mlx_pixel_put(cub, 100 + j, 200 + i, my_mlx_pixel_get(cub->img.so_tex,
+					j, i));
+			j++;
+		}
+		i++;
+	}
+}
+
 int	render(t_cub *cub)
 {
 	raycast(cub);
@@ -56,6 +75,7 @@ int	render(t_cub *cub)
 	print_hearts(cub);
 	draw_with_tranparency(cub, 20, 400, cub->img.settings);
 	write_options(cub);
+	//print_in_map(cub);
 	return (0);
 }
 //clear_screen(cub);
