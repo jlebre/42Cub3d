@@ -35,11 +35,20 @@ void	draw_texture(int y, double len, t_cub *cub, t_img *texture)
 	int		i;
 	double	tex_y;
 	double	increment;
+	double	temp;
 
-	increment = texture->height / len;
+	increment = (double)texture->height / len;
+	if (len > cub->height)
+	{
+		temp = (len - cub->height) / 2;
+		tex_y = increment * temp;
+		len = cub->height;
+		y = 0;
+	}
+	else
+		tex_y = 0;
 	i = 0;
-	tex_y = 0;
-	while (i < len && i < cub->height)
+	while (i < len && i < (cub->height) && tex_y < 64)
 	{
 		if (y < cub->height && cub->ray.ray < cub->width
 			&& (y >= 0 && cub->ray.ray >= 0 && tex_y <= texture->height

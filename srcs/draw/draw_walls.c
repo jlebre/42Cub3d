@@ -88,7 +88,8 @@ void	draw_walls(t_cub *cub)
 	check_hit(cub);
 	get_wall_x(cub);
 	if (wall_height >= cub->height / 2)
-		get_wall_direction(0, cub->height, cub);
+		get_wall_direction((int)((cub->height / 2) - wall_height),
+			2 * wall_height, cub);
 	else
 	{
 		draw_vertical_line(0, (int)((cub->height / 2) - wall_height),

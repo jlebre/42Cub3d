@@ -50,13 +50,12 @@ void	print_hearts(t_cub *cub)
 
 int	render(t_cub *cub)
 {
-	//clear_screen(cub);
+	clear_screen(cub);
 	raycast(cub);
 	mini_map(cub);
 	print_compass(cub);
 	print_hearts(cub);
 	draw_with_tranparency(cub, 20, 400, cub->img.settings);
 	write_options(cub);
-	//mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->game.mmbase, 0, 0);
 	return (0);
 }

@@ -16,7 +16,8 @@ void	ray_loop(double ray_cos, double ray_sin, t_cub *cub)
 {
 	cub->ray.ray_x += ray_cos;
 	cub->ray.ray_y += ray_sin;
-	draw_fov(cub, (cub->ray.ray_x / 4) + 2, (cub->ray.ray_y / 4) + 2, 0x0000FF00);
+	draw_fov(cub, (cub->ray.ray_x / 4) + 2,
+		(cub->ray.ray_y / 4) + 2, 0x0000FF00);
 	cub->ray.wall = cub->map.map[(int)(cub->ray.ray_y / 64)]
 	[(int)(cub->ray.ray_x / 64)];
 }
