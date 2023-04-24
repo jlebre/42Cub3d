@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:40:07 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/23 19:08:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/24 14:14:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,14 @@
 # include <allocs.h>
 # include <str.h>
 
-# define PI 3.14159265359
-# define PI2 6.28318530718
 # define FOV 60
 # define FOV2 30
-# define SIZE_X 64
-# define SIZE_Y 64
+# define PI 3.14159265358979323846
 
 typedef struct s_cub	t_cub;
 typedef struct s_image	t_image;
 typedef struct s_map	t_map;
 typedef struct s_game	t_game;
-typedef struct s_proj	t_proj;
 typedef struct s_ray	t_ray;
 
 struct	s_map
@@ -72,32 +68,15 @@ struct	s_image
 	char	order[5];
 };
 
-struct s_proj
-{
-	int		scale;
-	int		widht;
-	int		height;
-	int		half_width;
-	int		half_height;
-	float	increment;
-};
-
 struct s_game
 {
 	double	player_angle;
-	double	ray_angle;
 	void	*white;
 	void	*blue;
 	void	*black;
-	int		map_position;
-	int		depht_of_field;
 	int		player_speed;
-	int		delay;
-	int		fov_on;
 	int		map_on;
 	int		pause;
-	int		lights;
-	int		textures_on;
 	int		lifes;
 	t_img	*fov;
 	t_img	*mmp;
@@ -118,12 +97,10 @@ struct s_cub
 	double	px;
 	double	py;
 	int		num_player;
-	int		side;
 	t_img	*screen;
 	t_image	img;
 	t_map	map;
 	t_game	game;
-	t_proj	projection;
 	t_ray	ray;
 };
 
@@ -140,7 +117,6 @@ void	init_mini_map(t_cub *cub);
 void	mini_map(t_cub *cub);
 
 // FOV
-void	init_fov(t_cub *cub);
 void	draw_fov(t_cub *cub, int x, int y, int color);
 void	clear_fov(t_cub *cub);
 
@@ -157,7 +133,6 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 int		my_mlx_pixel_get(t_img *texture, int x, int y);
 void	draw_square(t_cub *cub, int x, int y, int color);
 void	draw_texture(int y, double len, t_cub *cub, t_img *texture);
-void	get_pixel(t_cub *cub, int x, int y);
 void	clear_screen(t_cub *cub);
 void	draw_pixel(t_cub *cub, int x, int y, int color);
 

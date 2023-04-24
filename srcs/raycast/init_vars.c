@@ -55,17 +55,7 @@ void	init_vars(t_cub *cub)
 	cub->height = 480;
 	cub->game.player_angle = start_angle(cub->direction);
 	cub->game.player_speed = 4;
-	cub->game.delay = 300;
-	cub->game.fov_on = 1;
 	cub->game.map_on = 1;
 	cub->game.pause = 0;
 	cub->game.lifes = 3;
-	cub->game.lights = 1;
-	cub->game.textures_on = 1;
-	cub->projection.scale = 4;
-	cub->projection.widht = cub->width / cub->projection.scale;
-	cub->projection.height = cub->height / cub->projection.scale;
-	cub->projection.half_width = cub->projection.widht / 2;
-	cub->projection.half_height = cub->projection.height / 2;
-	cub->projection.increment = 60 / cub->projection.widht;
 }

@@ -43,20 +43,18 @@ void	draw_texture(int y, double len, t_cub *cub, t_img *texture)
 		temp = (len - cub->height) / 2;
 		tex_y = increment * temp;
 		len = cub->height;
-		y = 0;
 	}
 	else
 		tex_y = 0;
 	i = 0;
 	while (i < len && i < (cub->height) && tex_y < 64)
 	{
-		if (y < cub->height && cub->ray.ray < cub->width
-			&& (y >= 0 && cub->ray.ray >= 0 && tex_y <= texture->height
+		if ((y + i) < cub->height && cub->ray.ray < cub->width
+			&& ((y + i) >= 0 && cub->ray.ray >= 0 && tex_y <= texture->height
 				&& cub->ray.wall_x <= texture->width))
-			my_mlx_pixel_put(cub, cub->ray.ray, y, my_mlx_pixel_get(texture,
-					cub->ray.wall_x, tex_y));
+			my_mlx_pixel_put(cub, cub->ray.ray, (y + i),
+				my_mlx_pixel_get(texture, cub->ray.wall_x, tex_y));
 		tex_y += increment;
-		y++;
 		i++;
 	}
 }

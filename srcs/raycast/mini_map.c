@@ -85,11 +85,7 @@ void	print_map(t_cub *cub)
 void	mini_map(t_cub *cub)
 {
 	if (cub->game.map_on == 1)
-	{
-		if (cub->game.fov_on == 0)
-			clear_fov(cub);
 		print_map(cub);
-	}
 }
 
 void	init_mini_map(t_cub *cub)

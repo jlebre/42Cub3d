@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:39:49 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/23 20:14:00 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/24 14:15:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,6 @@ t_cub	*this_cub(void)
 	return (&data);
 }
 
-int	mouse_hook(int button, t_cub *cub)
-{
-	int	x;
-	int	y;
-	int	half;
-
-	mlx_mouse_get_pos(cub->mlx, cub->mlx_win, &x, &y);
-	half = 320;
-	if (button == 1)
-	{		
-		if (x >= half && !cub->game.pause)
-		{
-			cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
-			render(cub);
-		}
-		else if (x < half && !cub->game.pause)
-		{
-			cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
-			render(cub);
-		}
-	}
-	return (0);
-}
-
-/*
 int	mouse_hook(int button, int x, int y, t_cub *cub)
 {
 	int	half;
@@ -62,7 +37,6 @@ int	mouse_hook(int button, int x, int y, t_cub *cub)
 	}
 	return (0);
 }
-*/
 
 char	**init(char **av)
 {
@@ -105,9 +79,35 @@ int	main(int ac, char **av)
 		exit_free((this_cub)(), 1, "Failed malloc on mlx_new_window");
 	render((this_cub)());
 	mlx_hook((this_cub)()->mlx_win, 2, 1L << 0, &key_press, (this_cub)());
-	//mlx_mouse_hook((this_cub)()->mlx_win, &mouse_hook, (this_cub)());
+	mlx_mouse_hook((this_cub)()->mlx_win, &mouse_hook, (this_cub)());
 	mlx_hook((this_cub)()->mlx_win, 17, 1L << 17, &ft_exit, (this_cub)());
 	mlx_loop((this_cub)()->mlx);
 }
 
 //mlx_hook((this_cub)()->mlx_win, 3, 1L << 1, &key_release, (this_cub)());
+
+/*
+int	mouse_hook(int button, t_cub *cub)
+{
+	int	x;
+	int	y;
+	int	half;
+
+	mlx_mouse_get_pos(cub->mlx, cub->mlx_win, &x, &y);
+	half = 320;
+	if (button == 1)
+	{		
+		if (x >= half && !cub->game.pause)
+		{
+			cub->game.player_angle = fix_angle(cub->game.player_angle + 5);
+			render(cub);
+		}
+		else if (x < half && !cub->game.pause)
+		{
+			cub->game.player_angle = fix_angle(cub->game.player_angle - 5);
+			render(cub);
+		}
+	}
+	return (0);
+}
+*/
