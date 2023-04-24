@@ -12,57 +12,56 @@
 
 #include "cub3d.h"
 
-void raycast(t_cub *cub)
+void	ray_loop(double ray_cos, double ray_sin, t_cub *cub)
 {
-	int		ray;
-	char	wall;
-	double	ray_x;
-	double	ray_y;
-	double	ray_angle;
-	double	rayCos;
-	double	raySin;
+	cub->ray.ray_x += ray_cos;
+	cub->ray.ray_y += ray_sin;
+	draw_fov(cub, cub->ray.ray_x + 2, cub->ray.ray_y + 2, 0x0000FF00);
+	cub->ray.wall = cub->map.map[(int)(cub->ray.ray_y / 16)]
+	[(int)(cub->ray.ray_x / 16)];
+}
+
+void	raycast(t_cub *cub)
+{
+	double	ray_cos;
+	double	ray_sin;
 	double	increment;
 
-	ray = 0;
+	cub->ray.ray = 0;
 	clear_fov(cub);
-	ray_angle = fix_angle(cub->game.player_angle - FOV2);
+	cub->ray.ray_angle = fix_angle(cub->game.player_angle - FOV2);
 	increment = (double)FOV / (double)cub->width;
-	while (ray < (cub->width))
+	while (cub->ray.ray < (cub->width))
 	{
-		ray_x = cub->px;
-		ray_y = cub->py;
-		raySin = sin(degrees_to_radians(ray_angle)) / 10;
-		rayCos = cos(degrees_to_radians(ray_angle)) / 10;
-		wall = '0';
-		while (wall == '0')
-		{
-			ray_x += rayCos;
-			ray_y += raySin;
-			draw_fov(cub, ray_x + 2, ray_y + 2, 0x0000FF00);
-			wall = cub->map.map[(int)(ray_y / 16)][(int)(ray_x / 16)];
-		}
-		draw_walls(cub, ray, ray_angle, ray_x, ray_y);
-		ray_angle += increment;
-		ray++;
+		cub->ray.ray_x = cub->px;
+		cub->ray.ray_y = cub->py;
+		ray_sin = sin(degrees_to_radians(cub->ray.ray_angle)) / 10;
+		ray_cos = cos(degrees_to_radians(cub->ray.ray_angle)) / 10;
+		cub->ray.wall = '0';
+		while (cub->ray.wall == '0')
+			ray_loop(ray_cos, ray_sin, cub);
+		draw_walls(cub);
+		cub->ray.ray_angle += increment;
+		cub->ray.ray++;
 	}
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->screen, 0, 0);
 }
 
-int check_hit(t_cub *cub, double ray_x, double ray_y)
+void	check_hit(t_cub *cub)
 {
-	int	vertical;
+	int		vertical;
 	double	a;
 	double	b;
 
-	a = ray_x - 0.1;
-	b = ray_x + 0.1;
-
+	a = cub->ray.ray_x - 0.1;
+	b = cub->ray.ray_x + 0.1;
 	vertical = 0;
-	if (cub->map.map[(int)(ray_y / 16)][(int)(ray_x / 16)] == '1')
+	if (cub->map.map[(int)(cub->ray.ray_y / 16)]
+		[(int)(cub->ray.ray_x / 16)] == '1')
 	{
-		if (cub->map.map[(int)(ray_y / 16)][(int)(a / 16)] == '0'
-			|| cub->map.map[(int)(ray_y / 16)][(int)(b / 16)] == '0')
+		if (cub->map.map[(int)(cub->ray.ray_y / 16)][(int)(a / 16)] == '0'
+			|| cub->map.map[(int)(cub->ray.ray_y / 16)][(int)(b / 16)] == '0')
 			vertical = 1;
 	}
-	return (vertical);
+	cub->ray.vertical = vertical;
 }

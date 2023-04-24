@@ -6,7 +6,7 @@
 /*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:39:49 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/22 20:31:06 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/24 11:53:30 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,10 @@ int	mouse_hook(int button, int x, int y, t_cub *cub)
 	return (0);
 }
 
-int	main(int ac, char **av)
+char	**init(char **av)
 {
 	char	**path;
 
-	(void)ac;
-	(void)av;
-	if (ac != 2)
-		exit_free(NULL, 1, "Wrong number of arguments");
 	path = parse(this_cub(), av[1]);
 	if (check_map(this_cub(), path))
 	{

@@ -13,9 +13,9 @@
 #include "cub3d.h"
 
 // Function to return the absolute value of a number
-int ft_abs(int n)
+int	ft_abs(int n)
 {
-    if (n < 0)
-        return (-n);
-    return (n);
+	if (n < 0)
+		return (-n);
+	return (n);
 }

@@ -6,7 +6,7 @@
 #    By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
-#    Updated: 2023/04/22 20:31:23 by mtavares         ###   ########.fr        #
+#    Updated: 2023/04/24 11:54:18 by mtavares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS		=	$(SRCS_DIR)/allocs/frees.c \
 				$(SRCS_DIR)/draw/draw_utils.c \
 				$(SRCS_DIR)/draw/draw_walls.c \
 				$(SRCS_DIR)/draw/textures.c \
+				$(SRCS_DIR)/draw/pixel.c \
 				$(SRCS_DIR)/gnl/get_next_line.c \
 				$(SRCS_DIR)/gnl/get_next_line_utils.c \
 				$(SRCS_DIR)/key/key_press.c \
@@ -31,6 +32,7 @@ SRCS		=	$(SRCS_DIR)/allocs/frees.c \
 				$(SRCS_DIR)/str/utils1.c \
 				$(SRCS_DIR)/str/utils2.c \
 				$(SRCS_DIR)/raycast/init_image.c \
+				$(SRCS_DIR)/raycast/init_textures.c \
 				$(SRCS_DIR)/raycast/init_vars.c \
 				$(SRCS_DIR)/raycast/ft_abs.c \
 				$(SRCS_DIR)/raycast/ft_exit.c \
@@ -69,32 +71,30 @@ MLX_FLAGS		= -Llibs/printf_fd -lprintf_fd
 all:		$(NAME)
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
-		mkdir -p $(@D)
-		$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
 
 $(NAME):	$(PRINTF) $(MLX) $(OBJS)
-		$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
 
 
 $(PRINTF):
-		make -C libs/printf_fd
+	@make -C libs/printf_fd
 
 $(MLX):
-		make -C mlx_linux
+	@make -C mlx_linux
 
 clean:
-		$(RM) $(OBJS_DIR)
-		make clean -C libs/printf_fd
-		make clean -C mlx_linux
+	@$(RM) $(OBJS_DIR)
+	@make clean -C libs/printf_fd
+	@make clean -C mlx_linux
 
 fclean:		clean
-		$(RM) $(NAME)
-		make fclean -C libs/printf_fd
+	@$(RM) $(NAME)
+	@make fclean -C libs/printf_fd
 
 a:
-	make re
-	make clean
-	./cub3d basic.cub
+	@make re && make clean && ./cub3d basic.cub
 
 re:			fclean all
 
