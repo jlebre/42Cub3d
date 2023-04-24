@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
-#    Updated: 2023/04/21 17:17:02 by marvin           ###   ########.fr        #
+#    Updated: 2023/04/24 23:25:16 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,16 +31,16 @@ SRCS		=	$(SRCS_DIR)/allocs/frees.c \
 				$(SRCS_DIR)/str/str.c \
 				$(SRCS_DIR)/str/utils1.c \
 				$(SRCS_DIR)/str/utils2.c \
-				$(SRCS_DIR)/raycast/init_image.c \
-				$(SRCS_DIR)/raycast/init_textures.c \
-				$(SRCS_DIR)/raycast/init_vars.c \
-				$(SRCS_DIR)/raycast/ft_abs.c \
-				$(SRCS_DIR)/raycast/ft_exit.c \
-				$(SRCS_DIR)/raycast/main.c \
+				$(SRCS_DIR)/init/init_image.c \
+				$(SRCS_DIR)/init/init_textures.c \
+				$(SRCS_DIR)/init/init_vars.c \
+				$(SRCS_DIR)/utils/ft_abs.c \
+				$(SRCS_DIR)/utils/ft_exit.c \
+				$(SRCS_DIR)/utils/utils.c \
 				$(SRCS_DIR)/raycast/mini_map.c \
 				$(SRCS_DIR)/raycast/raycast.c \
 				$(SRCS_DIR)/raycast/render.c \
-				$(SRCS_DIR)/raycast/utils.c \
+				$(SRCS_DIR)/main.c \
 
 SRCS_DIR	=	srcs
 

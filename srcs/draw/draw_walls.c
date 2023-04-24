@@ -71,6 +71,7 @@ void	draw_vertical_line(double y, double len, t_cub *cub, int color)
 			&& y + i >= 0 && cub->ray.ray >= 0)
 			my_mlx_pixel_put(cub, cub->ray.ray, y + i, color);
 		i++;
+		color += 0x00010101;
 	}
 }
 

@@ -39,9 +39,9 @@ char	**dup_map(char map[8][8])
 int	start_angle(char c)
 {
 	if (c == 'N')
-		return (90);
-	if (c == 'S')
 		return (270);
+	if (c == 'S')
+		return (90);
 	if (c == 'E')
 		return (0);
 	if (c == 'W')
