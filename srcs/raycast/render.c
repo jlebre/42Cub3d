@@ -19,8 +19,7 @@ void	write_options(t_cub *cub)
 {
 	mlx_string_put(cub->mlx, cub->mlx_win, 550, 20, 0x00000000, "P - Pause");
 	mlx_string_put(cub->mlx, cub->mlx_win, 550, 32, 0x00000000, "M - Mini Map");
-	mlx_string_put(cub->mlx, cub->mlx_win, 550, 44, 0x00000000, "F - FOV");
-	mlx_string_put(cub->mlx, cub->mlx_win, 550, 56, 0x00000000, "ESC - Quit");
+	mlx_string_put(cub->mlx, cub->mlx_win, 550, 44, 0x00000000, "ESC - Quit");
 }
 
 void	print_hearts(t_cub *cub)
@@ -57,5 +56,6 @@ int	render(t_cub *cub)
 	print_hearts(cub);
 	draw_with_tranparency(cub, 20, 400, cub->img.settings);
 	write_options(cub);
+	mlx_do_sync(cub->mlx);
 	return (0);
 }
