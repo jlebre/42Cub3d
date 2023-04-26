@@ -6,7 +6,7 @@
 /*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:50:50 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/18 22:54:26 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:45:54 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,17 @@ static int	open_file(t_cub *data, char *name, char **path)
 
 static int	string_unique_char(char *s)
 {
-	int	result[4];
+	int	checker;
 	int	i;
 
-	i = -1;
-	while (++i < 4)
-		result[i] = 0;
+	checker = 0;
 	i = -1;
 	while (s[++i])
 	{
-		if (s[i] == 'N')
-			result[0]++;
-		else if (s[i] == 'S')
-			result[1]++;
-		else if (s[i] == 'W')
-			result[2]++;
-		else if (s[i] == 'E')
-			result[3]++;
-	}
-	i = -1;
-	while (++i < 4)
-		if (result[i] != 1)
+		if (checker & (1 << (s[i] - 'A')))
 			return (0);
+		checker |= (1 << (s[i] - 'A'));
+	}
 	return (1);
 }
 
