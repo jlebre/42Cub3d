@@ -12,30 +12,6 @@
 
 #include "cub3d.h"
 
-char	**dup_map(char map[8][8])
-{
-	char	**new_map;
-	int		i;
-	int		j;
-
-	i = 0;
-	new_map = malloc(sizeof(char *) * 9);
-	while (i < 8)
-	{
-		j = 0;
-		new_map[i] = malloc(sizeof(char) * 9);
-		while (j < 8)
-		{
-			new_map[i][j] = map[i][j];
-			j++;
-		}
-		new_map[i][j] = '\0';
-		i++;
-	}
-	new_map[i] = NULL;
-	return (new_map);
-}
-
 int	start_angle(char c)
 {
 	if (c == 'N')

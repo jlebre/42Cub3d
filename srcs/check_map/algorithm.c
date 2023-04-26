@@ -6,7 +6,7 @@
 /*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:10:20 by mtavares          #+#    #+#             */
-/*   Updated: 2023/01/01 01:25:13 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/26 20:02:57 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,24 @@ int	can_move(t_cp *cp, int x, int y)
 	return (orientation_player(cp->map[y][x]) || cp->map[y][x] == '0');
 }
 
-static t_cp	cp_init(t_cub *data)
+static int	cp_init(t_cub *data, t_cp *cp)
 {
 	int		i;
-	t_cp	cp;
 
-	cp.height = -1;
-	while (data->map.map[++cp.height])
+	cp->height = -1;
+	while (data->map.map[++cp->height])
 		;
-	cp.map = alloc().calloc(sizeof(char *) * (cp.height + 1));
+	cp->map = alloc().calloc(sizeof(char *) * (cp->height + 1));
+	if (!cp->map)
+		return (1);
 	i = -1;
-	while (++i < cp.height)
+	while (++i < cp->height)
 	{
-		cp.map[i] = string().strdup(data->map.map[i]);
-		if (!cp.map)
-			return (cp);
+		cp->map[i] = string().strdup(data->map.map[i]);
+		if (!cp->map)
+			return (1);
 	}
-	return (cp);
+	return (0);
 }
 
 int	prep_alg(t_cub *data)
@@ -43,7 +44,11 @@ int	prep_alg(t_cub *data)
 	int		x;
 	int		y;
 
-	cp = cp_init(data);
+	if (cp_init(data, &cp))
+	{
+		alloc().free_matrix((void **)cp.map);
+		return (1);
+	}
 	if (!cp.map)
 		return (1);
 	y = -1;

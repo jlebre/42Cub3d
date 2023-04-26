@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 00:19:33 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/23 18:15:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 20:07:21 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	fill_args(t_parse *parse, char *s, int path_i, int color_i)
 
 	if (string().strncmp(s, "C", 1) && string().strncmp(s, "F", 1))
 	{
+		if (path_i > 3)
+			return (1);
 		s += 2;
 		str = string().trim(s, " \n\t");
 		if (!str)

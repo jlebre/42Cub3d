@@ -6,11 +6,12 @@
 /*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:27:00 by mtavares          #+#    #+#             */
-/*   Updated: 2022/12/30 19:58:50 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:55:16 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <allocs.h>
+#include "printf_fd.h"
 
 /*
 	It will free a matrix
@@ -42,33 +43,24 @@ void	free_array(void *array)
 }
 
 /*
-	Sets n bytes of a void pointer to 0
-*/
-static void	*ft_bzero(void *s, size_t n)
-{
-	char	*str;
-	size_t	i;
-
-	str = s;
-	i = -1;
-	while (++i < n)
-		str[i] = 0;
-	return (s);
-}
-
-/*
 	Allocates a memory a sets all bytes to 0
 */
 void	*ft_calloc(size_t size)
 {
 	void	*ptr;
+	size_t	i;
 
 	if (size == 0)
 		return (NULL);
 	ptr = malloc(size);
 	if (!ptr)
 		return (ptr);
-	ptr = ft_bzero(ptr, size);
+	i = -1;
+	while (++i < size)
+	{
+		((char *)ptr)[i] = 0;
+		printf_fd(1, "%c", ((char *)ptr)[i]);
+	}
 	return (ptr);
 }
 

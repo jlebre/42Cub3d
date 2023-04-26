@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 20:41:36 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/23 18:14:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 19:16:33 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	valid_line(char *s)
 	if (string().len(s, -1) < 2)
 		return (1);
 	i = -1;
-	while (s[++i] != '\n')
+	while (s[++i] && s[i] != '\n')
 		if (s[i] > 8 && s[i] < 14)
 			return (0);
 	return (1);

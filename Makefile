@@ -6,7 +6,7 @@
 #    By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
-#    Updated: 2023/04/26 15:48:44 by mtavares         ###   ########.fr        #
+#    Updated: 2023/04/26 17:45:21 by mtavares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ CC			=	cc
 
 INC			=	-Iincludes -Ilibs/printf_fd/include -I/usr/include -Imlx_linux
 
-CFLAGS		=	-Wall -Wextra -Werror -g# -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 
 RM			=	rm -rf
 
