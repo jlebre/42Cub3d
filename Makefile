@@ -6,49 +6,49 @@
 #    By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
-#    Updated: 2023/04/26 21:49:07 by mtavares         ###   ########.fr        #
+#    Updated: 2023/04/26 22:13:26 by mtavares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		=	$(SRCS_DIR)/allocs/frees.c \
-				$(SRCS_DIR)/allocs/allocs.c \
-				$(SRCS_DIR)/check_map/algorithm.c \
-				$(SRCS_DIR)/check_map/algo_utils.c \
-				$(SRCS_DIR)/check_map/check_map.c \
-				$(SRCS_DIR)/draw/draw_utils.c \
-				$(SRCS_DIR)/draw/draw_walls.c \
-				$(SRCS_DIR)/draw/textures.c \
-				$(SRCS_DIR)/draw/pixel.c \
-				$(SRCS_DIR)/gnl/get_next_line.c \
-				$(SRCS_DIR)/gnl/get_next_line_utils.c \
-				$(SRCS_DIR)/key/key_press.c \
-				$(SRCS_DIR)/key/movement.c \
-				$(SRCS_DIR)/key/switches.c \
-				$(SRCS_DIR)/parse/algorithm.c \
-				$(SRCS_DIR)/parse/parse.c \
-				$(SRCS_DIR)/parse/parse_file.c \
-				$(SRCS_DIR)/parse/parse_vars.c \
-				$(SRCS_DIR)/str/str.c \
-				$(SRCS_DIR)/str/utils1.c \
-				$(SRCS_DIR)/str/utils2.c \
-				$(SRCS_DIR)/init/init_image.c \
-				$(SRCS_DIR)/init/init_textures.c \
-				$(SRCS_DIR)/init/init_vars.c \
-				$(SRCS_DIR)/utils/ft_abs.c \
-				$(SRCS_DIR)/utils/ft_exit.c \
-				$(SRCS_DIR)/utils/utils.c \
-				$(SRCS_DIR)/raycast/mini_map.c \
-				$(SRCS_DIR)/raycast/raycast.c \
-				$(SRCS_DIR)/raycast/render.c \
-				$(SRCS_DIR)/main.c \
+FILE_NAME	=	allocs/frees.c \
+				allocs/allocs.c \
+				check_map/algorithm.c \
+				check_map/algo_utils.c \
+				check_map/check_map.c \
+				draw/draw_utils.c \
+				draw/draw_walls.c \
+				draw/textures.c \
+				draw/pixel.c \
+				gnl/get_next_line.c \
+				gnl/get_next_line_utils.c \
+				key/key_press.c \
+				key/movement.c \
+				key/switches.c \
+				parse/algorithm.c \
+				parse/parse.c \
+				parse/parse_file.c \
+				parse/parse_vars.c \
+				str/str.c \
+				str/utils1.c \
+				str/utils2.c \
+				init/init_image.c \
+				init/init_textures.c \
+				init/init_vars.c \
+				utils/ft_abs.c \
+				utils/ft_exit.c \
+				utils/utils.c \
+				raycast/mini_map.c \
+				raycast/raycast.c \
+				raycast/render.c \
+				main.c \
 
 SRCS_DIR	=	srcs
+
+SRCS		=	$(addprefix $(SRCS_DIR)/, $(FILE_NAME))
 
 OBJS		=	$(subst $(SRCS_DIR), $(OBJS_DIR), $(SRCS:.c=.o))
 
 OBJS_DIR	=	objs
-
-
 
 PRINTF		=	libs/printf_fd/libprintf_fd.a
 
@@ -58,24 +58,22 @@ NAME		=	cub3d
 
 CC			=	cc
 
-INC			=	-Iincludes -Ilibs/printf_fd/include -I/usr/include -Imlx_linux
+INC			=	-I includes -I libs/printf_fd/include  -I mlx_linux
 
-CFLAGS		=	-Wall -Wextra -Werror -g# -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror $(INC) -g# -fsanitize=address
 
 RM			=	rm -rf
 
-PRINTF_FLAGS	= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-
-MLX_FLAGS		= -Llibs/printf_fd -lprintf_fd
+LIBS_FLAGS	= -L libs/printf_fd -l printf_fd -Lmlx_linux -lmlx_Linux -L /usr/lib -lXext -lX11 -lm -lz
 
 all:		$(NAME)
 
 $(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
+	@$(CC) $(CFLAGS) -O3 -c $< -o $@
 
 $(NAME):	$(PRINTF) $(MLX) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) -o $(NAME) $(PRINTF_FLAGS) $(MLX_FLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS_FLAGS) -o $(NAME)
 
 
 $(PRINTF):
