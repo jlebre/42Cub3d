@@ -6,7 +6,7 @@
 /*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 00:19:33 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/26 20:07:21 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/26 21:33:00 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,20 @@ static int	fill_color(t_cub *data, char *s, t_parse *parse)
 	i = -1;
 	rgb[++i] = string().atoi(s);
 	if (rgb[i] > 255 || rgb[i] < 0)
-		exit_parse(data, 1, "Error during atoi", parse);
+		exit_parse(data, 1, \
+			"atoi overflow only can accept between 0 and 255", parse);
 	while (++i < 3)
 	{
 		while (string().isdig(*s))
 			s++;
 		if (*s != ',')
-			exit_parse(data, 1, "Error with formatting the file.cub", parse);
+			exit_parse(data, 1, \
+			"C or F must have 3 intergers separeted by a coma", parse);
 		s++;
 		rgb[i] = string().atoi(s);
 		if (rgb[i] > 255 || rgb[i] < 0)
-			exit_parse(data, 1, "Error during atoi", parse);
+			exit_parse(data, 1, \
+			"atoi overflow only can accept between 0 and 255", parse);
 	}
 	i = 255;
 	return (i << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
@@ -76,7 +79,8 @@ static int	find_args(t_parse *parse, char *s, char *compare)
 			color_i = 0;
 		else
 			(this_cub())->img.order[++parse->num_vars] = compare[0];
-		fill_args(parse, s, parse->num_vars, color_i);
+		if (fill_args(parse, s, parse->num_vars, color_i))
+			exit_parse(this_cub(), 1, "Error with malloc", parse);
 		return (0);
 	}
 	return (1);
@@ -118,7 +122,7 @@ int	get_vars(t_cub *data, t_parse *parse)
 			if (!string().ft_isspace(parse->file[i][j]) && parse->file[i][j])
 			{
 				if (choose_var(parse, &parse->file[i][j]))
-					exit_parse(data, 1, "File Not Formatted correctly", parse);
+					exit_parse(data, 1, "Invalid key", parse);
 				num_vars++;
 				break ;
 			}

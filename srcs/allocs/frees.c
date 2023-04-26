@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:44:25 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/21 15:50:59 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 21:37:13 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_parse(t_parse *parse)
 void	exit_parse(t_cub *data, int status, char *str, t_parse *parse)
 {
 	free_parse(parse);
-	exit_free(data, status, str);
+	exit_free(data, NULL, status, str);
 }
 
 static void	free_mlx(t_cub	*data)
@@ -44,7 +44,7 @@ static void	free_mlx(t_cub	*data)
 	}
 }
 
-void	exit_free(t_cub *data, int status, char *str)
+void	exit_free(t_cub *data, char **path, int status, char *str)
 {
 	if (status)
 		printf_fd(2, "Error: %s\n", str);
@@ -56,5 +56,7 @@ void	exit_free(t_cub *data, int status, char *str)
 			alloc().free_matrix((void **)data->map.map);
 		free_mlx(data);
 	}
+	if (path)
+		alloc().free_matrix((void **)path);
 	exit(status);
 }

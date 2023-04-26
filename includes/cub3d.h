@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:40:07 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/24 15:35:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 21:11:27 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ float	distance_between_points(float x1, float y1, float x2, float y2);
 void	*ft_memset(void *str, int c, size_t n);
 
 t_cub	*this_cub(void);
-void	exit_free(t_cub *data, int status, char *str);
+void	exit_free(t_cub *data, char **path, int status, char *str);
 char	**parse(t_cub *data, char *name);
 int		prep_alg(t_cub *data);
 int		valid_chars(char c);

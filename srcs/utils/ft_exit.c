@@ -69,6 +69,6 @@ void	destroy_img(t_cub *game)
 
 int	ft_exit(t_cub *game)
 {
-	exit_free(game, 0, "Game exited sucessfully!");
+	exit_free(game, NULL, 0, "Game exited sucessfully!");
 	return (0);
 }

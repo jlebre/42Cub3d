@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 19:12:57 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/23 19:08:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/26 21:20:29 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static int	check_invalid_char(t_cub *data)
 			if (orientation_player(data->map.map[y][x]))
 				set_player(data, x, y);
 		}
-			data->map.width = (x * 64) * (data->map.width / 64 < x) + \
-			(data->map.width / 64 >= x) * (data->map.width);
+		data->map.width = (x * 64) * (data->map.width / 64 < x) + \
+		(data->map.width / 64 >= x) * (data->map.width);
 	}
 	data->map.height = y * 64;
 	data->map.width16 = data->map.width / 4;
@@ -61,10 +61,8 @@ static int	check_invalid_char(t_cub *data)
 int	check_map(t_cub *data, char **path)
 {
 	if (check_invalid_char(data))
-	{
-		alloc().free_matrix((void **)path);
-		exit_free(data, 1, "The map must valid chars and one player position");
-	}
+		exit_free(data, path, 1, \
+		"The map must valid chars and one player position");
 	verify_paths(data, path);
 	return (0);
 }

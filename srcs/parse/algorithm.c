@@ -6,7 +6,7 @@
 /*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:50:50 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/26 15:45:54 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/04/26 21:35:47 by mtavares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,11 @@ static int	open_file(t_cub *data, char *name, char **path)
 	if (fd != -1)
 	{
 		close(fd);
-		exit_free(data, 1, "The argument passed must not be a directory");
+		exit_free(data, path, 1, "The argument passed must not be a directory");
 	}
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
-	{
-		alloc().free_matrix((void **)path);
-		exit_free(data, 1, "The argument passed must exist");
-	}
+		exit_free(data, path, 1, "The argument passed must exist");
 	return (fd);
 }
 
@@ -53,19 +50,11 @@ void	verify_paths(t_cub *data, char **path)
 	int	fd;
 
 	if (!string_unique_char(data->img.order))
-	{
-		alloc().free_matrix((void **)path);
-		exit_free(data, 1, "multiple imgs");
-	}
+		exit_free(data, path, 1, "Has multiple imgs");
 	i = -1;
 	while (path[++i])
 	{
 		fd = open_file(data, path[i], path);
-		if (fd == -1)
-		{
-			alloc().free_matrix((void **)path);
-			exit_free(data, 1, "loading texture");
-		}
 		close (fd);
 	}
 }

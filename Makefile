@@ -6,7 +6,7 @@
 #    By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 00:30:45 by mtavares          #+#    #+#              #
-#    Updated: 2023/04/26 17:45:21 by mtavares         ###   ########.fr        #
+#    Updated: 2023/04/26 21:49:07 by mtavares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ CC			=	cc
 
 INC			=	-Iincludes -Ilibs/printf_fd/include -I/usr/include -Imlx_linux
 
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g# -fsanitize=address
 
 RM			=	rm -rf
 
@@ -79,19 +79,19 @@ $(NAME):	$(PRINTF) $(MLX) $(OBJS)
 
 
 $(PRINTF):
-	@make -C libs/printf_fd
+	@make -sC libs/printf_fd
 
 $(MLX):
-	@make -C mlx_linux
+	@make -sC mlx_linux
 
 clean:
 	@$(RM) $(OBJS_DIR)
-	@make clean -C libs/printf_fd
-	@make clean -C mlx_linux
+	@make clean -sC libs/printf_fd
+	@make clean -sC mlx_linux
 
 fclean:		clean
 	@$(RM) $(NAME)
-	@make fclean -C libs/printf_fd
+	@make fclean -sC libs/printf_fd
 
 a:
 	@make re && make clean && ./cub3d basic.cub
