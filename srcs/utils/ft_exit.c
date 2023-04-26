@@ -59,6 +59,8 @@ void	destroy_img(t_cub *game)
 		mlx_destroy_image(game->mlx, game->game.mini);
 	if (game->game.mpause)
 		mlx_destroy_image(game->mlx, game->game.mpause);
+	if (game->img.settings)
+		mlx_destroy_image(game->mlx, game->img.settings);
 }
 
 int	ft_exit(t_cub *game)
