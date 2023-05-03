@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtavares <mtavares@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:39:49 by mtavares          #+#    #+#             */
-/*   Updated: 2023/04/26 21:46:12 by mtavares         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:51:25 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	main(int ac, char **av)
 {
 	if (ac != 2)
 		exit_free(NULL, NULL, 1, "Wrong number of arguments");
+	if (FOV > 180 || FOV < 0)
+		exit_free(NULL, NULL, 1, "FOV must be between 0 and 180");
 	init(av);
 	(this_cub())->mlx_win = mlx_new_window((this_cub())->mlx, \
 		(this_cub())->width, (this_cub())->height, "cub3d");
