@@ -11,7 +11,13 @@ We used the original textures of Wolfenstein.
 The trickiest part for me, was to figure out how to put the X value of a texture into a Wall.
 
 # Gallery
+![Screenshot 2023-05-10 013326](https://github.com/jlebre/42Cub3d/assets/94384240/9f3cc16c-c1b0-47a7-9753-5d153b9ed2ac)
 
+![Screenshot 2023-05-10 013357](https://github.com/jlebre/42Cub3d/assets/94384240/4c02b616-5d12-4026-8d53-98fb92f44621)
+
+https://github.com/jlebre/42Cub3d/assets/94384240/6084f44a-c4c4-429c-b9b1-3fb7c150e839
+
+https://github.com/jlebre/42Cub3d/assets/94384240/bcba92b7-983e-44a1-a111-9cd4b3bd9840
 
 # Installation
 ```
