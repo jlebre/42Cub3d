@@ -23,8 +23,29 @@ https://github.com/jlebre/42Cub3d/assets/94384240/bcba92b7-983e-44a1-a111-9cd4b3
 ```
 git clone https://github.com/jlebre/42Cub3d.git
 cd 42Cub3d/
+make
+```
+
+To run the game:  
+> ./cub3d "map"
+
+We have 2 different maps **basic.cub** and **info.cub**  
+```
+./cub basic.cub
+```
+```
+./cub info.cub
+```
+
+You can also create your own map, as long as it respects the constraints in the subject.  
+You can find them below in **The Assignment** section.
+
+To automatically compile the code and run the basic.cub map, run:  
+```
 make a
 ```
+
+
 # The Assignment
 To make a labrinth in 3D with first person view like Wolfenstein 3D.
 
