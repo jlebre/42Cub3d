@@ -1,219 +1,137 @@
-# 42Cub3d
-![school_42](https://user-images.githubusercontent.com/94384240/170144677-24ff4d41-6e4a-491a-adfa-7dcf0eac630a.jpeg)
+# 42Cub3D
 
-42 Cursus Cub3D
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/94384240/170144677-24ff4d41-6e4a-491a-adfa-7dcf0eac630a.jpeg" alt="42 School Logo" width="300">
+</p>
 
-This is the last project in C at 42. The goal was to recreate a basic raycaster with Wolfenstein 3D as a reference.
-It was a group project.
-I handled the Raycasting and graphic part, and [mtavares](https://github.com/mtavares98) the parsing.
-We completed the project in about 2 months.  
-We used the original textures of Wolfenstein.
-The trickiest part for me, was to figure out how to put the X value of a texture into a Wall.
+## 🕹️ 42 Cursus - Cub3D
 
-# Gallery
-![Screenshot 2023-05-10 013326](https://github.com/jlebre/42Cub3d/assets/94384240/9f3cc16c-c1b0-47a7-9753-5d153b9ed2ac)
+Cub3D is the final C project in the 42 curriculum, where we implemented a basic raycasting engine inspired by *Wolfenstein 3D*.
 
-![Screenshot 2023-05-10 013357](https://github.com/jlebre/42Cub3d/assets/94384240/4c02b616-5d12-4026-8d53-98fb92f44621)
+This was a group project:
+- **Raycasting & Graphics**: [José Maria Lebre](https://github.com/jlebre)
+- **Parsing & Map Handling**: [mtavares](https://github.com/mtavares98)
 
-https://github.com/jlebre/42Cub3d/assets/94384240/6084f44a-c4c4-429c-b9b1-3fb7c150e839
+The project took around **2 months** to complete, using the original textures from *Wolfenstein 3D*.
 
-https://github.com/jlebre/42Cub3d/assets/94384240/bcba92b7-983e-44a1-a111-9cd4b3bd9840
+One of the biggest challenges was correctly mapping the X-coordinate of a texture onto a wall.
 
-# Installation
-```
+---
+
+## 📸 Gallery
+
+![Screenshot](https://github.com/jlebre/42Cub3d/assets/94384240/9f3cc16c-c1b0-47a7-9753-5d153b9ed2ac)
+
+![Screenshot](https://github.com/jlebre/42Cub3d/assets/94384240/4c02b616-5d12-4026-8d53-98fb92f44621)
+
+[Gameplay Video](https://github.com/jlebre/42Cub3d/assets/94384240/6084f44a-c4c4-429c-b9b1-3fb7c150e839)
+
+[Another Gameplay Video](https://github.com/jlebre/42Cub3d/assets/94384240/bcba92b7-983e-44a1-a111-9cd4b3bd9840)
+
+---
+
+## ⚙️ Installation
+
+```bash
 git clone https://github.com/jlebre/42Cub3d.git
 cd 42Cub3d/
 make
 ```
 
-To run the game:  
-> ./cub3d "map"
-
-We have 2 different maps **basic.cub** and **info.cub**  
-```
-./cub basic.cub
-```
-```
-./cub info.cub
+To run the game:
+```bash
+./cub3d "map"
 ```
 
-You can also create your own map, as long as it respects the constraints in the subject.  
-You can find them below in **The Assignment** section.
-
-To automatically compile the code and run the basic.cub map, run:  
+Available maps:
+```bash
+./cub3d basic.cub
+./cub3d info.cub
 ```
+
+You can create custom maps as long as they follow the constraints in **The Assignment** section.
+
+To compile and run `basic.cub` in one command:
+```bash
 make a
 ```
 
+---
 
-# The Assignment
-To make a labrinth in 3D with first person view like Wolfenstein 3D.
+## 📜 The Assignment
 
-As per the Subject:
+The goal was to build a **3D labyrinth game with first-person view**, inspired by *Wolfenstein 3D*.
 
-> The constraints are as follows:    
-> - You must use the miniLibX. Either the version that is available on the operating  
-> system, or from its sources. If you choose to work with the sources, you will  
-> need to apply the same rules for your libft as those written above in Common  
-> Instructions part.
-> >
-> - The management of your window must remain smooth: changing to another window, minimizing, etc.  
-> 
-> - Display different wall textures (the choice is yours) that vary depending on which  
-> side the wall is facing (North, South, East, West).  
-> 
-> - Your program must be able to set the floor and ceiling colors to two different ones. 
->  
-> - The program displays the image in a window and respects the following rules:  
->   - The left and right arrow keys of the keyboard must allow you to look left and  
-> right in the maze.  
-> 
->   - The W, A, S, and D keys must allow you to move the point of view through  
->   the maze.
->
->   - Pressing ESC must close the window and quit the program cleanly.
->
->   - Clicking on the red cross on the window’s frame must close the window and  
->   quit the program cleanly.
->
->   - The use of images of the minilibX is strongly recommended.
->
-> - Your program must take as a first argument a scene description file with the .cub  
-> extension.  
->   - The map must be composed of only 6 possible characters: 0 for an empty space,  
->   1 for a wall, and N,S,E or W for the player’s start position and spawning  
->   orientation.  
->   This is a simple valid map:   
->     ```
->     111111  
->     100101  
->     101001  
->     1100N1  
->     111111
->     ```
-> 
->   - The map must be closed/surrounded by walls, if not the program must return  
->   an error.
->   
->   - Except for the map content, each type of element can be separated by one or  
->   more empty line(s).
->   
->   - Except for the map content which always has to be the last, each type of  
->   element can be set in any order in the file.
->   
->   - Except for the map, each type of information from an element can be separated  
->   by one or more space(s).
->   
->   - The map must be parsed as it looks in the file. Spaces are a valid part of the  
->   map and are up to you to handle. You must be able to parse any kind of map,  
->   as long as it respects the rules of the map.
->   
->   - Each element (except the map) firsts information is the type identifier (composed by one or two character(s)), >followed by all specific informations for each
->object in a strict order such as :
->
->     - North texture:  
->     ```
->     NO ./path_to_the_north_texture
->     ```
->       - identifier: NO  
->       - path to the north texure
->       
->     - South texture:  
->     ```
->     SO ./path_to_the_south_texture
->     ```
->       - identifier: SO  
->       - path to the south texure
->       
->     - West texture:  
->     ```
->     WE ./path_to_the_west_texture
->     ```
->       - identifier: WE  
->       - path to the west texure
->       
->     - East texture:  
->     ```
->     EA ./path_to_the_east_texture
->     ```
->       - identifier: EA  
->       - path to the east texure
->       
->     - Floor color:  
->     ```
->     F 220,100,0
->     ```
->       - identifier: F  
->       - R,G,B colors in range [0,255]: 0, 255, 255
->       
->      - Ceiling color:
->      ```
->      C 225,30,0
->      ```
->       - identifier: C  
->       - R,G,B colors in range [0,255]: 0, 255, 255
->       
->   - Example of the mandatory part with a minimalist .cub scene:  
->   ```
->   NO ./path_to_the_north_texture  
->   SO ./path_to_the_south_texture  
->   WE ./path_to_the_west_texture  
->   EA ./path_to_the_east_texture
->   
->   F 220,100,0  
->   C 225,30,0  
->   
->           1111111111111111111111111  
->           1000000000110000000000001  
->           1011000001110000000000001  
->           1001000000000000000000001  
->   111111111011000001110000000000001  
->   100000000011000001110111111111111  
->   11110111111111011100000010001  
->   11110111111111011101010010001  
->   11000000110101011100000010001  
->   10000000000000001100000010001  
->   10000000000000001101010010001  
->   11000001110101011111011110N0111  
->   11110111 1110101 101111010001  
->   11111111 1111111 111111111111  
->   ```
->   
->   - If any misconfiguration of any kind is encountered in the file, the program  
->   must exit properly and return "Error\n" followed by an explicit error message  
->   of your choice.
->   
+### Key Requirements
+- **Use MiniLibX** for rendering.
+- **Smooth window management** (switching, minimizing, etc.).
+- **Textured walls** that vary based on orientation (N, S, E, W).
+- **Custom floor & ceiling colors.**
+- **Keyboard controls:**
+  - `W, A, S, D` → Move player
+  - `←, →` → Rotate view
+  - `ESC` → Exit game
+- **Clicking the window’s close button should properly exit.**
+- **Parse `.cub` files** for game settings & map layout.
+- **The map must be enclosed by walls** (`1` for walls, `0` for empty space, `N/S/E/W` for player spawn position).
 
-# Features
-- A working compass
+Example of a valid `.cub` map:
+```plaintext
+111111
+100101
+101001
+1100N1
+111111
+```
 
-- FOV in Minimap corresponds to the actual Field Of Vision of the player
+### Texture & Color Configuration
+```plaintext
+NO ./path_to_north_texture
+SO ./path_to_south_texture
+WE ./path_to_west_texture
+EA ./path_to_east_texture
 
-- "P" for pause menu.
+F 220,100,0
+C 225,30,0
+```
 
-- "M" to hide / show the Minimap
+If any error is found in the configuration file, the program must exit with:
+```plaintext
+Error
+[Description of the issue]
+```
 
+---
 
-We were going to add enemies, so we implemented a lives system.  
-If you press "-" you'll lose a life. When it reaches 0 the program stops.
+## 🎮 Features
+✔️ **Working compass**
 
-The settings icon is not working.
+✔️ **Minimap FOV matches actual player vision**
 
-# The Code Explained
+✔️ **Pause menu (`P` key)**
 
-# Conclusion
-I really enjoyed this assignment! It was fun, and it is good to have something progressing visually.
+✔️ **Toggle minimap (`M` key)**
 
-Maybe my favorite project until now.
+✔️ **Lives system (press `-` to lose a life, game stops at 0)**
 
-The final grade was 115, as we also completed 3 of the 5 bonuses:
+⚠️ The settings icon is not functional.
 
-- Wall Colisions
+---
 
-- Mini Map System
+## 🏆 Final Grade: **115/100**
+We completed 3 out of 5 possible bonus features:
 
-- Move FOV With Mouse
+✔️ **Wall collisions**
 
-![Screenshot 2023-05-09 233645](https://github.com/jlebre/42Cub3d/assets/94384240/475636ea-68f0-4c38-95ac-b007bd2d68fd)
+✔️ **Mini-map system**
 
-Maybe sometime i'll add more things to the game.
+✔️ **Move FOV with mouse**
+
+![Screenshot](https://github.com/jlebre/42Cub3d/assets/94384240/475636ea-68f0-4c38-95ac-b007bd2d68fd)
+
+---
+
+## 🎤 Conclusion
+This was one of the most enjoyable projects I’ve worked on! Seeing visual progress made it extra rewarding.
+
+This might be my favorite project so far, and I’d love to add more features in the future. 🚀
