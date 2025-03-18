@@ -34,7 +34,7 @@ One of the biggest challenges was correctly mapping the X-coordinate of a textur
 
 ## ⚙️ Installation
 
-Install ![MLX](https://github.com/42Paris/minilibx-linux):  
+Install [MLX](https://github.com/42Paris/minilibx-linux):  
 ```bash
 sudo apt-get install gcc make xorg libxext-dev libbsd-dev
 git clone https://github.com/42Paris/minilibx-linux.git && cd minilibx-linux && ( [ -f ./configure ] && ./configure || true ) && make && sudo cp libmlx.a /usr/local/lib/ && [ -f libmlx_$(uname -m).a ] && sudo cp libmlx_$(uname -m).a /usr/local/lib/ || true && sudo cp mlx.h /usr/local/include/ && sudo mkdir -p /usr/local/man/man3 && sudo cp man/man3/mlx*.1 /usr/local/man/man3
